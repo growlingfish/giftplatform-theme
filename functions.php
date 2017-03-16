@@ -1,14 +1,13 @@
 <?php
 /**
- * Genesis Sample.
- *
- * This file adds functions to the Genesis Sample Theme.
- *
- * @package Genesis Sample
- * @author  StudioPress
- * @license GPL-2.0+
- * @link    http://www.studiopress.com/
+ * @package giftplatform-theme
+ * @author  Ben Bedwell
+ * @license GPL-3.0+
  */
+
+/*
+*	From genesis-sample
+*/
 
 // Start the engine.
 include_once( get_template_directory() . '/lib/init.php' );
@@ -48,10 +47,8 @@ define( 'CHILD_THEME_VERSION', '2.3.0' );
 // Enqueue Scripts and Styles.
 add_action( 'wp_enqueue_scripts', 'genesis_sample_enqueue_scripts_styles' );
 function genesis_sample_enqueue_scripts_styles() {
-
 	wp_enqueue_style( 'genesis-sample-fonts', '//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700', array(), CHILD_THEME_VERSION );
 	wp_enqueue_style( 'dashicons' );
-
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 	wp_enqueue_script( 'genesis-sample-responsive-menu', get_stylesheet_directory_uri() . "/js/responsive-menus{$suffix}.js", array( 'jquery' ), CHILD_THEME_VERSION, true );
 	wp_localize_script(
@@ -64,7 +61,6 @@ function genesis_sample_enqueue_scripts_styles() {
 
 // Define our responsive menu settings.
 function genesis_sample_responsive_menu_settings() {
-
 	$settings = array(
 		'mainMenu'          => __( 'Menu', 'genesis-sample' ),
 		'menuIconClass'     => 'dashicons-before dashicons-menu',
@@ -78,9 +74,7 @@ function genesis_sample_responsive_menu_settings() {
 			'others'  => array(),
 		),
 	);
-
 	return $settings;
-
 }
 
 // Add HTML5 markup structure.
@@ -123,15 +117,11 @@ add_action( 'genesis_footer', 'genesis_do_subnav', 5 );
 // Reduce the secondary navigation menu to one level depth.
 add_filter( 'wp_nav_menu_args', 'genesis_sample_secondary_menu_args' );
 function genesis_sample_secondary_menu_args( $args ) {
-
 	if ( 'secondary' != $args['theme_location'] ) {
 		return $args;
 	}
-
 	$args['depth'] = 1;
-
 	return $args;
-
 }
 
 // Modify size of the Gravatar in the author box.
@@ -143,9 +133,15 @@ function genesis_sample_author_box_gravatar( $size ) {
 // Modify size of the Gravatar in the entry comments.
 add_filter( 'genesis_comment_list_args', 'genesis_sample_comments_gravatar' );
 function genesis_sample_comments_gravatar( $args ) {
-
 	$args['avatar_size'] = 60;
-
 	return $args;
+}
 
+/*
+*	For GIFT platform
+*/
+
+add_action( 'wp_enqueue_scripts', 'gift_enqueue_scripts_styles' );
+function gift_enqueue_scripts_styles () {
+	wp_enqueue_style( 'gift-style', get_stylesheet_directory_uri() . '/style-gift.css');
 }
