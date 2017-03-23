@@ -144,4 +144,5 @@ function genesis_sample_comments_gravatar( $args ) {
 add_action( 'wp_enqueue_scripts', 'gift_enqueue_scripts_styles' );
 function gift_enqueue_scripts_styles () {
 	wp_enqueue_style( 'gift-style', get_stylesheet_directory_uri() . '/style-gift.css');
+	wp_enqueue_script( 'gift-backstretch', get_stylesheet_directory_uri() . '/js/jquery.backstretch.min.js', array( 'jquery' ) );
 }
