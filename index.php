@@ -54,3 +54,7 @@ function gift_index_loop () {
 		get_template_part( 'templates/index', 'dashboard' );
 	}
 }
+
+genesis();
+
+?>
