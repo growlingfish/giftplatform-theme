@@ -10,11 +10,8 @@
 // Add landing page body class to the head.
 add_filter( 'body_class', 'genesis_sample_add_body_class' );
 function genesis_sample_add_body_class( $classes ) {
-
 	$classes[] = 'landing-page';
-
 	return $classes;
-
 }
 
 // Remove Skip Links.
@@ -48,5 +45,12 @@ remove_action( 'genesis_footer', 'genesis_footer_markup_open', 5 );
 remove_action( 'genesis_footer', 'genesis_do_footer' );
 remove_action( 'genesis_footer', 'genesis_footer_markup_close', 15 );
 
-// Run the Genesis loop.
-genesis();
+remove_action( 'genesis_loop', 'genesis_do_loop' );
+add_action( 'genesis_loop', 'gift_index_loop' );
+function gift_index_loop () { 
+	if ( !is_user_logged_in () ) { // Not logged in
+		get_template_part( 'templates/index', 'welcome' );
+	} else {
+		get_template_part( 'templates/index', 'dashboard' );
+	}
+}
