@@ -10,6 +10,6 @@
 ?>
 <script>
 jQuery(function($) {
-	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-welcome.jpg');	
+		
 });
 </script>
