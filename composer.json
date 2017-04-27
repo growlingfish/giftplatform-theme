@@ -1,0 +1,11 @@
+{
+
+        "name": "growlingfish/giftplatform-theme",
+        "version": "master",
+        "type": "wordpress-theme",
+        "source": {
+          "type": "git",
+          "url": "https://github.com/growlingfish/giftplatform-theme.git",
+	  "reference": "origin/master"
+        }
+}
