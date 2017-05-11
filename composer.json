@@ -2,10 +2,5 @@
 
         "name": "growlingfish/giftplatform-theme",
         "version": "0.0.0.4",
-        "type": "wordpress-theme",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/growlingfish/giftplatform-theme.git",
-	  "reference": "master"
-        }
+        "type": "wordpress-theme"
 }
