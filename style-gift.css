@@ -2,3 +2,12 @@
  * 	Additional CSS for GIFT platform theme
  */
 
+div.center-logo {
+    position: fixed;
+    width: 300px;
+    height: 419px;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px; /* Negative half of height. */
+    margin-left: -250px; /* Negative half of width. */
+}
