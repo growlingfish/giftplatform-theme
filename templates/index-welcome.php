@@ -24,7 +24,7 @@
     <h1>What is this website?</h1>
     <p>This website lets you make a gift for another user. The gifts are personal messages that you create for another user to experience when they have found particular exhibits in the museum.</p>
     <p>Using this website you choose the exhibit, create the gift, and send it to the lucky recipient.</p>
-    <button onclick="goToStep3();">OK</button>
+    <button id="step3_button">OK</button>
 </div>
 
 <div class="step" id="step3">
@@ -39,17 +39,15 @@ jQuery(function($) {
     $('#step1').fadeIn();
 
     $('#step2_button').on('click', function () {
-        console.log("asd");
-        jQuery('#step1').slideDown(function () {
-            jQuery('#step2').slideUp();
+        jQuery('#step1').slideToggle(function () {
+            jQuery('#step2').slideToggle();
+        });
+    });
+
+    $('#step3_button').on('click', function () {
+        jQuery('#step2').slideToggle(function () {
+            jQuery('#step3').slideToggle();
         });
     });
 });
-    
-
-    function goToStep3 () {
-        jQuery('#step2').slideDown(function () {
-            jQuery('#step3').slideUp();
-        });
-    }
 </script>
