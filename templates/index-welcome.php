@@ -37,17 +37,17 @@ jQuery(function($) {
 	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-welcome.jpg');
 
     $('#step1').fadeIn();
+
+    function step2 () {
+        jQuery('#step1').slideDown(function () {
+            jQuery('#step2').slideUp();
+        });
+    }
+
+    function step3 () {
+        jQuery('#step2').slideDown(function () {
+            jQuery('#step3').slideUp();
+        });
+    }
 });
-
-function step2 () {
-    jQuery('#step1').slideDown(function () {
-        jQuery('#step2').slideUp();
-    });
-}
-
-function step3 () {
-    jQuery('#step2').slideDown(function () {
-        jQuery('#step3').slideUp();
-    });
-}
 </script>

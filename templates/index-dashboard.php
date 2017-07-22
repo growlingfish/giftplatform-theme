@@ -42,34 +42,34 @@ jQuery(function($) {
 	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-welcome.jpg');
 
     $('#step2').fadeIn();
+
+    function step2 (isStranger) {
+        stranger = isStranger;
+        if (stranger) {
+            jQuery('#step1').slideDown(function () {
+                jQuery('#step2a').slideUp();
+            });
+        } else {
+            jQuery('#step1').slideDown(function () {
+                jQuery('#step2b').slideUp();
+            });
+        }
+    }
+
+    function step3a () {
+        if (jQuery('#recipientName').val().length > 0 && jQuery('#recipientEmail').val().length) {
+            console.log(jQuery('#recipientEmail').val());
+        }
+    }
+
+    function step3b (local) {
+        if (local) {
+            console.log('localbrighton@gifting.digital');
+            // 31B*CBbd9YS69ElJ3slxSARx
+        } else {
+            console.log('outoftownbrighton@gifting.digital');
+            // 9u@2W*hvZpZh!lilxkVDWPZ1
+        }
+    }
 });
-
-function step2 (isStranger) {
-    stranger = isStranger;
-    if (stranger) {
-        jQuery('#step1').slideDown(function () {
-            jQuery('#step2a').slideUp();
-        });
-    } else {
-        jQuery('#step1').slideDown(function () {
-            jQuery('#step2b').slideUp();
-        });
-    }
-}
-
-function step3a () {
-    if (jQuery('#recipientName').val().length > 0 && jQuery('#recipientEmail').val().length) {
-        console.log(jQuery('#recipientEmail').val());
-    }
-}
-
-function step3b (local) {
-    if (local) {
-        console.log('localbrighton@gifting.digital');
-        // 31B*CBbd9YS69ElJ3slxSARx
-    } else {
-        console.log('outoftownbrighton@gifting.digital');
-        // 9u@2W*hvZpZh!lilxkVDWPZ1
-    }
-}
 </script>
