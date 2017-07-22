@@ -8,6 +8,19 @@ div.center-logo {
     height: 419px;
     top: 50%;
     left: 50%;
-    margin-top: -100px; /* Negative half of height. */
-    margin-left: -250px; /* Negative half of width. */
+    margin-top: -210px; /* Negative half of height. */
+    margin-left: -150px; /* Negative half of width. */
+}
+
+div.head-logo {
+    text-align: center;
+    margin: 10% 0 50px 0;
+}
+
+div.head-logo img {
+    height: 100px;
+}
+
+div.step {
+    display: none;
 }
