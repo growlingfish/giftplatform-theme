@@ -17,7 +17,7 @@
     <h1>Welcome!</h1>
     <p>The GIFT Platform is a set of tools, including this website, that lets you send and receive 'gifts'.</p>
     <p>It is a service provided by the EU-funded GIFT project, which is investigating ways to combine digital content with real cultural artifacts - museum exhibits, historical sites, and so on - to provide new ways for visitors to engage with heritage.</p>
-    <button onclick="goToStep2();">Continue</button>
+    <button id="step2_button">Continue</button>
 </div>
 
 <div class="step" id="step2">
@@ -38,16 +38,17 @@ jQuery(function($) {
 
     $('#step1').fadeIn();
 
-    function goToStep2 () {
+    $('#step2_button').click(function () {
         jQuery('#step1').slideDown(function () {
             jQuery('#step2').slideUp();
         });
-    }
+    });
+});
+    
 
     function goToStep3 () {
         jQuery('#step2').slideDown(function () {
             jQuery('#step3').slideUp();
         });
     }
-});
 </script>
