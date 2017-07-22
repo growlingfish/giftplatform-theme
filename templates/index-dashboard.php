@@ -7,6 +7,8 @@
  * @license GPL-3.0+
  */
 
+$user = wp_get_current_user();
+
 ?>
 
 <div class="head-logo">
@@ -15,7 +17,7 @@
 
 <div class="step" id="step1">
     <h1>The Recipient</h1>
-    <p>Hello <?php echo wp_get_current_user()->user_firstname; ?>. Who are you making your gift for?</p>
+    <p>Hello <?php echo $user->user_firstname; ?>. Who are you making your gift for?</p>
     <button id="step2_button">Someone I know</button>
     <button id="step2_strange_button">Someone unknown</button>
 </div>
@@ -41,22 +43,16 @@ var stranger = false;
 jQuery(function($) {
 	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-welcome.jpg');
 
-    $('#step2').fadeIn();
+    $('#step1').fadeIn();
 
     $('#step2_button').on('click', function () {
-        jQuery('#step1').slideToggle(function () {
-            jQuery('#step2b').slideToggle();
-        });
-    });
-
-    $('#step2_strange_button').on('click', function () {
-        stranger = true;
         jQuery('#step1').slideToggle(function () {
             jQuery('#step2a').slideToggle();
         });
     });
 
-    $('#step2_button').on('click', function () {
+    $('#step2_strange_button').on('click', function () {
+        stranger = true;
         jQuery('#step1').slideToggle(function () {
             jQuery('#step2b').slideToggle();
         });
