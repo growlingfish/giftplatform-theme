@@ -23,4 +23,7 @@ div.head-logo img {
 
 div.step {
     display: none;
+    margin-bottom: 120px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 40px;
 }

@@ -23,8 +23,8 @@
 <div class="step" id="step2a">
     <h1>The Recipient</h1>
     <p>Who are you making the gift for?</p>
-    <input></input>
-    <input></input>
+    <p><label for="recipientName">Name:</label><input type="text" name="recipientName" id="recipientName"></p>
+    <p><label for="recipientEmail">Email:</label><input type="email" name="recipientEmail" id="recipientEmail"></p>
     <button onclick="step3a();">Submit</button>
 </div>
 
@@ -47,21 +47,29 @@ jQuery(function($) {
 function step2 (isStranger) {
     stranger = isStranger;
     if (stranger) {
-        $('#step1').slideDown(function () {
-            $('#step2a').slideUp();
+        jQuery('#step1').slideDown(function () {
+            jQuery('#step2a').slideUp();
         });
     } else {
-        $('#step1').slideDown(function () {
-            $('#step2b').slideUp();
+        jQuery('#step1').slideDown(function () {
+            jQuery('#step2b').slideUp();
         });
     }
 }
 
 function step3a () {
-    // Check
+    if (jQuery('#recipientName').val().length > 0 && jQuery('#recipientEmail').val().length) {
+        console.log(jQuery('#recipientEmail').val());
+    }
 }
 
 function step3b (local) {
-    // choose right recipient
+    if (local) {
+        console.log('localbrighton@gifting.digital');
+        // 31B*CBbd9YS69ElJ3slxSARx
+    } else {
+        console.log('outoftownbrighton@gifting.digital');
+        // 9u@2W*hvZpZh!lilxkVDWPZ1
+    }
 }
 </script>

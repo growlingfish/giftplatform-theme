@@ -40,14 +40,14 @@ jQuery(function($) {
 });
 
 function step2 () {
-    $('#step1').slideDown(function () {
-        $('#step2').slideUp();
+    jQuery('#step1').slideDown(function () {
+        jQuery('#step2').slideUp();
     });
 }
 
 function step3 () {
-    $('#step2').slideDown(function () {
-        $('#step3').slideUp();
+    jQuery('#step2').slideDown(function () {
+        jQuery('#step3').slideUp();
     });
 }
 </script>
