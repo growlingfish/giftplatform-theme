@@ -65,17 +65,14 @@ jQuery(function($) {
     });
 
     $('#step3_local_button').on('click', function () {
-        if (jQuery('#recipientName').val().length > 0 && jQuery('#recipientEmail').val().length) {
-            console.log('localbrighton@gifting.digital');
+        console.log('localbrighton@gifting.digital');
             // 31B*CBbd9YS69ElJ3slxSARx
-        }
+
     });
 
     $('#step3_outoftown_button').on('click', function () {
-        if (jQuery('#recipientName').val().length > 0 && jQuery('#recipientEmail').val().length) {
-            console.log('outoftownbrighton@gifting.digital');
+        console.log('outoftownbrighton@gifting.digital');
             // 9u@2W*hvZpZh!lilxkVDWPZ1
-        }
     });
 });
 </script>
