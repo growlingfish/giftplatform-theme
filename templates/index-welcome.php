@@ -38,7 +38,8 @@ jQuery(function($) {
 
     $('#step1').fadeIn();
 
-    $('#step2_button').click(function () {
+    $('#step2_button').on('click', function () {
+        console.log("asd");
         jQuery('#step1').slideDown(function () {
             jQuery('#step2').slideUp();
         });
