@@ -28,7 +28,7 @@ div.step {
     padding: 40px;
 }
 
-div.exhibit {
+div.profile, div.exhibit {
     display: inline-block;
     width: 48%;
     padding: 15px;
@@ -39,11 +39,11 @@ div.exhibit {
     margin: 1%;
 }
 
-div.exhibit img {
+div.profile img, div.exhibit img {
     width: 100%;
 }
 
-div.exhibit h2 {
+div.profile h2, div.exhibit h2 {
     font-size: 20px;
     font-size: 2rem;
 }

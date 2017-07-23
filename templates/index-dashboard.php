@@ -33,13 +33,24 @@ $user = wp_get_current_user();
 <div class="step" id="step2b">
     <h1>Choose a Recipient</h1>
     <p>Who will you make a gift for today?</p>
-    <button id="step3_local_button">A local</button>
-    <button id="step3_outoftown_button">Someone from out of town</button>
+    <div>
+        <div class="profile">
+            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/local.jpg" />
+            <h2>A Local</h2>
+            <button id="step3_local_button">Choose</button>
+        </div>
+        <div class="profile">
+            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/outoftown.jpg" />
+            <h2>From out of town</h2>
+            <button id="step3_outoftown_button">Choose</button>
+        </div>
+    </div>
 </div>
 
 <div class="step" id="step3">
     <h1>Choose an Exhibit</h1>
     <p>Which museum exhibit would you like to include in your gift for <span id="receiverName">the receiver</span>?</p>
+    <div>
 <?php 
 	$query = array(
 		'numberposts'   => -1,
@@ -54,11 +65,12 @@ $user = wp_get_current_user();
                 .'<h2>'.$object->post_title.'</h2>'
 			    .'<img src="'.get_the_post_thumbnail_url($object->ID, 'medium').'" />'
 			    .'<div>'.wpautop($object->post_content).'</div>'
-                .'<button id="step4_button" object="'.$object->ID.'">A local</button>'
+                .'<button id="step4_button" object="'.$object->ID.'">Choose</button>'
             .'</div>';
 		}
 	}
 ?>
+    </div>
 </div>
 
 <script>
@@ -110,7 +122,25 @@ jQuery(function($) {
                         //data: { name: "John", location: "Boston" }
                     });
                     setupRequest.done(function( data ) {
-                        console.log(data);
+                        if (data.success && typeof(data.new) != 'undefined' && data.new) {
+                            receiver = {
+                                "data": {
+                                    "ID": data.new.id,
+                                    "user_email": jQuery('#recipientEmail').val(),
+                                    "display_name": jQuery('#recipientName').val()
+                                },
+                                "ID": data.new.id;
+                            };
+                            jQuery('#receiverName').text(receiver.data.display_name);
+                            jQuery('#step2a').slideToggle(function () {
+                                jQuery('#step3').slideToggle();
+                            });
+                        } else {
+                            console.log(data);
+                            setTimeout(function () {
+                                window.location.replace("https://gifting.digital");
+                            }, 3000);
+                        }
                     });
                     setupRequest.fail(function( jqXHR, textStatus ) {
                         console.log( "Request failed: " + textStatus );
