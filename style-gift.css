@@ -48,6 +48,10 @@ div.profile h2, div.exhibit h2 {
     font-size: 2rem;
 }
 
+img.exhibitImage {
+    width: 100%;
+}
+
 textarea {
     width: 100%;
     -webkit-box-sizing: border-box;
