@@ -39,6 +39,7 @@ $user = wp_get_current_user();
 
 <script>
 var stranger = false;
+var apiBase = "https://gifting.digital/wp-json/gift/v1/";
 
 jQuery(function($) {
 	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-welcome.jpg');
@@ -60,19 +61,52 @@ jQuery(function($) {
 
     $('#step3_button').on('click', function () {
         if (jQuery('#recipientName').val().length > 0 && jQuery('#recipientEmail').val().length) {
-            console.log(jQuery('#recipientEmail').val());
+            var request = jQuery.ajax({
+                dataType: "json",
+                cache: false,
+                url: apiBase + "validate/receiver/" + jQuery('#recipientEmail').val(),
+                method: "GET"
+                //data: { name: "John", location: "Boston" }
+            });
+            request.done(function( msg ) {
+                console.log(msg);
+            });
+            request.fail(function( jqXHR, textStatus ) {
+                console.log( "Request failed: " + textStatus );
+            });
         }
     });
 
     $('#step3_local_button').on('click', function () {
-        console.log('localbrighton@gifting.digital');
-            // 31B*CBbd9YS69ElJ3slxSARx
-
+        var request = jQuery.ajax({
+            dataType: "json",
+            cache: false,
+            url: apiBase + "validate/receiver/" + 'localbrighton@gifting.digital',
+            method: "GET"
+            //data: { name: "John", location: "Boston" }
+        });
+        request.done(function( msg ) {
+            console.log(msg);
+        });
+        request.fail(function( jqXHR, textStatus ) {
+            console.log( "Request failed: " + textStatus );
+        });
     });
 
     $('#step3_outoftown_button').on('click', function () {
-        console.log('outoftownbrighton@gifting.digital');
-            // 9u@2W*hvZpZh!lilxkVDWPZ1
+        var request = jQuery.ajax({
+            dataType: "json",
+            cache: false,
+            url: apiBase + "validate/receiver/" + 'outoftownbrighton@gifting.digital',
+            method: "GET"
+            //data: { name: "John", location: "Boston" }
+        });
+        request.done(function( msg ) {
+            console.log(msg);
+        });
+        request.fail(function( jqXHR, textStatus ) {
+            console.log( "Request failed: " + textStatus );
+        });
     });
 });
 </script>
