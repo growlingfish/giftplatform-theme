@@ -18,8 +18,18 @@ $user = wp_get_current_user();
 <div class="step" id="step1">
     <h1>The Recipient</h1>
     <p>Hello <?php echo $user->user_firstname; ?>. Who are you making your gift for?</p>
-    <button id="step2_button">Someone I know</button>
-    <button id="step2_strange_button">Someone unknown</button>
+    <div>
+        <div class="profile">
+            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/familiar.jpg" />
+            <h2>Someone I know</h2>
+            <button id="step2_button">Choose</button>
+        </div>
+        <div class="profile">
+            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/stranger.jpg" />
+            <h2>Someone unknown</h2>
+            <button id="step2_strange_button">Choose</button>
+        </div>
+    </div>
 </div>
 
 <div class="step" id="step2a">
