@@ -324,9 +324,19 @@ jQuery(function($) {
 
     $('#step8b_button').on('click', function () {
         sendGift();
+
         exhibit = null;
         exhibitName = null;
+        jQuery('#exhibitName').val('');
         giftcard = null;
+        if (!stranger) {
+            jQuery('#giftcard').text('Hey ' + receiver.data.display_name + ' - I wanted to give you ...');
+        } else {
+            jQuery('#giftcard').text('Hey stranger - I wanted to give you ...');
+        }
+        payload = null;
+        jQuery('#payload').text('');
+
         jQuery('#step7').slideToggle(function () {
             jQuery('#step3').slideToggle();
         });
@@ -342,7 +352,7 @@ jQuery(function($) {
             cache: false,
             url: apiBase + "new/gift/",
             method: "POST",
-            data: { 
+            data: JSON.stringify({ 
                 sender: "<?php echo $user->ID; ?>", 
                 gift: { 
                     title: exhibitName,
@@ -372,7 +382,7 @@ jQuery(function($) {
                         content: giftcard
                     }
                 }
-            }
+            })
         });
         request.done(function( data ) {
             console.log(data);
