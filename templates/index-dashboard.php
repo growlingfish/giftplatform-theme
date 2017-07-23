@@ -309,6 +309,7 @@ jQuery(function($) {
         if (jQuery('#payload').val().length > 0 && jQuery('#payload').val().length) {
             payload = jQuery('#payload').val();
             jQuery('.head-logo').show();
+            sendGift();
             jQuery('#step6').slideToggle(function () {
                 jQuery('#step7').slideToggle();
             });
@@ -316,15 +317,12 @@ jQuery(function($) {
     });
 
     $('#step8a_button').on('click', function () {
-        sendGift();
         jQuery('#step7').slideToggle(function () {
             jQuery('#step8a').slideToggle();
         });
     });
 
     $('#step8b_button').on('click', function () {
-        sendGift();
-
         exhibit = null;
         exhibitName = null;
         jQuery('#exhibitName').val('');
@@ -352,9 +350,9 @@ jQuery(function($) {
             cache: false,
             url: apiBase + "new/gift/",
             method: "POST",
-            data: JSON.stringify({ 
+            data: 
                 sender: "<?php echo $user->ID; ?>", 
-                gift: { 
+                gift: JSON.stringify({ 
                     title: exhibitName,
                     receiver: receiver.data.user_email,
                     receiverName: receiver.data.display_name,
@@ -381,8 +379,8 @@ jQuery(function($) {
                         title: "<?php echo $user->display_name; ?>'s giftcard for " + exhibitName,
                         content: giftcard
                     }
-                }
-            })
+                })
+            }
         });
         request.done(function( data ) {
             console.log(data);
