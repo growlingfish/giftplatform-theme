@@ -105,9 +105,11 @@ jQuery(function($) {
                         //data: { name: "John", location: "Boston" }
                     });
                     request.done(function( data ) {
-                        console.log(data);
-                        /*if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
+                        if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
                             receiver = data.exists;
+                            jQuery('#step2a').slideToggle(function () {
+                                jQuery('#step3').slideToggle();
+                            });
                         } else if (typeof(data.exists) != 'undefined' && !data.exists) {
                             console.log(data);
                             //this.http.get(this.globalVar.getSetupReceiverURL(email, name, this.auth.currentUser.id))
@@ -117,7 +119,7 @@ jQuery(function($) {
                             setTimeout(function () {
                                 window.location.replace("https://gifting.digital");
                             }, 3000);
-                        }*/
+                        }
                     });
                     request.fail(function( jqXHR, textStatus ) {
                         console.log( "Request failed: " + textStatus );
@@ -152,6 +154,9 @@ jQuery(function($) {
         request.done(function( data ) {
             if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
                 receiver = data.exists;
+                jQuery('#step2b').slideToggle(function () {
+                    jQuery('#step3').slideToggle();
+                });
             } else {
                 console.log(data);
                 setTimeout(function () {
@@ -178,6 +183,9 @@ jQuery(function($) {
         request.done(function( data ) {
             if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
                 receiver = data.exists;
+                jQuery('#step2b').slideToggle(function () {
+                    jQuery('#step3').slideToggle();
+                });
             } else {
                 console.log(data);
                 setTimeout(function () {
