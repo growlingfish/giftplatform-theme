@@ -54,6 +54,7 @@ $user = wp_get_current_user();
                 .'<h2>'.$object->post_title.'</h2>'
 			    .'<img src="'.get_the_post_thumbnail_url($object->ID, 'medium').'" />'
 			    .'<div>'.wpautop($object->post_content).'</div>'
+                .'<button id="step4_button" object="'.$object->ID.'">A local</button>'
             .'</div>';
 		}
 	}
@@ -95,6 +96,10 @@ jQuery(function($) {
             request.done(function( data ) {
                 if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
                     receiver = data.exists;
+                    jQuery('#receiverName').text(receiver.data.display_name);
+                    jQuery('#step2a').slideToggle(function () {
+                        jQuery('#step3').slideToggle();
+                    });
                 } else if (typeof(data.exists) != 'undefined' && !data.exists) {
                     console.log(data);
                     var setupRequest = jQuery.ajax({
@@ -105,22 +110,7 @@ jQuery(function($) {
                         //data: { name: "John", location: "Boston" }
                     });
                     setupRequest.done(function( data ) {
-                        if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
-                            receiver = data.exists;
-                            jQuery('#receiverName').text(receiver.data.display_name);
-                            jQuery('#step2a').slideToggle(function () {
-                                jQuery('#step3').slideToggle();
-                            });
-                        } else if (typeof(data.exists) != 'undefined' && !data.exists) {
-                            console.log(data);
-                            //this.http.get(this.globalVar.getSetupReceiverURL(email, name, this.auth.currentUser.id))
-                            
-                        } else {
-                            console.log(data);
-                            setTimeout(function () {
-                                window.location.replace("https://gifting.digital");
-                            }, 3000);
-                        }
+                        console.log(data);
                     });
                     setupRequest.fail(function( jqXHR, textStatus ) {
                         console.log( "Request failed: " + textStatus );
@@ -201,6 +191,13 @@ jQuery(function($) {
             setTimeout(function () {
                 window.location.replace("https://gifting.digital");
             }, 3000);
+        });
+    });
+
+    $('#step4_button').on('click', function () {
+        console.log(jQuery(this).attr('object'));
+        jQuery('#step3').slideToggle(function () {
+            jQuery('#step4').slideToggle();
         });
     });
 });
