@@ -162,7 +162,7 @@ jQuery(function($) {
             request.done(function( data ) {
                 if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
                     receiver = data.exists;
-                    jQuery('.receiverName').text(receiver.data.display_name);
+                    jQuery('.receiverName').text(receiver.data.nickname);
                     jQuery('#step2a').slideToggle(function () {
                         jQuery('#step3').slideToggle();
                     });
@@ -180,11 +180,11 @@ jQuery(function($) {
                                 "data": {
                                     "ID": data.new.id,
                                     "user_email": jQuery('#recipientEmail').val(),
-                                    "display_name": jQuery('#recipientName').val()
+                                    "nickname": jQuery('#recipientName').val()
                                 },
                                 "ID": data.new.id
                             };
-                            jQuery('.receiverName').text(receiver.data.display_name);
+                            jQuery('.receiverName').text(receiver.data.nickname);
                             jQuery('#step2a').slideToggle(function () {
                                 jQuery('#step3').slideToggle();
                             });
@@ -230,7 +230,7 @@ jQuery(function($) {
         request.done(function( data ) {
             if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
                 receiver = data.exists;
-                jQuery('.receiverName').text(receiver.data.display_name);
+                jQuery('.receiverName').text(receiver.data.nickname);
                 jQuery('#step2b').slideToggle(function () {
                     jQuery('#step3').slideToggle();
                 });
@@ -262,7 +262,7 @@ jQuery(function($) {
         request.done(function( data ) {
             if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
                 receiver = data.exists;
-                jQuery('.receiverName').text(receiver.data.display_name);
+                jQuery('.receiverName').text(receiver.data.nickname);
                 jQuery('#step2b').slideToggle(function () {
                     jQuery('#step3').slideToggle();
                 });
@@ -286,7 +286,7 @@ jQuery(function($) {
     $('.step4_button').on('click', function () {
         exhibit = jQuery(this).attr('object');
         if (!stranger) {
-            jQuery('#giftcard').text('Hey ' + receiver.data.display_name + ' - I wanted to give you ...');
+            jQuery('#giftcard').text('Hey ' + receiver.data.nickname + ' - I wanted to give you ...');
         }
         jQuery('.exhibitImage').attr('src', jQuery(this).attr('objectImage'));
         jQuery('.head-logo').hide();
@@ -338,7 +338,7 @@ jQuery(function($) {
         jQuery('#exhibitName').val('');
         giftcard = null;
         if (!stranger) {
-            jQuery('#giftcard').text('Hey ' + receiver.data.display_name + ' - I wanted to give you ...');
+            jQuery('#giftcard').text('Hey ' + receiver.data.nickname + ' - I wanted to give you ...');
         } else {
             jQuery('#giftcard').text('Hey stranger - I wanted to give you ...');
         }
@@ -366,11 +366,11 @@ jQuery(function($) {
                 gift: JSON.stringify({ 
                     title: exhibitName,
                     receiver: receiver.data.user_email,
-                    receiverName: receiver.data.display_name,
+                    receiverName: receiver.data.nickname,
                     wraps: [
                         {
                             id: 0,
-                            title: "<?php echo $user->display_name; ?>'s wrap for " + exhibitName,
+                            title: "<?php echo $user->nickname; ?>'s wrap for " + exhibitName,
                             challenges: [
                                 {
                                     type: 'object',
@@ -382,12 +382,12 @@ jQuery(function($) {
                     payloads: [
                         {
                             id: 0,
-                            title: "<?php echo $user->display_name; ?>'s payload for " + exhibitName,
+                            title: "<?php echo $user->nickname; ?>'s payload for " + exhibitName,
                             content: payload
                         }
                     ],
                     giftcard: {
-                        title: "<?php echo $user->display_name; ?>'s giftcard for " + exhibitName,
+                        title: "<?php echo $user->nickname; ?>'s giftcard for " + exhibitName,
                         content: giftcard
                     }
                 })
