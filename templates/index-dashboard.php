@@ -129,7 +129,7 @@ jQuery(function($) {
                                     "user_email": jQuery('#recipientEmail').val(),
                                     "display_name": jQuery('#recipientName').val()
                                 },
-                                "ID": data.new.id;
+                                "ID": data.new.id
                             };
                             jQuery('#receiverName').text(receiver.data.display_name);
                             jQuery('#step2a').slideToggle(function () {
