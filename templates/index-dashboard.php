@@ -128,6 +128,7 @@ var receiver;
 var exhibit;
 var exhibitName;
 var giftcard;
+var payload;
 
 jQuery(function($) {
 	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-welcome.jpg');
@@ -348,11 +349,22 @@ jQuery(function($) {
                     receiver: receiver.data.user_email,
                     receiverName: receiver.data.display_name,
                     wraps: [
-                        {}
+                        {
+                            id: 0,
+                            title: "<?php echo $user->display_name; ?>'s wrap for " + exhibitName,
+                            challenges: [
+                                {
+                                    type: 'object',
+                                    task: [exhibit]
+                                }
+                            ]
+                        }
                     ],
                     payloads: [
                         {
-                            
+                            id: 0,
+                            title: "<?php echo $user->display_name; ?>'s payload for " + exhibitName,
+                            content: payload
                         }
                     ],
                     giftcard: {
@@ -363,24 +375,10 @@ jQuery(function($) {
             }
         });
         request.done(function( data ) {
-            if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
-                receiver = data.exists;
-                jQuery('.receiverName').text(receiver.data.display_name);
-                jQuery('#step2b').slideToggle(function () {
-                    jQuery('#step3').slideToggle();
-                });
-            } else {
-                console.log(data);
-                setTimeout(function () {
-                    window.location.replace("https://gifting.digital");
-                }, 3000);
-            }
+            console.log(data);
         });
         request.fail(function( jqXHR, textStatus ) {
             console.log( "Request failed: " + textStatus );
-            setTimeout(function () {
-                window.location.replace("https://gifting.digital");
-            }, 3000);
         });
     }
 });
