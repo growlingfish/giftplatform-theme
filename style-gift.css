@@ -58,3 +58,14 @@ textarea {
        -moz-box-sizing: border-box;
             box-sizing: border-box;
 }
+
+.preloader {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url('images/gear.gif') 50% 50% no-repeat rgb(255,255,255);
+	display: none;
+}

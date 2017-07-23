@@ -121,6 +121,8 @@ $user = wp_get_current_user();
     <button id="step9_button">Log out</button>
 </div>
 
+<div class="preloader"></div>
+
 <script>
 var stranger = false;
 var apiBase = "https://gifting.digital/wp-json/gift/v1/";
@@ -150,6 +152,7 @@ jQuery(function($) {
 
     $('#step3_button').on('click', function () {
         if (jQuery('#recipientName').val().length > 0 && jQuery('#recipientEmail').val().length) {
+            jQuery('.preloader').show();
             var request = jQuery.ajax({
                 dataType: "json",
                 cache: false,
@@ -204,17 +207,20 @@ jQuery(function($) {
                         window.location.replace("https://gifting.digital");
                     }, 3000);
                 }
+                jQuery('.preloader').fadeOut();
             });
             request.fail(function( jqXHR, textStatus ) {
                 console.log( "Request failed: " + textStatus );
                 setTimeout(function () {
                     window.location.replace("https://gifting.digital");
                 }, 3000);
+                jQuery('.preloader').fadeOut();
             });
         }
     });
 
     $('#step3_local_button').on('click', function () {
+        jQuery('.preloader').show();
         var request = jQuery.ajax({
             dataType: "json",
             cache: false,
@@ -234,16 +240,19 @@ jQuery(function($) {
                     window.location.replace("https://gifting.digital");
                 }, 3000);
             }
+            jQuery('.preloader').fadeOut();
         });
         request.fail(function( jqXHR, textStatus ) {
             console.log( "Request failed: " + textStatus );
             setTimeout(function () {
                 window.location.replace("https://gifting.digital");
             }, 3000);
+            jQuery('.preloader').fadeOut();
         });
     });
 
     $('#step3_outoftown_button').on('click', function () {
+        jQuery('.preloader').show();
         var request = jQuery.ajax({
             dataType: "json",
             cache: false,
@@ -263,17 +272,18 @@ jQuery(function($) {
                     window.location.replace("https://gifting.digital");
                 }, 3000);
             }
+            jQuery('.preloader').fadeOut();
         });
         request.fail(function( jqXHR, textStatus ) {
             console.log( "Request failed: " + textStatus );
             setTimeout(function () {
                 window.location.replace("https://gifting.digital");
             }, 3000);
+            jQuery('.preloader').fadeOut();
         });
     });
 
     $('.step4_button').on('click', function () {
-        console.log(jQuery(this).attr('object'));
         exhibit = jQuery(this).attr('object');
         if (!stranger) {
             jQuery('#giftcard').text('Hey ' + receiver.data.display_name + ' - I wanted to give you ...');
@@ -345,6 +355,7 @@ jQuery(function($) {
     });
     
     function sendGift () {
+        jQuery('.preloader').show();
         var request = jQuery.ajax({
             dataType: "json",
             cache: false,
@@ -383,10 +394,11 @@ jQuery(function($) {
             }
         });
         request.done(function( data ) {
-            console.log(data);
+            jQuery('.preloader').fadeOut();
         });
         request.fail(function( jqXHR, textStatus ) {
             console.log( "Request failed: " + textStatus );
+            jQuery('.preloader').fadeOut();
         });
     }
 });

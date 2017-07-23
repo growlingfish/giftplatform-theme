@@ -55,6 +55,8 @@
     </p>
 </div>
 
+<div class="preloader"></div>
+
 <script>
 var apiBase = "https://gifting.digital/wp-json/gift/v1/";
 
@@ -87,6 +89,7 @@ jQuery(function($) {
     });
 
     $('#register-submit').on('click', function () {
+        jQuery('.preloader').show();
         var request = jQuery.ajax({
             dataType: "json",
             cache: false,
@@ -96,6 +99,7 @@ jQuery(function($) {
         request.done(function( data ) {
             if (data.success && typeof(data.new) != 'undefined' && data.new) {
                 jQuery('#loginChoices').hide();
+                jQuery('#loginform').show();
                 jQuery('#step4').slideToggle(function () {
                     jQuery('#step3').slideToggle();
                 });
@@ -105,12 +109,14 @@ jQuery(function($) {
                     window.location.replace("https://gifting.digital");
                 }, 3000);
             }
+            jQuery('.preloader').fadeOut();
         });
         request.fail(function( jqXHR, textStatus ) {
             console.log( "Request failed: " + textStatus );
             setTimeout(function () {
                 window.location.replace("https://gifting.digital");
             }, 3000);
+            jQuery('.preloader').fadeOut();
         });
     });
 });
