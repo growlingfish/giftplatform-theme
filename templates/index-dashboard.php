@@ -37,6 +37,29 @@ $user = wp_get_current_user();
     <button id="step3_outoftown_button">Someone from out of town</button>
 </div>
 
+<div class="step" id="step3">
+    <h1>Choose an Exhibit</h1>
+    <p>Which museum exhibit would you like to include in your gift?</p>
+<?php 
+	$query = array(
+		'numberposts'   => -1,
+		'post_type'     => 'object',
+		'post_status'   => 'publish'
+	);
+	$all_objects = get_posts( $query );
+	foreach ($all_objects as $object) {
+		$owner = get_field( 'field_5969c3853f8f2', $object->ID );
+		if ($owner == null || $owner['ID'] == $user->ID) { // object belongs to no-one or this user
+            echo '<div>'
+                .'<h2>'.$object->post_title.'</h2>'
+			    .'<img src="'.get_the_post_thumbnail_url($object->ID, 'medium').'" />'
+			    .'<div>'.wpautop($object->post_content).'</div>'
+            .'</div>';
+		}
+	}
+?>
+</div>
+
 <script>
 var stranger = false;
 var apiBase = "https://gifting.digital/wp-json/gift/v1/";
@@ -74,6 +97,34 @@ jQuery(function($) {
                     receiver = data.exists;
                 } else if (typeof(data.exists) != 'undefined' && !data.exists) {
                     console.log(data);
+                    var request = jQuery.ajax({
+                        dataType: "json",
+                        cache: false,
+                        url: apiBase + "new/receiver/" + jQuery('#recipientEmail').val() + "/" + jQuery('#recipientName').val() + "/" + "<?php echo $user->ID; ?>",
+                        method: "GET"
+                        //data: { name: "John", location: "Boston" }
+                    });
+                    request.done(function( data ) {
+                        console.log(data);
+                        /*if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
+                            receiver = data.exists;
+                        } else if (typeof(data.exists) != 'undefined' && !data.exists) {
+                            console.log(data);
+                            //this.http.get(this.globalVar.getSetupReceiverURL(email, name, this.auth.currentUser.id))
+                            
+                        } else {
+                            console.log(data);
+                            setTimeout(function () {
+                                window.location.replace("https://gifting.digital");
+                            }, 3000);
+                        }*/
+                    });
+                    request.fail(function( jqXHR, textStatus ) {
+                        console.log( "Request failed: " + textStatus );
+                        setTimeout(function () {
+                            window.location.replace("https://gifting.digital");
+                        }, 3000);
+                    });
                 } else {
                     console.log(data);
                     setTimeout(function () {
