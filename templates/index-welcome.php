@@ -56,6 +56,8 @@
 </div>
 
 <script>
+var apiBase = "https://gifting.digital/wp-json/gift/v1/";
+
 jQuery(function($) {
 	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-welcome.jpg');
 
