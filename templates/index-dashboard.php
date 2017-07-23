@@ -40,6 +40,7 @@ $user = wp_get_current_user();
 <script>
 var stranger = false;
 var apiBase = "https://gifting.digital/wp-json/gift/v1/";
+var receiver;
 
 jQuery(function($) {
 	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-welcome.jpg');
@@ -68,11 +69,23 @@ jQuery(function($) {
                 method: "GET"
                 //data: { name: "John", location: "Boston" }
             });
-            request.done(function( msg ) {
-                console.log(msg);
+            request.done(function( data ) {
+                if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
+                    receiver = data.exists;
+                } else if (typeof(data.exists) != 'undefined' && !data.exists) {
+                    console.log(data);
+                } else {
+                    console.log(data);
+                    setTimeout(function () {
+                        window.location.replace("https://gifting.digital");
+                    }, 3000);
+                }
             });
             request.fail(function( jqXHR, textStatus ) {
                 console.log( "Request failed: " + textStatus );
+                setTimeout(function () {
+                    window.location.replace("https://gifting.digital");
+                }, 3000);
             });
         }
     });
@@ -85,11 +98,21 @@ jQuery(function($) {
             method: "GET"
             //data: { name: "John", location: "Boston" }
         });
-        request.done(function( msg ) {
-            console.log(msg);
+        request.done(function( data ) {
+            if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
+                receiver = data.exists;
+            } else {
+                console.log(data);
+                setTimeout(function () {
+                    window.location.replace("https://gifting.digital");
+                }, 3000);
+            }
         });
         request.fail(function( jqXHR, textStatus ) {
             console.log( "Request failed: " + textStatus );
+            setTimeout(function () {
+                window.location.replace("https://gifting.digital");
+            }, 3000);
         });
     });
 
@@ -101,11 +124,21 @@ jQuery(function($) {
             method: "GET"
             //data: { name: "John", location: "Boston" }
         });
-        request.done(function( msg ) {
-            console.log(msg);
+        request.done(function( data ) {
+            if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
+                receiver = data.exists;
+            } else {
+                console.log(data);
+                setTimeout(function () {
+                    window.location.replace("https://gifting.digital");
+                }, 3000);
+            }
         });
         request.fail(function( jqXHR, textStatus ) {
             console.log( "Request failed: " + textStatus );
+            setTimeout(function () {
+                window.location.replace("https://gifting.digital");
+            }, 3000);
         });
     });
 });
