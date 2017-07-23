@@ -341,7 +341,7 @@ jQuery(function($) {
             dataType: "json",
             cache: false,
             url: apiBase + "new/gift/",
-            method: "POST"
+            method: "POST",
             data: { 
                 sender: "<?php echo $user->ID; ?>", 
                 gift: { 
