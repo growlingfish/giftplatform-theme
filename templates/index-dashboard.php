@@ -350,7 +350,7 @@ jQuery(function($) {
             cache: false,
             url: apiBase + "new/gift/",
             method: "POST",
-            data: 
+            data: {
                 sender: "<?php echo $user->ID; ?>", 
                 gift: JSON.stringify({ 
                     title: exhibitName,
