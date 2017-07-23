@@ -39,7 +39,7 @@ $user = wp_get_current_user();
 
 <div class="step" id="step3">
     <h1>Choose an Exhibit</h1>
-    <p>Which museum exhibit would you like to include in your gift?</p>
+    <p>Which museum exhibit would you like to include in your gift for <span id="receiverName">the receiver</span>?</p>
 <?php 
 	$query = array(
 		'numberposts'   => -1,
@@ -50,7 +50,7 @@ $user = wp_get_current_user();
 	foreach ($all_objects as $object) {
 		$owner = get_field( 'field_5969c3853f8f2', $object->ID );
 		if ($owner == null || $owner['ID'] == $user->ID) { // object belongs to no-one or this user
-            echo '<div>'
+            echo '<div class="exhibit">'
                 .'<h2>'.$object->post_title.'</h2>'
 			    .'<img src="'.get_the_post_thumbnail_url($object->ID, 'medium').'" />'
 			    .'<div>'.wpautop($object->post_content).'</div>'
@@ -97,16 +97,17 @@ jQuery(function($) {
                     receiver = data.exists;
                 } else if (typeof(data.exists) != 'undefined' && !data.exists) {
                     console.log(data);
-                    var request = jQuery.ajax({
+                    var setupRequest = jQuery.ajax({
                         dataType: "json",
                         cache: false,
                         url: apiBase + "new/receiver/" + jQuery('#recipientEmail').val() + "/" + jQuery('#recipientName').val() + "/" + "<?php echo $user->ID; ?>",
                         method: "GET"
                         //data: { name: "John", location: "Boston" }
                     });
-                    request.done(function( data ) {
+                    setupRequest.done(function( data ) {
                         if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
                             receiver = data.exists;
+                            jQuery('#receiverName').text(receiver.data.display_name);
                             jQuery('#step2a').slideToggle(function () {
                                 jQuery('#step3').slideToggle();
                             });
@@ -121,7 +122,7 @@ jQuery(function($) {
                             }, 3000);
                         }
                     });
-                    request.fail(function( jqXHR, textStatus ) {
+                    setupRequest.fail(function( jqXHR, textStatus ) {
                         console.log( "Request failed: " + textStatus );
                         setTimeout(function () {
                             window.location.replace("https://gifting.digital");
@@ -154,6 +155,7 @@ jQuery(function($) {
         request.done(function( data ) {
             if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
                 receiver = data.exists;
+                jQuery('#receiverName').text(receiver.data.display_name);
                 jQuery('#step2b').slideToggle(function () {
                     jQuery('#step3').slideToggle();
                 });
@@ -183,6 +185,7 @@ jQuery(function($) {
         request.done(function( data ) {
             if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
                 receiver = data.exists;
+                jQuery('#receiverName').text(receiver.data.display_name);
                 jQuery('#step2b').slideToggle(function () {
                     jQuery('#step3').slideToggle();
                 });
