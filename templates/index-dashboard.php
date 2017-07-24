@@ -374,7 +374,7 @@ jQuery(function($) {
                             challenges: [
                                 {
                                     type: 'object',
-                                    task: [exhibit]
+                                    task: exhibit
                                 }
                             ]
                         }
