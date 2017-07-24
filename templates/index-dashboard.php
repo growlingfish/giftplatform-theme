@@ -17,7 +17,7 @@ $user = wp_get_current_user();
 
 <div class="step" id="step1">
     <h1>The Recipient</h1>
-    <p>Hello <?php echo $user->user_firstname; ?>. Who are you making your gift for?</p>
+    <p>Hello <?php echo $user->nickname; ?>. Who are you making your gift for?</p>
     <div>
         <div class="profile">
             <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/familiar.jpg" />
@@ -86,29 +86,29 @@ $user = wp_get_current_user();
 <div class="step" id="step4">
     <img class="exhibitImage" src="" />
     <h2>A New Name</h2>
-    <p>If <em>you</em> could name this object what would you call it?</p>
+    <p>If <em>you</em> could name this exhibit for <span class="receiverName">the receiver</span>, what would you call it?</p>
     <p><label for="exhibitName">Name:</label><input type="text" name="exhibitName" id="exhibitName"></p>
     <button id="step5_button">Submit</button>
 </div>
 
 <div class="step" id="step5">
     <h2>Write Them a Card</h2>
-    <p>The gift card will be the first thing <span class="receiverName">the receiver</span> sees, before they start unwrapping the gift.</p>
+    <p>Is it their birthday? Are you just thinking of them? What do you want to say to them before they get their gift?</p>
     <p><textarea name="giftcard" id="giftcard">Hey stranger - I wanted to give you ...</textarea></p>
     <button id="step6_button">Submit</button>
 </div>
 
 <div class="step" id="step6">
     <img class="exhibitImage" src="" />
-    <h2>What is in your gift?</h2>
-    <p>Write a message for <span class="receiverName">the receiver</span> about this part of their gift when they have found it in the museum.</p>
+    <h2>Why this gift?</h2>
+    <p>Why did you choose this for <span class="receiverName">the receiver</span>?</p>
     <p><textarea name="payload" id="payload"></textarea></p>
     <button id="step7_button">Submit</button>
 </div>
 
 <div class="step" id="step7">
-    <h2>Another?</h2>
-    <p>This part of the gift has been sent to <span class="receiverName">the receiver</span>. Would you like to add another part to the gift?</p>
+    <h2>Another part to your gift?</h2>
+    <p>Do you want to build on this gift for <span class="receiverName">the receiver</span> and let them know more keenly what you want to say?</p>
     <p>
         <button id="step8a_button">No, thanks</button>
         <button id="step8b_button">Yes!</button>
@@ -116,9 +116,9 @@ $user = wp_get_current_user();
 </div>
 
 <div class="step" id="step8a">
-    <h2>Outro</h2>
+    <h2>Thank you</h2>
     <p>Outro text</p>
-    <button id="step9_button">Log out</button>
+    <button id="step9_button">Thank you for making a gift for <span class="receiverName">the receiver</span>. They will receive an email shortly with your gift in it, that they can see at Brighton Museum.</button>
 </div>
 
 <div class="preloader"></div>
