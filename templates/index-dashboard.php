@@ -92,8 +92,8 @@ $user = wp_get_current_user();
 </div>
 
 <div class="step" id="step5">
-    <h2>Write Them a Card</h2>
-    <p>Is it their birthday? Are you just thinking of them? What do you want to say to them before they get their gift?</p>
+    <h2>Write <span class="receiverName">the receiver</span> a Card</h2>
+    <p>Is it their birthday? Are you just thinking of them? What do you want to say to <span class="receiverName">the receiver</span> before they get their gift?</p>
     <p><textarea name="giftcard" id="giftcard">Hey stranger - I wanted to give you ...</textarea></p>
     <button id="step6_button">Submit</button>
 </div>
@@ -117,8 +117,8 @@ $user = wp_get_current_user();
 
 <div class="step" id="step8a">
     <h2>Thank you</h2>
-    <p>Outro text</p>
-    <button id="step9_button">Thank you for making a gift for <span class="receiverName">the receiver</span>. They will receive an email shortly with your gift in it, that they can see at Brighton Museum.</button>
+    <p>Thank you for making a gift for <span class="receiverName">the receiver</span>. They will receive an email shortly with your gift in it, that they can see at Brighton Museum.</p>
+    <button id="step9_button">Done</button>
 </div>
 
 <div class="preloader"></div>
