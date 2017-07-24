@@ -67,7 +67,8 @@ $user = wp_get_current_user();
 		'post_type'     => 'object',
 		'post_status'   => 'publish'
 	);
-	$all_objects = shuffle(get_posts( $query ));
+	$all_objects = get_posts( $query );
+    shuffle($all_objects);
 	foreach ($all_objects as $object) {
 		$owner = get_field( 'field_5969c3853f8f2', $object->ID );
 		if ($owner == null || $owner['ID'] == $user->ID) { // object belongs to no-one or this user
@@ -162,7 +163,7 @@ jQuery(function($) {
             request.done(function( data ) {
                 if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
                     receiver = data.exists;
-                    jQuery('.receiverName').text(receiver.data.nickname);
+                    jQuery('.receiverName').text(decodeURIComponent(receiver.data.nickname));
                     jQuery('#step2a').slideToggle(function () {
                         jQuery('#step3').slideToggle();
                     });
@@ -184,7 +185,7 @@ jQuery(function($) {
                                 },
                                 "ID": data.new.id
                             };
-                            jQuery('.receiverName').text(receiver.data.nickname);
+                            jQuery('.receiverName').text(decodeURIComponent(receiver.data.nickname));
                             jQuery('#step2a').slideToggle(function () {
                                 jQuery('#step3').slideToggle();
                             });
@@ -230,7 +231,7 @@ jQuery(function($) {
         request.done(function( data ) {
             if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
                 receiver = data.exists;
-                jQuery('.receiverName').text(receiver.data.nickname);
+                jQuery('.receiverName').text(decodeURIComponent(receiver.data.nickname));
                 jQuery('#step2b').slideToggle(function () {
                     jQuery('#step3').slideToggle();
                 });
@@ -262,7 +263,7 @@ jQuery(function($) {
         request.done(function( data ) {
             if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
                 receiver = data.exists;
-                jQuery('.receiverName').text(receiver.data.nickname);
+                jQuery('.receiverName').text(decodeURIComponent(receiver.data.nickname));
                 jQuery('#step2b').slideToggle(function () {
                     jQuery('#step3').slideToggle();
                 });
@@ -286,7 +287,7 @@ jQuery(function($) {
     $('.step4_button').on('click', function () {
         exhibit = jQuery(this).attr('object');
         if (!stranger) {
-            jQuery('#giftcard').text('Hey ' + receiver.data.nickname + ' - I wanted to give you ...');
+            jQuery('#giftcard').text('Hey ' + decodeURIComponent(receiver.data.nickname) + ' - I wanted to give you ...');
         }
         jQuery('.exhibitImage').attr('src', jQuery(this).attr('objectImage'));
         jQuery('.head-logo').hide();
@@ -338,7 +339,7 @@ jQuery(function($) {
         jQuery('#exhibitName').val('');
         giftcard = null;
         if (!stranger) {
-            jQuery('#giftcard').text('Hey ' + receiver.data.nickname + ' - I wanted to give you ...');
+            jQuery('#giftcard').text('Hey ' + decodeURIComponent(receiver.data.nickname) + ' - I wanted to give you ...');
         } else {
             jQuery('#giftcard').text('Hey stranger - I wanted to give you ...');
         }
@@ -366,7 +367,7 @@ jQuery(function($) {
                 gift: JSON.stringify({ 
                     title: exhibitName,
                     receiver: receiver.data.user_email,
-                    receiverName: receiver.data.nickname,
+                    receiverName: decodeURIComponent(receiver.data.nickname),
                     wraps: [
                         {
                             id: 0,
