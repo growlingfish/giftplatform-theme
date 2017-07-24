@@ -17,7 +17,7 @@ $user = wp_get_current_user();
 
 <div class="step" id="step1">
     <h1>The Recipient</h1>
-    <p>Hello <?php echo $user->nickname; ?>. Who are you making your gift for?</p>
+    <p>Hello <?php echo urldecode($user->nickname); ?>. Who are you making your gift for?</p>
     <div>
         <div class="profile">
             <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/familiar.jpg" />
@@ -67,7 +67,7 @@ $user = wp_get_current_user();
 		'post_type'     => 'object',
 		'post_status'   => 'publish'
 	);
-	$all_objects = get_posts( $query );
+	$all_objects = shuffle(get_posts( $query ));
 	foreach ($all_objects as $object) {
 		$owner = get_field( 'field_5969c3853f8f2', $object->ID );
 		if ($owner == null || $owner['ID'] == $user->ID) { // object belongs to no-one or this user
