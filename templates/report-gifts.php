@@ -31,8 +31,8 @@
         <ul>
             <li>Sent at: <?php echo $gift->post_modified; ?></li>
             <li>ID: <?php echo $gift->ID; ?></li>
-            <li>Maker: <?php $maker = get_userdata($gift->post_author); echo $maker->nickname.' ('.$gift->post_author.')'; ?></li>
-            <li>Receiver: <?php $receiver = get_field('field_58e4f6e88f3d7', $gift->ID); echo $receiver[0]['nickname'].' ('.$receiver[0]['ID'].')'; ?></li>
+            <li>Maker: <?php $maker = get_userdata($gift->post_author); echo urldecode($maker->nickname).' ('.$gift->post_author.')'; ?></li>
+            <li>Receiver: <?php $receiver = get_field('field_58e4f6e88f3d7', $gift->ID); echo urldecode($receiver[0]['nickname']).' ('.$receiver[0]['ID'].')'; ?></li>
         </ul>
         <h2>Object</h2>
         <?php
@@ -77,6 +77,6 @@
 
 <script>
 jQuery(function($) {
-	
+	$('.site-inner').removeClass('.site-inner');
 });
 </script>
