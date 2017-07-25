@@ -18,7 +18,13 @@
 	);
 	$all_gifts = get_posts( $query );
 	foreach ($all_gifts as $gift) {
-         var_dump($gift);
+    ?>
+    <div style="border-bottom: 5px solid black; margin-bottom: 20px;">
+        <p>Gift <?php echo $gift->ID; ?></p>
+        <p>Maker: <?php $maker = get_userdata($gift->post_author); echo $maker->user_login.' ('.$gift->post_author')'; ?></p>
+        <p>Receiver: <?php $receiver = get_field('receiver', $gift->ID); echo $receiver->user_login.' ('.$receiver->ID.')'; ?></p>
+    </div>
+    <?php
 	}
     ?>
 </div>
