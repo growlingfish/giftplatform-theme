@@ -9,7 +9,7 @@
 
 ?>
 
-<div style="height: 210mm; width: 297mm;">
+<div style="height: 175mm;">
     <?php 
     $query = array(
 		'numberposts'   => -1,
@@ -77,6 +77,6 @@
 
 <script>
 jQuery(function($) {
-	$('.site-inner').removeClass('.site-inner');
+
 });
 </script>
