@@ -25,7 +25,7 @@
             <li>Sent at: <?php echo $gift->post_modified; ?></li>
             <li>ID: <?php echo $gift->ID; ?></li>
             <li>Maker: <?php $maker = get_userdata($gift->post_author); echo $maker->user_login.' ('.$gift->post_author.')'; ?></li>
-            <li>Receiver: <?php $receiver = get_field('field_58e4f6e88f3d7', $gift->ID); echo $receiver[0]['user_login'].' ('.$receiver[0]['ID'].')'; ?></li>
+            <li>Receiver: <?php $receiver = get_field('field_58e4f6e88f3d7', $gift->ID); echo $receiver[0]['nickname'].' ('.$receiver[0]['ID'].')'; ?></li>
             <li>Gift was unwrapped? <?php echo get_field('field_595e0593bd980', $gift->ID); ?></li>
             <li>Reciever responded? <?php echo get_field('field_595e05c8bd981', $gift->ID); ?></li>
         </ul>
