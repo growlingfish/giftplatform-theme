@@ -24,10 +24,10 @@
         <ul>
             <li>Sent at: <?php echo $gift->post_modified; ?></li>
             <li>ID: <?php echo $gift->ID; ?></li>
-            <li>Maker: <?php $maker = get_userdata($gift->post_author); echo $maker->user_login.' ('.$gift->post_author.')'; ?></li>
+            <li>Maker: <?php $maker = get_userdata($gift->post_author); echo $maker->nickname.' ('.$gift->post_author.')'; ?></li>
             <li>Receiver: <?php $receiver = get_field('field_58e4f6e88f3d7', $gift->ID); echo $receiver[0]['nickname'].' ('.$receiver[0]['ID'].')'; ?></li>
             <li>Gift was unwrapped? <?php echo get_field('field_595e0593bd980', $gift->ID); ?></li>
-            <li>Reciever responded? <?php echo get_field('field_595e05c8bd981', $gift->ID); ?></li>
+            <li>Receiver responded? <?php echo get_field('field_595e05c8bd981', $gift->ID); ?></li>
         </ul>
         <h2>Object</h2>
         <?php
@@ -43,9 +43,8 @@
                     unset($wrap->unwrap_object);
                 }  
                 if ($wrap->unwrap_object) {
-                    $wrap->unwrap_object->post_image = get_the_post_thumbnail_url($wrap->unwrap_object->ID, 'large');
-                    $wrap->unwrap_object->post_content = wpautop($wrap->unwrap_object->post_content);
-                    var_dump($wrap->unwrap_object);
+                    ?><p><img src="<?php echo get_the_post_thumbnail_url($wrap->unwrap_object->ID, 'large'); ?>" /></p>
+                    <p><?php echo $wrap->unwrap_object->post_title; ?></p><?php
                 } else {
                     ?><p>Broken gift ...</p><?php
                 }
