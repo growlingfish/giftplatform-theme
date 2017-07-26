@@ -52,7 +52,7 @@ require_once( $_SERVER['DOCUMENT_ROOT'] . '/wp/wp-load.php' );
 						unset($wrap->unwrap_object);
 					}  
 					if ($wrap->unwrap_object) {
-						?><p><img src="<?php echo get_the_post_thumbnail_url($wrap->unwrap_object->ID, 'large'); ?>" /></p>
+						?><p><img src="<?php echo get_the_post_thumbnail_url($wrap->unwrap_object->ID, 'medium'); ?>" /></p>
 						<p>Named: <?php echo $wrap->unwrap_object->post_title; ?></p><?php
 					} else {
 						?><p>Broken gift ...</p><?php

@@ -7,9 +7,12 @@
  * @license GPL-3.0+
  */
 
+$total = 0;
+$unwrapped = 0;
+
 ?>
 
-<div style="height: 175mm;">
+<div>
     <?php 
     $query = array(
 		'numberposts'   => -1,
@@ -25,6 +28,10 @@
 	);
 	$all_gifts = get_posts( $query );
 	foreach ($all_gifts as $gift) {
+        $total++;
+        if (get_field('field_595e0593bd980', $gift->ID) == '1') {
+            $unwrapped++;
+        }
     ?>
     <div style="border-bottom: 5px solid black; margin: 40px 0;">
         <h1><?php echo $gift->post_title; ?></h1>
@@ -33,6 +40,7 @@
             <li>ID: <?php echo $gift->ID; ?></li>
             <li>Maker: <?php $maker = get_userdata($gift->post_author); echo urldecode($maker->nickname).' ('.$gift->post_author.')'; ?></li>
             <li>Receiver: <?php $receiver = get_field('field_58e4f6e88f3d7', $gift->ID); echo urldecode($receiver[0]['nickname']).' ('.$receiver[0]['ID'].')'; ?></li>
+            <li>Experienced? <?php echo (get_field('field_595e0593bd980', $gift->ID) == '1' ? 'Yes' : 'No'); ?></li>
         </ul>
         <h2>Object</h2>
         <?php

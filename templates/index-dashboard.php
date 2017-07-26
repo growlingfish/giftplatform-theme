@@ -301,7 +301,13 @@ jQuery(function($) {
             exhibitName = jQuery('#exhibitName').val();
             jQuery('.head-logo').show();
             jQuery('#step4').slideToggle(function () {
-                jQuery('#step5').slideToggle();
+                jQuery('#step5').slideToggle(function () {
+                    if (!stranger) {
+                        jQuery('#giftcard').text('Hey ' + decodeURIComponent(receiver.data.nickname) + ' - I wanted to give you ...');
+                    } else {
+                        jQuery('#giftcard').text('Hey stranger - I wanted to give you ...');
+                    }
+                });
             });
         }
     });
@@ -311,7 +317,9 @@ jQuery(function($) {
             giftcard = jQuery('#giftcard').val();
             jQuery('.head-logo').hide();
             jQuery('#step5').slideToggle(function () {
-                jQuery('#step6').slideToggle();
+                jQuery('#step6').slideToggle(function () {
+                    jQuery('#payload').text('');
+                });
             });
         }
     });
