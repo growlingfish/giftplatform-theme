@@ -1,5 +1,5 @@
 <?php
-require_once( $_SERVER['DOCUMENT_ROOT'] . '/wp-load.php' );
+require_once( $_SERVER['DOCUMENT_ROOT'] . '/wp/wp-load.php' );
 ?>
 
 <html>
