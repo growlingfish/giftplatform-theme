@@ -1,25 +1,17 @@
 <?php
 /**
- * Genesis Sample.
+ * Index page.
  *
- * This file adds the landing page template to the Genesis Sample Theme.
- *
- * Template Name: Landing
- *
- * @package Genesis Sample
- * @author  StudioPress
- * @license GPL-2.0+
- * @link    http://www.studiopress.com/
+ * @package giftplatform-theme
+ * @author  Ben Bedwell
+ * @license GPL-3.0+
  */
 
 // Add landing page body class to the head.
 add_filter( 'body_class', 'genesis_sample_add_body_class' );
 function genesis_sample_add_body_class( $classes ) {
-
 	$classes[] = 'landing-page';
-
 	return $classes;
-
 }
 
 // Remove Skip Links.
@@ -53,5 +45,16 @@ remove_action( 'genesis_footer', 'genesis_footer_markup_open', 5 );
 remove_action( 'genesis_footer', 'genesis_do_footer' );
 remove_action( 'genesis_footer', 'genesis_footer_markup_close', 15 );
 
-// Run the Genesis loop.
+remove_action( 'genesis_loop', 'genesis_do_loop' );
+add_action( 'genesis_loop', 'gift_index_loop' );
+function gift_index_loop () { 
+	if ( !is_user_logged_in () ) { // Not logged in
+		get_template_part( 'templates/index', 'welcome' );
+	} else {
+		get_template_part( 'templates/index', 'dashboard' );
+	}
+}
+
 genesis();
+
+?>

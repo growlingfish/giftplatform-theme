@@ -1,127 +1,67 @@
 <?php
 /**
- * Monochrome Pro.
+ * Genesis Sample.
  *
- * This file defines helper functions used elsewhere in the Monochrome Pro Theme.
+ * This file adds the required helper functions used in the Genesis Sample Theme.
  *
- * @package Monochrome
+ * @package Genesis Sample
  * @author  StudioPress
  * @license GPL-2.0+
- * @link    https://my.studiopress.com/themes/monochrome/
+ * @link    http://www.studiopress.com/
  */
 
 /**
  * Get default link color for Customizer.
  * Abstracted here since at least two functions use it.
  *
- * @since 1.0.0
+ * @since 2.2.3
  *
  * @return string Hex color code for link color.
  */
-function monochrome_customizer_get_default_link_color() {
-	return '#0066cc';
+function genesis_sample_customizer_get_default_link_color() {
+	return '#c3251d';
 }
 
 /**
  * Get default accent color for Customizer.
  * Abstracted here since at least two functions use it.
  *
- * @since 1.0.0
+ * @since 2.2.3
  *
  * @return string Hex color code for accent color.
  */
-function monochrome_customizer_get_default_accent_color() {
-	return '#0066cc';
+function genesis_sample_customizer_get_default_accent_color() {
+	return '#c3251d';
 }
 
 /**
- * Get default footer start color for Customizer.
- * Abstracted here since at least two functions use it.
+ * Calculate the color contrast.
  *
- * @since 1.0.0
+ * @since 2.2.3
  *
- * @return string Hex color code for footer start color.
+ * @return string Hex color code for contrast color
  */
-function monochrome_customizer_get_default_footer_start_color() {
-	return '#0066cc';
-}
-
-/**
- * Get default footer end color for Customizer.
- * Abstracted here since at least two functions use it.
- *
- * @since 1.0.0
- *
- * @return string Hex color code for footer end color.
- */
-function monochrome_customizer_get_default_footer_end_color() {
-	return '#02cbfb';
-}
-
-/**
- * Get default search icon settings for Customizer.
- *
- * @since 1.0.0
- *
- * @return int 1 for true, in order to show the icon.
- */
-function monochrome_customizer_get_default_search_setting() {
-	return 1;
-}
-
-/**
- * Output the header search form toggle button.
- *
- * @return string HTML output of the Show Search button.
- *
- * @since 1.0.0
- */
-function monochrome_get_header_search_toggle() {
-	return sprintf( '<a href="#header-search-wrap" aria-controls="header-search-wrap" aria-expanded="false" role="button" class="toggle-header-search"><span class="screen-reader-text">%s</span><span class="ionicons ion-ios-search"></span></a>', __( 'Show Search', 'monochrome-pro' ) );
-}
-
-/**
- * Output the header search form.
- *
- * @since 1.0.0
- */
-function monochrome_do_header_search_form() {
-
-	$button = sprintf( '<a href="#" role="button" aria-expanded="false" aria-controls="header-search-wrap" class="toggle-header-search close"><span class="screen-reader-text">%s</span><span class="ionicons ion-ios-close-empty"></span></a>', __( 'Hide Search', 'monochrome-pro' ) );
-
-	printf(
-		'<div id="header-search-wrap" class="header-search-wrap">%s %s</div>',
-		get_search_form( false ),
-		$button
-	);
-
-}
-
-/**
- * Calculate color contrast.
- *
- * @since 1.0.0
- */
-function monochrome_color_contrast( $color ) {
+function genesis_sample_color_contrast( $color ) {
 
 	$hexcolor = str_replace( '#', '', $color );
-
-	$red   = hexdec( substr( $hexcolor, 0, 2 ) );
-	$green = hexdec( substr( $hexcolor, 2, 2 ) );
-	$blue  = hexdec( substr( $hexcolor, 4, 2 ) );
+	$red      = hexdec( substr( $hexcolor, 0, 2 ) );
+	$green    = hexdec( substr( $hexcolor, 2, 2 ) );
+	$blue     = hexdec( substr( $hexcolor, 4, 2 ) );
 
 	$luminosity = ( ( $red * 0.2126 ) + ( $green * 0.7152 ) + ( $blue * 0.0722 ) );
 
-	return ( $luminosity > 128 ) ? '#000000' : '#ffffff';
+	return ( $luminosity > 128 ) ? '#333333' : '#ffffff';
 
 }
 
 /**
- * Calculate color brightness.
+ * Calculate the color brightness.
  *
- * @since 1.0.0
+ * @since 2.2.3
+ *
+ * @return string Hex color code for the color brightness
  */
-function monochrome_color_brightness( $color, $change ) {
+function genesis_sample_color_brightness( $color, $change ) {
 
 	$hexcolor = str_replace( '#', '', $color );
 
@@ -134,24 +74,5 @@ function monochrome_color_brightness( $color, $change ) {
 	$blue  = max( 0, min( 255, $blue + $change ) );
 
 	return '#'.dechex( $red ).dechex( $green ).dechex( $blue );
-
-}
-
-/**
- * Change color brightness.
- *
- * @since 1.0.0
- */
-function monochrome_change_brightness( $color ) {
-
-	$hexcolor = str_replace( '#', '', $color );
-
-	$red   = hexdec( substr( $hexcolor, 0, 2 ) );
-	$green = hexdec( substr( $hexcolor, 2, 2 ) );
-	$blue  = hexdec( substr( $hexcolor, 4, 2 ) );
-
-	$luminosity = ( ( $red * 0.2126 ) + ( $green * 0.7152 ) + ( $blue * 0.0722 ) );
-
-	return ( $luminosity > 128 ) ? monochrome_color_brightness( '#000000', 20 ) : monochrome_color_brightness( '#ffffff', -50 );
 
 }

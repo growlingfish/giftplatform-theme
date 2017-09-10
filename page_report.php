@@ -2,9 +2,9 @@
 /**
  * Genesis Sample.
  *
- * This file adds the landing page template to the Genesis Sample Theme.
+ * This file adds the report template to the Genesis Sample Theme.
  *
- * Template Name: Landing
+ * Template Name: Report
  *
  * @package Genesis Sample
  * @author  StudioPress
@@ -53,5 +53,12 @@ remove_action( 'genesis_footer', 'genesis_footer_markup_open', 5 );
 remove_action( 'genesis_footer', 'genesis_do_footer' );
 remove_action( 'genesis_footer', 'genesis_footer_markup_close', 15 );
 
-// Run the Genesis loop.
+remove_action( 'genesis_loop', 'genesis_do_loop' );
+add_action( 'genesis_loop', 'gift_report_loop' );
+function gift_report_loop () { 
+	if ( is_user_logged_in () ) { // Not logged in
+		get_template_part( 'templates/report', 'gifts' );
+	}
+}
+
 genesis();
