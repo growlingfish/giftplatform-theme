@@ -1,20 +1,20 @@
 <?php
 /**
- * Genesis Sample.
+ * Monochrome Pro.
  *
- * This file adds the landing page template to the Genesis Sample Theme.
+ * This file adds the landing page template to the Monochrome Pro Theme.
  *
  * Template Name: Landing
  *
- * @package Genesis Sample
+ * @package Monochrome
  * @author  StudioPress
  * @license GPL-2.0+
- * @link    http://www.studiopress.com/
+ * @link    https://my.studiopress.com/themes/monochrome/
  */
 
 // Add landing page body class to the head.
-add_filter( 'body_class', 'genesis_sample_add_body_class' );
-function genesis_sample_add_body_class( $classes ) {
+add_filter( 'body_class', 'monochrome_add_body_class' );
+function monochrome_add_body_class( $classes ) {
 
 	$classes[] = 'landing-page';
 
@@ -25,10 +25,12 @@ function genesis_sample_add_body_class( $classes ) {
 // Remove Skip Links.
 remove_action ( 'genesis_before_header', 'genesis_skip_links', 5 );
 
-// Dequeue Skip Links Script.
-add_action( 'wp_enqueue_scripts', 'genesis_sample_dequeue_skip_links' );
-function genesis_sample_dequeue_skip_links() {
+// Dequeue Skip Links script.
+add_action( 'wp_enqueue_scripts', 'monochrome_dequeue_skip_links' );
+function monochrome_dequeue_skip_links() {
+
 	wp_dequeue_script( 'skip-links' );
+
 }
 
 // Force full width content layout.
@@ -45,13 +47,15 @@ remove_theme_support( 'genesis-menus' );
 // Remove breadcrumbs.
 remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
 
-// Remove footer widgets.
-remove_action( 'genesis_before_footer', 'genesis_footer_widget_areas' );
+// Remove before footer CTA widget area.
+remove_action( 'genesis_before_footer', 'monochrome_before_footer_cta' );
 
 // Remove site footer elements.
-remove_action( 'genesis_footer', 'genesis_footer_markup_open', 5 );
-remove_action( 'genesis_footer', 'genesis_do_footer' );
-remove_action( 'genesis_footer', 'genesis_footer_markup_close', 15 );
+remove_action( 'genesis_after', 'genesis_footer_markup_open', 5 );
+remove_action( 'genesis_after', 'monochrome_before_footer', 8 );
+remove_action( 'genesis_after', 'genesis_do_footer' );
+remove_action( 'genesis_after', 'monochrome_footer_menu', 12 );
+remove_action( 'genesis_after', 'genesis_footer_markup_close', 15 );
 
 // Run the Genesis loop.
 genesis();
