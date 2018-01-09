@@ -4,7 +4,7 @@
  *
  * This file adds the report template to the Genesis Sample Theme.
  *
- * Template Name: Report
+ * Template Name: Network
  *
  * @package Genesis Sample
  * @author  StudioPress
