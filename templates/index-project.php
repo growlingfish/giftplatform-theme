@@ -61,7 +61,7 @@
 var apiBase = "https://gifting.digital/wp-json/gift/v3/";
 
 jQuery(function($) {
-	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-welcome.jpg');
+	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-project.jpg');
 
     $('#step1').fadeIn();
     jQuery('#loginform').hide();
