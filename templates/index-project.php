@@ -24,7 +24,7 @@
     <h1>What would you like to do?</h1>
     <p>Currently we offer the <strong>GIFT Toolkit</strong>, which is useful for cultural heritage venues and for developers who make apps for those venues.</p>
     <a href="https://toolkit.gifting.digital/" class="button">Take me to the GIFT Toolkit</a>
-    <p><a href="#" id="step3_button">I'm a member of the GIFT Project</a></p>
+    <p style="padding-top: 20px; font-size: 1.5rem;"><a href="#" id="step3_button">I'm a member of the GIFT Project</a></p>
 </div>
 
 <div class="step" id="step3">
