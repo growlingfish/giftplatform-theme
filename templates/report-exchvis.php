@@ -13,13 +13,16 @@ $user = wp_get_current_user();
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.css" rel="stylesheet" type="text/css" />
-<div id="mynetwork" style="width: 600px; height: 400px; border: 1px solid lightgray;"></div>
+<div id="mynetwork" style="position: fixed; top: 0; left: 0; width: 100%;"></div>
 
 <div class="preloader"></div>
 
 <script>
 jQuery(function($) {
 	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-project.jpg');
+
+    $('#mynetwork').css('height', $( window ).height());
+    $('#mynetwork').css('width', $( window ).width());
 
 <?php
     $query = array(
