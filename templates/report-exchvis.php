@@ -18,19 +18,56 @@ $user = wp_get_current_user();
 <div class="preloader"></div>
 
 <script>
-var apiBase = "https://gifting.digital/wp-json/gift/v3/";
-
 jQuery(function($) {
-	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-welcome.jpg');
+	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-project.jpg');
+
+<?php
+    define ( 'ACF_recipient', 	'field_58e4f6e88f3d7' );
+    define ( 'ACF_wrap', 		'field_58e4f5da816ac' );
+    define ( 'ACF_date', 		'field_58e4fb5c55127' );
+    define ( 'ACF_key',			'field_58e4fb8055128' );
+    define ( 'ACF_place', 		'field_58e4fae755126' );
+    define ( 'ACF_artcode',		'field_58ff4bdf23d95' );
+    define ( 'ACF_personal', 	'field_594d2552e8835' );
+    define ( 'ACF_object', 		'field_595b4a2bc9c1c' );
+    define ( 'ACF_payload',		'field_58e4f689655ef' );
+    define ( 'ACF_giftcard', 	'field_5964a5787eb68' );
+    define ( 'ACF_received', 	'field_595e186f21668' );
+    define ( 'ACF_unwrapped', 	'field_595e0593bd980' );
+    define ( 'ACF_responded', 	'field_595e05c8bd981' );
+    define ( 'ACF_location', 	'field_59a85fff4be5a' );
+    define ( 'ACF_gift', 		'field_59c4cdc1f07f6' );
+    define ( 'ACF_owner', 		'field_5969c3853f8f2' );
+    define ( 'ACF_freegift', 	'field_5a54cf62fc74f' );
+
+    function prepare_gift_object ($post) {
+        $location = get_field( ACF_location, $post->ID );
+        if (!$location || count($location) == 0) {
+            return null;
+        }
+        return (object)array(
+            'id' => $post->ID,
+            'label' => $post->post_title
+        );
+    }
+
+    $query = array(
+        'numberposts'   => -1,
+        'post_type'     => 'object',
+        'post_status'   => 'publish'
+    );
+    $all_objects = get_posts( $query );
+    $result = array();
+    foreach ($all_objects as $object) {
+        $o = prepare_gift_object($object);
+        if ($o) {
+            $result[] = $o;
+        }
+    }
+?>
 
     // create an array with nodes
-    var nodes = new vis.DataSet([
-        {id: 1, label: 'Node 1'},
-        {id: 2, label: 'Node 2'},
-        {id: 3, label: 'Node 3'},
-        {id: 4, label: 'Node 4'},
-        {id: 5, label: 'Node 5'}
-    ]);
+    var nodes = new vis.DataSet(<?php echo json_encode($result); ?>);
 
     // create an array with edges
     var edges = new vis.DataSet([
@@ -52,38 +89,5 @@ jQuery(function($) {
 
     // initialize your network!
     var network = new vis.Network(container, data, options);
-
-/*  $('#step3_local_button').on('click', function () {
-        jQuery('.preloader').show();
-        var request = jQuery.ajax({
-            dataType: "json",
-            cache: false,
-            url: apiBase + "validate/receiver/" + 'localbrighton@gifting.digital',
-            method: "GET"
-        });
-        request.done(function( data ) {
-            if (data.success && typeof(data.exists) != 'undefined' && data.exists) {
-                receiver = data.exists;
-                jQuery('.receiverName').text(decodeURIComponent(receiver.data.nickname));
-                jQuery('#step2b').slideToggle(function () {
-                    jQuery('#step3').slideToggle();
-                });
-            } else {
-                console.log(data);
-                setTimeout(function () {
-                    window.location.replace("https://gifting.digital");
-                }, 3000);
-            }
-            jQuery('.preloader').fadeOut();
-        });
-        request.fail(function( jqXHR, textStatus ) {
-            console.log( "Request failed: " + textStatus );
-            setTimeout(function () {
-                window.location.replace("https://gifting.digital");
-            }, 3000);
-            jQuery('.preloader').fadeOut();
-        });
-    });*/
-
 });
 </script>
