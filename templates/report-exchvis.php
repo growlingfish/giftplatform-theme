@@ -1,6 +1,6 @@
 <?php
 /**
- * Index page template for analytics.
+ * Index page template for Exchange Visualisation.
  *
  * @package giftplatform-theme
  * @author  Ben Bedwell

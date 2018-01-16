@@ -1,16 +1,17 @@
 <?php
 /**
- * Genesis Sample.
- *
- * This file adds the report template to the Genesis Sample Theme.
- *
- * Template Name: Network
+ * Template Name: ExchangeVis
  *
  * @package Genesis Sample
  * @author  StudioPress
  * @license GPL-2.0+
  * @link    http://www.studiopress.com/
  */
+
+if ( !is_user_logged_in () ) { // Not logged in
+	wp_redirect( esc_url( home_url( '/', 'https' ) ) );
+	exit;
+}
 
 // Add landing page body class to the head.
 add_filter( 'body_class', 'genesis_sample_add_body_class' );
@@ -54,10 +55,10 @@ remove_action( 'genesis_footer', 'genesis_do_footer' );
 remove_action( 'genesis_footer', 'genesis_footer_markup_close', 15 );
 
 remove_action( 'genesis_loop', 'genesis_do_loop' );
-add_action( 'genesis_loop', 'gift_report_loop' );
-function gift_report_loop () { 
+add_action( 'genesis_loop', 'gift_vis_loop' );
+function gift_vis_loop () { 
 	if ( is_user_logged_in () ) { // Not logged in
-		get_template_part( 'templates/report', 'network' );
+		get_template_part( 'templates/report', 'exchvis' );
 	}
 }
 
