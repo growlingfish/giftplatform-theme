@@ -48,7 +48,11 @@ remove_action( 'genesis_footer', 'genesis_footer_markup_close', 15 );
 remove_action( 'genesis_loop', 'genesis_do_loop' );
 add_action( 'genesis_loop', 'gift_index_loop' );
 function gift_index_loop () { 
-	get_template_part( 'templates/index', 'project' );
+	if ( is_user_logged_in () ) { // Not logged in
+		get_template_part( 'templates/index', 'internal' );
+	} else {
+		get_template_part( 'templates/index', 'external' );
+	}
 }
 
 genesis();
