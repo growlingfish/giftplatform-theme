@@ -146,3 +146,9 @@ function gift_enqueue_scripts_styles () {
 	wp_enqueue_style( 'gift-style', get_stylesheet_directory_uri() . '/style-gift.css');
 	wp_enqueue_script( 'gift-backstretch', get_stylesheet_directory_uri() . '/js/jquery.backstretch.min.js', array( 'jquery' ) );
 }
+
+add_filter("retrieve_password_message", "gift_custom_password_reset", 99, 4);
+function gift_custom_password_reset ($message, $key, $user_login, $user_data )    {
+        $message = "Someone has requested a password reset for the following account:" . sprintf(__('%s'), $user_data->user_email) . ".\r\nIf this was a mistake, just ignore this email and nothing will happen. To reset your password, visit the following address:" . network_site_url("wp-login.php?action=rp&key=$key&login=" . rawurlencode($user_login), 'login') . "\r\n";
+        return $message;
+}
