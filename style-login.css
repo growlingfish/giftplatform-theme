@@ -14,11 +14,11 @@ body.login h1 a {
     background-image: url('images/cropped-GIFT-white.png');
 }
 
-p#backtoblog {
+body.login p#backtoblog {
     display: none;
 }
 
-p#nav {
+body.login p#nav {
     background: white;
-    padding: 24px;
+    padding: 24px !important;
 }
