@@ -17,3 +17,8 @@ body.login h1 a {
 p#backtoblog {
     display: none;
 }
+
+p#nav {
+    background: white;
+    padding: 24px;
+}
