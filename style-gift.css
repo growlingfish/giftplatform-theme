@@ -69,19 +69,3 @@ textarea {
 	background: url('images/gear.gif') 50% 50% no-repeat rgb(0,0,0);
 	display: none;
 }
-
-body.login {
-    background-image: url('images/backstretch/index-project.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-  }
-
-  body.login h1 a {
-    background-image: url('images/cropped-GIFT-white.png');
-  }
-
-  p#backtoblog {
-    display: none;
-  }

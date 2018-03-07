@@ -153,6 +153,11 @@ function gift_custom_password_reset ($message, $key, $user_login, $user_data )  
         return $message;
 }
 
+function my_custom_login() {
+	echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo('stylesheet_directory') . '/style-login.css" />';
+}
+add_action('login_head', 'my_custom_login');
+
 function gift_login_logo_url() {
 	return get_bloginfo( 'url' );
 }
