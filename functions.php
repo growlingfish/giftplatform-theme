@@ -152,3 +152,32 @@ function gift_custom_password_reset ($message, $key, $user_login, $user_data )  
         $message = "Someone has requested a password reset for the following account:" . sprintf(__('%s'), $user_data->user_email) . ".\r\nIf this was a mistake, just ignore this email and nothing will happen. To reset your password, visit the following address:" . network_site_url("wp-login.php?action=rp&key=$key&login=" . rawurlencode($user_login), 'login') . "\r\n";
         return $message;
 }
+
+function gift_login_logo_url() {
+	return get_bloginfo( 'url' );
+}
+add_filter( 'login_headerurl', 'gift_login_logo_url' );
+	
+function gift_login_logo_url_title() {
+	return 'GIFT Platform';
+}
+add_filter( 'login_headertitle', 'gift_login_logo_url_title' );
+
+function gift_login_error_override() {
+    return 'Incorrect login details.';
+}
+add_filter('login_errors', 'gift_login_error_override');
+
+function gift_admin_login_redirect( $redirect_to, $request, $user ) {
+	global $user;
+	if( isset( $user->roles ) && is_array( $user->roles ) ) {
+		if( in_array( "administrator", $user->roles ) ) {
+			return $redirect_to;
+		} else {
+			return home_url();
+		}
+	} else {
+		return $redirect_to;
+	}
+}
+add_filter("login_redirect", "gift_admin_login_redirect", 10, 3);
