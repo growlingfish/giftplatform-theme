@@ -63,7 +63,7 @@
                         $location = $location[0];
                         $venues = wp_get_post_terms( $location->ID, 'venue' );
                         if ($venues) {
-                            $venue = $venue[0];
+                            $venue = $venues[0];
                         }
                     }
                 }
@@ -81,7 +81,7 @@
             .'>'
                 .$gift->post_title
                 .'<ul>'
-                    .'<li>Title: '.$object->post_title.'</li>'
+                    .'<li>Object: '.$object->post_title.'</li>'
                     .'<li>Sent: '.$gift->post_modified.'</li>'
                     .'<li>By: '.urldecode($senderdata->nickname).'</li>'
                     .'<li>To: '.urldecode($recipientdata->nickname).'</li>'
