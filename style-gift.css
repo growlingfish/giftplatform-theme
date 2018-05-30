@@ -79,6 +79,7 @@ div#giftsvis .grid-item {
     padding: 10px;
     margin: 1%;
     font-size: 0.7em;
+    cursor: pointer;
 }
 
 div#giftsvis .grid-item.incomplete {

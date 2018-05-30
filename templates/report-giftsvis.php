@@ -82,10 +82,10 @@
             .'>'
                 .'<strong>Gift #'.$gift->ID.'</strong>'
                 .'<ul>'
-                    .'<li>Object: '.(isset ($object->post_title) ? $object->post_title : '<span style="color: red">No object</span>' ).'</li>'
                     .'<li>Sent: '.(isset ($gift->post_modified) ? $gift->post_modified : '<span style="color: red">No date</span>' ).'</li>'
                     .'<li>By: '.(isset ($senderdata->nickname) ? urldecode($senderdata->nickname) : '<span style="color: red">No sender</span>' ).'</li>'
                     .'<li>To: '.(isset ($recipientdata->nickname) ? urldecode($recipientdata->nickname) : '<span style="color: red">No recipient</span>' ).'</li>'
+                    .'<li>Object: '.(isset ($object->post_title) ? $object->post_title : '<span style="color: red">No object</span>' ).'</li>'
                     .'<li>At: '.(isset ($venue->name) ? $venue->name : 'No venue' ).'</li>'
                 .'</ul>'
             .'</div>';
@@ -117,7 +117,7 @@ jQuery(function($) {
     });
 
     $('.grid-item').click(function () {
-        console.log($(this).attr('gift'));
+        window.location.href = 'https://gifting.digital/vis/?tool=gift&id=' + $(this).attr('gift');
     });
 
     $('#orders').fadeIn();
