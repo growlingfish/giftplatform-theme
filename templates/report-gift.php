@@ -1,5 +1,4 @@
-<script src="https://cdn.jsdelivr.net/npm/isotope-layout@3.0.6/js/isotope.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/isotope-layout@3.0.6/js/layout-modes/masonry.js"></script>
+<script src="https://unpkg.com/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js" integrity="sha256-L3S3EDEk31HcLA5C6T2ovHvOcD80+fgqaCDt2BAi92o=" crossorigin="anonymous"></script>
 
 <div class="step" id="detail">
