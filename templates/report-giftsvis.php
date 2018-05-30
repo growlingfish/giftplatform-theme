@@ -13,10 +13,9 @@
     </div>
     <p>Would you like to filter the gifts?</p>
     <button id="sept-sprint">Sep 2017 Brighton sprint</button>
-    <button id="byVenue">By venue</button>
-    <button id="bySender">By sender</button>
-    <button id="byRecipient">By recipient</button>
-    <button id="byDate">By date sent</button>
+    <button id="uon-trial">2018 UoN Museum trial</button>
+    <button id="complete">Complete</button>
+    <button id="incomplete">Incomplete</button>
 </div>
 
 <div id="giftsvis" class="grid">
@@ -116,11 +115,36 @@ jQuery(function($) {
         $('.grid').isotope({ sortBy : sortByValue });
     });
 
+    $('#complete').click( function () {
+        $('.grid').isotope({
+            filter: function() {
+                return $(this).hasClass('complete');
+            }
+        });
+    });
+
+    $('#incomplete').click( function () {
+        $('.grid').isotope({
+            filter: function() {
+                return $(this).hasClass('incomplete');
+            }
+        });
+    });
+
     $('#sept-sprint').click( function () {
         $('.grid').isotope({
             filter: function() {
                 var date = $(this).attr('data-date');
                 return moment(date).isBetween('2017-09-24', '2017-09-28');
+            }
+        });
+    });
+
+    $('#uon-trial').click( function () {
+        $('.grid').isotope({
+            filter: function() {
+                var date = $(this).attr('data-date');
+                return moment(date).isSame('2018-03-20', 'day');
             }
         });
     });
