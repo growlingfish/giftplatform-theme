@@ -85,3 +85,11 @@ div#giftsvis .grid-item {
 div#giftsvis .grid-item.incomplete {
     background-color: orange;
 }
+
+div#giftobjectsvis .grid-item {
+    border: 1px solid black;
+    background-color: white;
+    padding: 10px;
+    margin: 1%;
+    font-size: 0.7em;
+}
