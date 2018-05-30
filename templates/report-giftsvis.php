@@ -12,8 +12,8 @@
         <button id="byDate">By date sent</button>
     </div>
     <p>Would you also like to filter the gifts?</p>
-    <button id="sept-sprint">2017 Brighton sprint</button>
-    <button id="uon-trial">2018 UoN Museum trial</button>
+    <button id="sept-sprint">2017 Brighton</button>
+    <button id="uon-trial">2018 UoN Museum</button>
     <button id="complete">Complete</button>
     <button id="incomplete">Incomplete</button>
     <button id="clear">Clear</button>
