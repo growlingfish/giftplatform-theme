@@ -6,11 +6,11 @@
 <?php
     $gift = get_post($_GET['id']);
 
-    echo '<p>This gift was sent on <span id="sent-date"></span> at <span id="sent-time"></span></p>';
+    echo '<p>This gift was made on <span id="sent-date"></span> at <span id="sent-time"></span></p>';
 
     // sender
     $senderdata = get_userdata($gift->post_author);
-    echo '<p>It was sent by '.urldecode($senderdata->nickname).'</p>';
+    echo '<p>It was sent by '.urldecode($senderdata->nickname).' ... ';
 
     $recipients = get_field( 'field_58e4f6e88f3d7', $gift->ID );
     if ($recipients) {
@@ -20,9 +20,9 @@
         }
     }
     if ($recipientdata) {
-        echo '<p>It was sent to '.urldecode($recipientdata->nickname).'</p>';
+        echo ' to '.urldecode($recipientdata->nickname).'.</p>';
     } else {
-        echo '<p style="color: red;">No recipient was chosen.</p>';
+        echo ' <span style="color: red;">but no recipient was chosen.</span></p>';
     }
 ?>
 </div>
@@ -64,29 +64,9 @@
                 unset($object);
             }  
             if ($object) {
-
-                echo '<div class="grid-item grid-item--width3"><strong>'.$object->post_title.'</strong>';
-                echo '<p><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'medium').'" /></p>';
-
-                $location = get_field( 'field_59a85fff4be5a', $object->ID );
-                if (!$location || count($location) == 0) {
-                    
-                } else {
-                    $location = $location[0];
-
-                    echo '<div>'.$location->post_title;
-
-                    $venues = wp_get_post_terms( $location->ID, 'venue' );
-                    if ($venues) {
-                        $venue = $venues[0];
-
-                        echo ' in '.$venue->name;
-                    }
-
-                    echo '</div>';
-                }
-
-                echo '</div>';
+                echo '<div class="grid-item grid-item--width3"><strong>'.$object->post_title.'</strong>'
+                    .'<p><a href="'.get_the_guid($object->ID).'"><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'medium').'" /></a></p>'
+                .'</div>';
             }
         }
     }
@@ -117,6 +97,17 @@
 ?>
 </div>
 
+<div class="step" id="status">
+    <h1>Status</h1>
+    <ul>
+<?php
+    echo '<li>Received? '.get_field( field_595e186f21668, $gift->ID).'</li>';
+	echo '<li>Unwrapped? '.get_field( field_595e0593bd980, $gift->ID).'</li>';
+	echo '<li>Responded? '.get_field( field_595e05c8bd981, $gift->ID).'</li>';
+?>
+    </ul>
+</div>
+
 <script>
 jQuery(function($) {
 	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-project.jpg');
@@ -130,6 +121,9 @@ jQuery(function($) {
                 $('.grid').isotope({
                     itemSelector: '.grid-item',
                     layoutMode: 'fitRows'
+                });
+                $('#payload').fadeIn(function () {
+                    $('#status').fadeIn();
                 });
             });
         });
