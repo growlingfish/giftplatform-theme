@@ -1,10 +1,11 @@
 <div class="step" id="detail">
     <h1><?php echo get_the_title(); ?></h1>
 
-    <p><?php echo get_the_post_thumbnail_url('large'); ?></p>
+    <p><img src="<?php echo get_the_post_thumbnail_url(); ?>" /></p>
 
 <?php
-    $userdata = get_userdata(get_the_author_meta( 'ID' ));
+    global $post;
+    $userdata = get_userdata($post->post_author);
 ?>
     <p>Created by <?php echo $userdata->nickname; ?> on <?php the_date(); ?>.</p>
 
