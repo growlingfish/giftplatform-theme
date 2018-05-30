@@ -12,10 +12,11 @@
         <button id="byDate">By date sent</button>
     </div>
     <p>Would you like to filter the gifts?</p>
-    <button id="sept-sprint">Sep 2017 Brighton sprint</button>
+    <button id="sept-sprint">2017 Brighton sprint</button>
     <button id="uon-trial">2018 UoN Museum trial</button>
     <button id="complete">Complete</button>
     <button id="incomplete">Incomplete</button>
+    <button id="clear">Clear</button>
 </div>
 
 <div id="giftsvis" class="grid">
@@ -146,6 +147,12 @@ jQuery(function($) {
                 var date = $(this).attr('data-date');
                 return moment(date).isSame('2018-03-20', 'day');
             }
+        });
+    });
+
+    $('#clear').click( function () {
+        $('.grid').isotope({
+            filter: '*'
         });
     });
 
