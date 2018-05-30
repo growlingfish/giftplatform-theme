@@ -101,7 +101,7 @@ jQuery(function($) {
 
     $('.grid').isotope({
         itemSelector: '.grid-item',
-        layoutMode: 'fitRows',
+        layoutMode: 'masonry',
         getSortData: {
             //byObject: '[data-object]',
             byDate: '[data-date]',

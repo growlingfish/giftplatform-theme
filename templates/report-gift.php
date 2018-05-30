@@ -111,7 +111,7 @@ jQuery(function($) {
             $('#wraps').fadeIn(function () {
                 $('.grid').isotope({
                     itemSelector: '.grid-item',
-                    layoutMode: 'fitRows'
+                    layoutMode: 'masonry'
                 });
                 $('#status').fadeIn();
             });
