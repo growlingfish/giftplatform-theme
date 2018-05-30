@@ -73,13 +73,14 @@
         echo '<div class="grid-item '
                 .(isset ($object->post_title) && isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) && isset ($venue->name) ? 'complete' : 'incomplete')
             .'" '
+                .'gift="'.$gift->ID.'"'
                 .'data-object="'.$object->post_title.'" '
                 .'data-date="'.$gift->post_modified.'" '
                 .'data-sender="'.urldecode($senderdata->nickname).'" '
                 .'data-recipient="'.urldecode($recipientdata->nickname).'" '
                 .'data-venue="'.$venue->name.'" '
             .'>'
-                .$gift->post_title
+                .'<strong>Gift #'.$gift->ID.'</strong>'
                 .'<ul>'
                     .'<li>Object: '.$object->post_title.'</li>'
                     .'<li>Sent: '.$gift->post_modified.'</li>'
@@ -113,6 +114,10 @@ jQuery(function($) {
     $('#sort-by').on('click', 'button', function () {
         var sortByValue = $(this).attr('id');
         $('.grid').isotope({ sortBy : sortByValue });
+    });
+
+    $('.grid-item').click(function () {
+        console.log($(this).attr('gift'));
     });
 
     $('#orders').fadeIn();
