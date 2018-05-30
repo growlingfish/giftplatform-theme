@@ -71,7 +71,7 @@
         }
 
         echo '<div class="grid-item '
-                .(isset ($object->post_title) && isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) && isset ($venue->name) ? 'complete' : 'incomplete')
+                .(isset ($object->post_title) && isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) ? 'complete' : 'incomplete')
             .'" '
                 .'gift="'.$gift->ID.'"'
                 .'data-object="'.$object->post_title.'" '
@@ -82,11 +82,11 @@
             .'>'
                 .'<strong>Gift #'.$gift->ID.'</strong>'
                 .'<ul>'
-                    .'<li>Object: '.$object->post_title.'</li>'
-                    .'<li>Sent: '.$gift->post_modified.'</li>'
-                    .'<li>By: '.urldecode($senderdata->nickname).'</li>'
-                    .'<li>To: '.urldecode($recipientdata->nickname).'</li>'
-                    .'<li>At: '.$venue->name.'</li>'
+                    .'<li>Object: '.(isset ($object->post_title) ? $object->post_title : '<span style="color: red">No object</span>' ).'</li>'
+                    .'<li>Sent: '.(isset ($gift->post_modified) ? $gift->post_modified : '<span style="color: red">No date</span>' ).'</li>'
+                    .'<li>By: '.(isset ($senderdata->nickname) ? urldecode($senderdata->nickname) : '<span style="color: red">No sender</span>' ).'</li>'
+                    .'<li>To: '.(isset ($recipientdata->nickname) ? urldecode($recipientdata->nickname) : '<span style="color: red">No recipient</span>' ).'</li>'
+                    .'<li>At: '.(isset ($venue->name) ? $venue->name : 'No venue' ).'</li>'
                 .'</ul>'
             .'</div>';
     }
