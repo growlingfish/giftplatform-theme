@@ -52,21 +52,32 @@
     <p>The recipient was asked to find the following objects:</p>
     <div id="giftobjectsvis" class="grid">
 <?php
-    $wraps = get_field( 'field_58e4f5da816ac', $gift->ID);
-	if ($wraps) {
-        foreach ($wraps as $wrap) {
-            $object = get_field( 'field_595b4a2bc9c1c', $wrap->ID);
-            if (is_array($object) && count($object) > 0) {
-                $object = $object[0];
-            } else if (is_a($object, 'WP_Post')) {
-                    
-            } else {
-                unset($object);
-            }  
-            if ($object) {
-                echo '<div class="grid-item grid-item--width3"><strong>'.$object->post_title.'</strong>'
-                    .'<p><a href="'.get_the_guid($object->ID).'"><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'medium').'" /></a></p>'
-                .'</div>';
+    $payloads = get_field( 'field_58e4f689655ef', $gift->ID);
+	if ($payloads) {
+        
+        $wraps = get_field( 'field_58e4f5da816ac', $gift->ID);
+        if ($wraps) {
+            $i = 0;
+            foreach ($wraps as $wrap) {
+                $object = get_field( 'field_595b4a2bc9c1c', $wrap->ID);
+                if (is_array($object) && count($object) > 0) {
+                    $object = $object[0];
+                } else if (is_a($object, 'WP_Post')) {
+                        
+                } else {
+                    unset($object);
+                }  
+                if ($object) {
+                    echo '<div class="grid-item grid-item--width2"><strong>'.$object->post_title.'</strong>'
+                        .'<p><a href="'.get_the_guid($object->ID).'"><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'medium').'" /></a></p>';
+
+                    if ($payloads[$i]) {
+                        echo '<p>After finding this object, the visitor received this message:</p><blockquote>'.wpautop($payload->post_content).'</blockquote>';
+                    }
+
+                    echo '</div>';
+                }
+                $i++;
             }
         }
     }
@@ -77,33 +88,13 @@
 ?>
 </div>
 
-<div class="step" id="payload">
-    <h1>Payload</h1>
-<?php
-    $payloads = get_field( 'field_58e4f689655ef', $gift->ID);
-	if ($payloads) {
-        foreach ($payloads as $payload) {
-            $payloaddata = (object)array(
-                'ID' => $payload->ID,
-                'post_content' => wpautop($payload->post_content)
-            );
-        }
-    }
-    if ($payloaddata) {
-        echo '<p>After the gift was unwrapped, the message said:</p><blockquote>'.$payloaddata->post_content.'</blockquote>';
-    } else {
-        echo '<p style="color: red;">No message was written.</p>';
-    }
-?>
-</div>
-
 <div class="step" id="status">
     <h1>Status</h1>
     <ul>
 <?php
-    echo '<li>Received? '.get_field( field_595e186f21668, $gift->ID).'</li>';
-	echo '<li>Unwrapped? '.get_field( field_595e0593bd980, $gift->ID).'</li>';
-	echo '<li>Responded? '.get_field( field_595e05c8bd981, $gift->ID).'</li>';
+    echo '<li>Received? '.(get_field( field_595e186f21668, $gift->ID) == 1 ? 'Yes' : 'No').'</li>';
+	echo '<li>Unwrapped? '.(get_field( field_595e0593bd980, $gift->ID) == 1 ? 'Yes' : 'No').'</li>';
+	echo '<li>Responded? '.(get_field( field_595e05c8bd981, $gift->ID) == 1 ? 'Yes' : 'No').'</li>';
 ?>
     </ul>
 </div>
@@ -122,9 +113,7 @@ jQuery(function($) {
                     itemSelector: '.grid-item',
                     layoutMode: 'fitRows'
                 });
-                $('#payload').fadeIn(function () {
-                    $('#status').fadeIn();
-                });
+                $('#status').fadeIn();
             });
         });
     });
