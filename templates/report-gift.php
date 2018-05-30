@@ -27,6 +27,10 @@
 ?>
 </div>
 
+<div style="position: fixed; right: 20px; bottom: 20px; background: white; padding: 10px;">
+    <button onclick="window.history.back();">Back</button>
+</div>
+
 <div class="step" id="giftcard">
     <h1>Gift card</h1>
 <?php

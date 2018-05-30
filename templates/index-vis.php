@@ -7,7 +7,6 @@
     <p>What would you like to see?</p>
     <a href="https://gifting.digital/vis/?tool=exchange" class="button">Network of exchanges</a>
     <a href="https://gifting.digital/vis/?tool=gifts" class="button">Gifts</a>
-    <a href="https://gifting.digital/vis/?tool=gift" class="button">A gift</a>
 </div>
 
 <div class="preloader"></div>
