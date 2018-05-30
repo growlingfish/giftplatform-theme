@@ -1,11 +1,4 @@
 <?php
-/**
- * Index page template for Exchange Visualisation.
- *
- * @package giftplatform-theme
- * @author  Ben Bedwell
- * @license GPL-3.0+
- */
 
 $user = wp_get_current_user();
 
