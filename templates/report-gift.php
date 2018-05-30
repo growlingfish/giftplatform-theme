@@ -65,8 +65,8 @@
             }  
             if ($object) {
 
-                echo '<div class="grid-item"><strong>'.$object->post_title.'</strong>';
-                echo '<p>'.get_the_post_thumbnail_url($object->ID, 'medium').'</p>';
+                echo '<div class="grid-item grid-item--width3"><strong>'.$object->post_title.'</strong>';
+                echo '<p><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'medium').'" /></p>';
 
                 $location = get_field( 'field_59a85fff4be5a', $object->ID );
                 if (!$location || count($location) == 0) {
@@ -93,6 +93,26 @@
     echo '</div>';
     if (!$wraps) {
         echo '<p style="color: red;">Gift was not wrapped.</p>';
+    }
+?>
+</div>
+
+<div class="step" id="payload">
+    <h1>Payload</h1>
+<?php
+    $payloads = get_field( 'field_58e4f689655ef', $gift->ID);
+	if ($payloads) {
+        foreach ($payloads as $payload) {
+            $payloaddata = (object)array(
+                'ID' => $payload->ID,
+                'post_content' => wpautop($payload->post_content)
+            );
+        }
+    }
+    if ($payloaddata) {
+        echo '<p>After the gift was unwrapped, the message said:</p><blockquote>'.$payloaddata->post_content.'</blockquote>';
+    } else {
+        echo '<p style="color: red;">No message was written.</p>';
     }
 ?>
 </div>
