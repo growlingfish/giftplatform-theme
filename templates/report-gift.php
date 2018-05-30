@@ -47,7 +47,7 @@
 ?>
 </div>
 
-<div class="step" id="giftcard">
+<div class="step" id="wraps">
     <h1>Wraps</h1>
     <div id="giftobjectsvis" class="grid">
 <?php
@@ -153,70 +153,16 @@ jQuery(function($) {
     $('#sent-date').text(moment('<?php echo $gift->post_modified; ?>').format("dddd, MMMM Do YYYY"));
     $('#sent-time').text(moment('<?php echo $gift->post_modified; ?>').format("h:mm:ss a"));
 
-    /*$('.grid').isotope({
+    $('.grid').isotope({
         itemSelector: '.grid-item',
-        layoutMode: 'fitRows',
-        getSortData: {
-            //byObject: '[data-object]',
-            byDate: '[data-date]',
-            bySender: '[data-sender]',
-            byRecipient: '[data-recipient]',
-            byVenue: '[data-venue]',
-        }
+        layoutMode: 'fitRows'
     });
-
-    $('#sort-by').on('click', 'button', function () {
-        var sortByValue = $(this).attr('id');
-        $('.grid').isotope({ sortBy : sortByValue });
-    });
-
-    $('#complete').click( function () {
-        $('.grid').isotope({
-            filter: function() {
-                return $(this).hasClass('complete');
-            }
-        });
-    });
-
-    $('#incomplete').click( function () {
-        $('.grid').isotope({
-            filter: function() {
-                return $(this).hasClass('incomplete');
-            }
-        });
-    });
-
-    $('#sept-sprint').click( function () {
-        $('.grid').isotope({
-            filter: function() {
-                var date = $(this).attr('data-date');
-                return moment(date).isBetween('2017-09-27', '2017-09-28', 'day', '[]');
-            }
-        });
-    });
-
-    $('#uon-trial').click( function () {
-        $('.grid').isotope({
-            filter: function() {
-                var date = $(this).attr('data-date');
-                return moment(date).isSame('2018-03-20', 'day');
-            }
-        });
-    });
-
-    $('#clear').click( function () {
-        $('.grid').isotope({
-            filter: '*'
-        });
-    });
-
-    $('.grid-item').click(function () {
-        window.location.href = 'https://gifting.digital/vis/?tool=gift&id=' + $(this).attr('gift');
-    });*/
 
     $('#detail').fadeIn(function () {
         $('#giftcard').fadeIn(function () {
+            $('#wraps').fadeIn(function () {
 
+            });
         });
     });
 });
