@@ -72,7 +72,7 @@
                         .'<p><a href="'.get_the_guid($object->ID).'"><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'medium').'" /></a></p>';
 
                     if ($payloads[$i]) {
-                        echo '<p>After finding this object, the visitor received this message:</p><blockquote>'.wpautop($payload->post_content).'</blockquote>';
+                        echo '<p>After finding this object, the visitor received this message:</p><blockquote>'.wpautop($payloads[$i]->post_content).'</blockquote>';
                     }
 
                     echo '</div>';
