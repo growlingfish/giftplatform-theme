@@ -31,15 +31,14 @@
     <h1>Gift card</h1>
 <?php
     $giftcards = get_field( 'field_5964a5787eb68', $gift->ID);
-	if (!$giftcards) {
-		return null;
-	}
-	foreach ($giftcards as $giftcard) {
-		$giftcarddata = (object)array(
-			'ID' => $giftcard->ID,
-			'post_content' => wpautop($giftcard->post_content)
-		);
-	}
+	if ($giftcards) {
+        foreach ($giftcards as $giftcard) {
+            $giftcarddata = (object)array(
+                'ID' => $giftcard->ID,
+                'post_content' => wpautop($giftcard->post_content)
+            );
+        }
+    }
     if ($giftcarddata) {
         echo '<p>The gift card said:</p><blockquote>'.$giftcarddata->post_content.'</blockquote>';
     } else {
@@ -48,7 +47,53 @@
 ?>
 </div>
 
-<div id="giftsvis" class="grid">
+<div class="step" id="giftcard">
+    <h1>Wraps</h1>
+    <div id="giftobjectsvis" class="grid">
+<?php
+    $wraps = get_field( 'field_58e4f5da816ac', $gift->ID);
+	if ($wraps) {
+        foreach ($wraps as $wrap) {
+            $object = get_field( 'field_595b4a2bc9c1c', $wrap->ID);
+            if (is_array($object) && count($object) > 0) {
+                $object = $object[0];
+            } else if (is_a($object, 'WP_Post')) {
+                    
+            } else {
+                unset($object);
+            }  
+            if ($object) {
+
+                echo '<div class="grid-item"><strong>'.$object->post_title.'</strong>';
+
+                $location = get_field( 'field_59a85fff4be5a', $object->ID );
+                if (!$location || count($location) == 0) {
+                    
+                } else {
+                    $location = $location[0];
+
+                    echo '<div>'.$location->post_title;
+
+                    $venues = wp_get_post_terms( $location->ID, 'venue' );
+                    if ($venues) {
+                        $venue = $venues[0];
+
+                        echo ' in '.$venue->name;
+                    }
+
+                    echo '</div>';
+                }
+
+                echo '</div>';
+            }
+        }
+    }
+    if (!$wraps) {
+        echo '<p style="color: red;">Gift was not wrapped.</p>';
+    }
+?>
+    </div>
+</div>
 
 <?php
         //venue
@@ -100,8 +145,6 @@
             .'</div>';*/
 
 ?>
-
-</div>
 
 <script>
 jQuery(function($) {
