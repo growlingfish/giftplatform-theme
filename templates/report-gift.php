@@ -27,7 +27,7 @@
 ?>
 </div>
 
-<div style="position: fixed; right: 20px; bottom: 20px; background: white; padding: 10px;">
+<div style="position: fixed; right: 20px; bottom: 20px;">
     <button onclick="window.history.back();">Back</button>
 </div>
 

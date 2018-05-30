@@ -1,7 +1,7 @@
 <script src="https://unpkg.com/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js" integrity="sha256-L3S3EDEk31HcLA5C6T2ovHvOcD80+fgqaCDt2BAi92o=" crossorigin="anonymous"></script>
 
-<div style="position: fixed; right: 20px; bottom: 20px; background: white; padding: 10px;">
+<div style="position: fixed; right: 20px; bottom: 20px;">
     <button onclick="window.history.back();">Back</button>
 </div>
 
