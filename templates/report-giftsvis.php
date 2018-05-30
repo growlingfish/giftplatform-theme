@@ -70,7 +70,9 @@
             }
         }
 
-        echo '<div class="grid-item" '
+        echo '<div class="grid-item '
+                .(isset ($object->post_title) && isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) && isset ($venue->name) ? 'complete' : 'incomplete')
+            .'" '
                 .'data-object="'.$object->post_title.'" '
                 .'data-date="'.$gift->post_modified.'" '
                 .'data-sender="'.urldecode($senderdata->nickname).'" '
@@ -79,11 +81,11 @@
             .'>'
                 .$gift->post_title
                 .'<ul>'
-                    .'<li>'.$object->post_title.'</li>'
-                    .'<li>'.$gift->post_modified.'</li>'
-                    .'<li>'.urldecode($senderdata->nickname).'</li>'
-                    .'<li>'.urldecode($recipientdata->nickname).'</li>'
-                    .'<li>'.$venue->name.'</li>'
+                    .'<li>Title: '.$object->post_title.'</li>'
+                    .'<li>Sent: '.$gift->post_modified.'</li>'
+                    .'<li>By: '.urldecode($senderdata->nickname).'</li>'
+                    .'<li>To: '.urldecode($recipientdata->nickname).'</li>'
+                    .'<li>At: '.$venue->name.'</li>'
                 .'</ul>'
             .'</div>';
     }

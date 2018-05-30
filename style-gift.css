@@ -70,11 +70,16 @@ textarea {
 	display: none;
 }
 
-.grid-item { width: 25%; }
-.grid-item--width2 { width: 50%; }
+.grid-item { width: 23%; }
+.grid-item--width2 { width: 48%; }
 
 div#giftsvis .grid-item {
-    background-color: white;
     border: 1px solid black;
     padding: 10px;
+    margin: 1%;
+}
+
+div#giftsvis .grid-item.incomplete {
+    background-color: red;
+    color: white;
 }
