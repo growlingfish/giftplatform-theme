@@ -7,7 +7,7 @@
         <button id="byObject">By object</button>
         <button id="byVenue">By venue</button>
         <button id="bySender">By sender</button>
-        <button id="byReceiver">By receiver</button>
+        <button id="byRecipient">By recipient</button>
         <button id="byDate">By date sent</button>
     </div>
 </div>
@@ -78,6 +78,13 @@
                 .'data-venue="'.$venue->name.'" '
             .'>'
                 .$gift->post_title
+                .'<ul>'
+                    .'<li>'.$object->post_title.'</li>'
+                    .'<li>'.$gift->post_modified.'</li>'
+                    .'<li>'.urldecode($senderdata->nickname).'</li>'
+                    .'<li>'.urldecode($recipientdata->nickname).'</li>'
+                    .'<li>'.$venue->name.'</li>'
+                .'</ul>'
             .'</div>';
     }
 
