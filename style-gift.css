@@ -72,3 +72,7 @@ textarea {
 
 .grid-item { width: 25%; }
 .grid-item--width2 { width: 50%; }
+
+div#giftsvis .grid-item {
+    background-color: white;
+}

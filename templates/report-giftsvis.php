@@ -1,5 +1,18 @@
 <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
-<div class="grid">
+
+<div class="step" id="orders">
+    <h1>Gifts</h1>
+    <p>How would you like to order the gifts?</p>
+    <div id="sort-by">
+        <button id="byObject">By object</button>
+        <button id="byVenue">By venue</button>
+        <button id="bySender">By sender</button>
+        <button id="byReceiver">By receiver</button>
+        <button id="byDate">By date sent</button>
+    </div>
+</div>
+
+<div id="giftsvis" class="grid">
 
 <?php
     $query = array(
@@ -14,7 +27,11 @@
         if (!$location || count($location) == 0) {
             
         } else {
-            echo '<div class="grid-item">'.$object->post_title.'</div>';
+            echo '<div class="grid-item" '
+                    .'data-object="'.$object->ID.'" '
+                .'>'
+                    .$object->post_title
+                .'</div>';
         }
     }
 ?>
@@ -27,7 +44,17 @@ jQuery(function($) {
 
     $('.grid').isotope({
         itemSelector: '.grid-item',
-        layoutMode: 'fitRows'
+        layoutMode: 'fitRows',
+        getSortData: {
+            byObject: '[data-object]'
+        }
     });
+
+    $('#sort-by').on('click', 'button', function () {
+        var sortByValue = $(this).attr('id');
+        $('.grid').isotope({ sortBy : sortByValue });
+    });
+
+    $('#orders').fadeIn();
 });
 </script>
