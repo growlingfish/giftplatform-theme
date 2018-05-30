@@ -1,4 +1,5 @@
 <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js" integrity="sha256-L3S3EDEk31HcLA5C6T2ovHvOcD80+fgqaCDt2BAi92o=" crossorigin="anonymous"></script>
 
 <div class="step" id="orders">
     <h1>Gifts</h1>
@@ -10,6 +11,12 @@
         <button id="byRecipient">By recipient</button>
         <button id="byDate">By date sent</button>
     </div>
+    <p>Would you like to filter the gifts?</p>
+    <button id="sept-sprint">Sep 2017 Brighton sprint</button>
+    <button id="byVenue">By venue</button>
+    <button id="bySender">By sender</button>
+    <button id="byRecipient">By recipient</button>
+    <button id="byDate">By date sent</button>
 </div>
 
 <div id="giftsvis" class="grid">
@@ -18,14 +25,7 @@
     $query = array(
 		'numberposts'   => -1,
 		'post_type'     => 'gift',
-		'post_status'   => 'publish',
-        /*'date_query' => array(
-            array(
-                'after'     => 'July 24th, 2017',
-                'before'    => 'July 28th, 2017',
-                'inclusive' => true,
-            )
-        )*/
+		'post_status'   => 'publish'
 	);
     $all_gifts = get_posts( $query );
     foreach ($all_gifts as $gift) {
@@ -114,6 +114,15 @@ jQuery(function($) {
     $('#sort-by').on('click', 'button', function () {
         var sortByValue = $(this).attr('id');
         $('.grid').isotope({ sortBy : sortByValue });
+    });
+
+    $('#sept-sprint').click( function () {
+        $('.grid').isotope({
+            filter: function() {
+                var date = $(this).attr('data-date');
+                return moment(date).isBetween('2017-09-24', '2017-09-28');
+            }
+        });
     });
 
     $('.grid-item').click(function () {
