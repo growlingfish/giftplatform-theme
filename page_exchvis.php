@@ -64,6 +64,8 @@ function gift_vis_loop () {
 			get_template_part( 'templates/report', 'giftsvis' );
 		} else if ($_GET['tool'] == 'gift' && isset($_GET['id'])) {
 			get_template_part( 'templates/report', 'gift' );
+		} else {
+			get_template_part( 'templates/index', 'vis' );
 		}
 	}
 }
