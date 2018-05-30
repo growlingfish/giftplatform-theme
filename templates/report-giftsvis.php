@@ -136,7 +136,7 @@ jQuery(function($) {
         $('.grid').isotope({
             filter: function() {
                 var date = $(this).attr('data-date');
-                return moment(date).isBetween('2017-09-27', '2017-09-28', null, '[]');
+                return moment(date).isBetween('2017-09-27', '2017-09-28', 'day', '[]');
             }
         });
     });
