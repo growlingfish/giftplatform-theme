@@ -57,8 +57,14 @@ remove_action( 'genesis_footer', 'genesis_footer_markup_close', 15 );
 remove_action( 'genesis_loop', 'genesis_do_loop' );
 add_action( 'genesis_loop', 'gift_vis_loop' );
 function gift_vis_loop () { 
-	if ( is_user_logged_in () ) { // Not logged in
-		get_template_part( 'templates/report', 'exchvis' );
+	if ( is_user_logged_in () ) { // Logged in
+		if ($_GET['tool'] == 'exchange') {
+			get_template_part( 'templates/report', 'exchvis' );
+		} else if ($_GET['tool'] == 'gifts') {
+			get_template_part( 'templates/report', 'giftsvis' );
+		} else if ($_GET['tool'] == 'gift' && isset($_GET['id'])) {
+			get_template_part( 'templates/report', 'gift' );
+		}
 	}
 }
 
