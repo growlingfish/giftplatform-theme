@@ -4,14 +4,14 @@
 <div class="step" id="orders">
     <h1>Gifts</h1>
     <p>How would you like to order the gifts?</p>
-    <div id="sort-by">
+    <div id="sort-by" style="padding-bottom: 20px;">
         <button id="byObject">By object</button>
         <button id="byVenue">By venue</button>
         <button id="bySender">By sender</button>
         <button id="byRecipient">By recipient</button>
         <button id="byDate">By date sent</button>
     </div>
-    <p>Would you like to filter the gifts?</p>
+    <p>Would you also like to filter the gifts?</p>
     <button id="sept-sprint">2017 Brighton sprint</button>
     <button id="uon-trial">2018 UoN Museum trial</button>
     <button id="complete">Complete</button>
@@ -136,7 +136,7 @@ jQuery(function($) {
         $('.grid').isotope({
             filter: function() {
                 var date = $(this).attr('data-date');
-                return moment(date).isBetween('2017-09-24', '2017-09-28');
+                return moment(date).isBetween('2017-09-27', '2017-09-28', null, '[]');
             }
         });
     });
