@@ -24,42 +24,23 @@
         ),
     );
     $locations = new WP_Query( $args );
-    $query = array(
-        'numberposts'   => -1,
-        'post_type'     => 'gift',
-        'post_status'   => 'publish'
-    );
-    $all_gifts = get_posts( $query );
     foreach ($locations as $location) {
         echo '<h2>'.$location->post_title.'</h2>';
         echo '<p>'.$location->post_content.'</p>';
         echo '<div class="grid">';
-        foreach ($all_gifts as $gift) {
-            $wraps = get_field( 'field_58e4f5da816ac', $gift->ID);
-            if ($wraps) {
-                foreach ($wraps as $wrap) {
-                    unset ($object);
-                    $object = get_field( 'field_595b4a2bc9c1c', $wrap->ID);
-                    if (is_array($object) && count($object) > 0) {
-                        $object = $object[0];
-                    } else if (is_a($object, 'WP_Post')) {
-                            
-                    } else {
-                        unset($object);
-                    }
-
-                    if ($object) {
-                        $l = get_field( 'field_59a85fff4be5a', $post->ID );
-                        if (!$l || count($l) == 0) {
-                            return null;
-                        }
-                        $l = $l[0];
-                        if ($l->ID == $location->ID) {
-                            echo $object->post_title;
-                        }
-                    }
-                }
-            }
+        $objects = get_posts(array(
+            'numberposts'	=> -1,
+            'post_type'		=> 'object',
+            'meta_query' => array(
+                array(
+                    'key' => 'location', 
+                    'value' => '"' . $location->ID . '"', 
+                    'compare' => 'LIKE'
+                )
+            )
+        ));
+        foreach ($objects as $object) {
+            echo '<div class="grid-item">'.$object->post_title.'</div>';
         }
         echo '</div>';
     }
