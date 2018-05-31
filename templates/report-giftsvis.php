@@ -104,7 +104,6 @@ jQuery(function($) {
         itemSelector: '.grid-item',
         layoutMode: 'masonry',
         getSortData: {
-            //byObject: '[data-object]',
             byDate: '[data-date]',
             bySender: '[data-sender]',
             byRecipient: '[data-recipient]',

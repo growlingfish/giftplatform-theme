@@ -22,7 +22,7 @@
         $location = $location[0];
         $venues = wp_get_post_terms( $location->ID, 'venue' );
         foreach ($venues as $v) {
-            $venue = $v->name;
+            $venue = '<a href="'.get_term_link((int) $v->term_id, 'venue').'">'.$v->name.'</a>';
             break;
         }
     }
@@ -109,7 +109,10 @@ jQuery(function($) {
 
     $('#detail').fadeIn(function () {
         $('#used').fadeIn(function () {
-        
+            $('.grid').isotope({
+                itemSelector: '.grid-item',
+                layoutMode: 'masonry'
+            });
         });
     });
 });
