@@ -28,7 +28,7 @@
         echo '<h2>'.$location->post_title.'</h2>';
         echo '<p>'.$location->post_content.'</p>';
         echo '<div class="grid">';
-        $objects = get_posts(array(
+        $objects = new WP_Query(array(
             'numberposts'	=> -1,
             'post_type'		=> 'object',
             'meta_query' => array(
