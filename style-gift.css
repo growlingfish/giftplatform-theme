@@ -74,12 +74,7 @@ textarea {
 .grid-item--width2 { width: 48%; }
 .grid-item--width3 { width: 31%; }
 
-div#giftsvis .grid-item {
-    border: 1px solid black;
-    background-color: white;
-    padding: 10px;
-    margin: 1%;
-    font-size: 0.7em;
+div#giftsvis .grid-item, div#usedvis .grid-item {
     cursor: pointer;
 }
 
@@ -87,7 +82,7 @@ div#giftsvis .grid-item.incomplete {
     background-color: orange;
 }
 
-div#giftobjectsvis .grid-item {
+div#giftsvis .grid-item, div#giftobjectsvis .grid-item, div#usedvis .grid-item {
     border: 1px solid black;
     background-color: white;
     padding: 10px;

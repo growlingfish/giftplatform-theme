@@ -9,7 +9,6 @@
     <h1>Gifts</h1>
     <p>How would you like to order the gifts?</p>
     <div id="sort-by" style="padding-bottom: 20px;">
-        <!--<button id="byObject">By object</button>-->
         <button id="byVenue">By venue</button>
         <button id="bySender">By sender</button>
         <button id="byRecipient">By recipient</button>
@@ -75,10 +74,9 @@
         }
 
         echo '<div class="grid-item '
-                .(/*isset ($object->post_title) && */isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) ? 'complete' : 'incomplete')
+                .(isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) ? 'complete' : 'incomplete')
             .'" '
                 .'gift="'.$gift->ID.'"'
-                //.'data-object="'.$object->post_title.'" '
                 .'data-date="'.$gift->post_modified.'" '
                 .'data-sender="'.urldecode($senderdata->nickname).'" '
                 .'data-recipient="'.urldecode($recipientdata->nickname).'" '
@@ -89,7 +87,6 @@
                     .'<li>Sent: '.(isset ($gift->post_modified) ? $gift->post_modified : '<span style="color: red">No date</span>' ).'</li>'
                     .'<li>By: '.(isset ($senderdata->nickname) ? urldecode($senderdata->nickname) : '<span style="color: red">No sender</span>' ).'</li>'
                     .'<li>To: '.(isset ($recipientdata->nickname) ? urldecode($recipientdata->nickname) : '<span style="color: red">No recipient</span>' ).'</li>'
-                    //.'<li>Object: '.(isset ($object->post_title) ? $object->post_title : '<span style="color: red">No object</span>' ).'</li>'
                     .'<li>At: '.(isset ($venue->name) ? $venue->name : 'No venue' ).'</li>'
                 .'</ul>'
             .'</div>';
