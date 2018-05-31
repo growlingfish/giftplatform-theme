@@ -1,16 +1,19 @@
+<?php
+    global $post;
+?>
+
 <div class="step" id="detail">
-    <h1><?php echo get_the_title(); ?></h1>
+    <h1><?php echo $post->post_title; ?></h1>
 
     <p><img src="<?php echo get_the_post_thumbnail_url(); ?>" /></p>
 
 <?php
-    global $post;
     $userdata = get_userdata($post->post_author);
 ?>
-    <p>Created by <?php echo $userdata->nickname; ?> on <?php the_date(); ?>.</p>
+    <p>Created by <?php echo $userdata->nickname; ?> on <?php echo $post->post_modified; ?>.</p>
 
 <?php
-    $location = get_field( 'field_59a85fff4be5a', get_the_ID() );
+    $location = get_field( 'field_59a85fff4be5a', $post->ID );
 	if (!$location || count($location) == 0) {
 		
 	} else {
@@ -24,9 +27,9 @@
 ?>
     <p>Located at <?php echo $location->post_title; ?><?php echo (isset($venue) ? ' in ' : ''); ?>.</p>
 
-<?php if (count(get_the_content()) > 0) { ?>
+<?php if (count($post->post_content) > 0) { ?>
     <p>Comes with the following description:</p>
-    <blockquote><?php echo wpautop(get_the_content()); ?></blockquote>
+    <blockquote><?php echo wpautop($post->post_content); ?></blockquote>
 <?php } ?>
 
 </div>
