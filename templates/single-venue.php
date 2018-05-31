@@ -24,23 +24,23 @@
         ),
     );
     $locations = new WP_Query( $args );
+    $args = array(
+        'post_type' => 'object'
+    );
+    $objects = new WP_Query( $args );
     foreach ($locations as $location) {
         echo '<h2>'.$location->post_title.'</h2>';
         echo '<p>'.$location->post_content.'</p>';
         echo '<div class="grid">';
-        $objects = new WP_Query(array(
-            'numberposts'	=> -1,
-            'post_type'		=> 'object',
-            'meta_query' => array(
-                array(
-                    'key' => 'location', 
-                    'value' => '"' . $location->ID . '"', 
-                    'compare' => 'LIKE'
-                )
-            )
-        ));
         foreach ($objects as $object) {
-            echo '<div class="grid-item">'.$object->post_title.'</div>';
+            $l = get_field( 'field_59a85fff4be5a', $object->ID );
+            if (!$l || count($l) == 0) {
+                return null;
+            }
+            $l = $l[0];
+            if ($location->ID == $l->ID) {
+                echo '<div class="grid-item">'.$object->post_title.'</div>';
+            }
         }
         echo '</div>';
     }
