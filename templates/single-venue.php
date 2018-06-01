@@ -82,31 +82,33 @@
                         return null;
                     }
                     $l = $l[0];
-                    if ($l->ID == $location->ID) {
-                        $senderdata = get_userdata($gift->post_author);
+                    foreach ($locations as $location) {
+                        if ($l->ID == $location->ID) {
+                            $senderdata = get_userdata($gift->post_author);
 
-                        // recipient
-                        $recipients = get_field( 'field_58e4f6e88f3d7', $gift->ID );
-                        unset($recipientdata);
-                        if ($recipients) {
-                            foreach ($recipients as $recipient) {
-                                $recipientdata = get_userdata($recipient['ID']);
-                                break; // only one recipient for now
+                            // recipient
+                            $recipients = get_field( 'field_58e4f6e88f3d7', $gift->ID );
+                            unset($recipientdata);
+                            if ($recipients) {
+                                foreach ($recipients as $recipient) {
+                                    $recipientdata = get_userdata($recipient['ID']);
+                                    break; // only one recipient for now
+                                }
                             }
-                        }
 
-                        echo '<div class="grid-item '
-                            .(isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) ? 'complete' : 'incomplete')
-                            .'" gift="'.$gift->ID.'"'                    
-                        .'>'
-                            .'<strong>Gift #'.$gift->ID.'</strong>'
-                            .'<ul>'
-                                .'<li>Sent: '.(isset ($gift->post_modified) ? $gift->post_modified : '<span style="color: red">No date</span>' ).'</li>'
-                                .'<li>By: '.(isset ($senderdata->nickname) ? urldecode($senderdata->nickname) : '<span style="color: red">No sender</span>' ).'</li>'
-                                .'<li>To: '.(isset ($recipientdata->nickname) ? urldecode($recipientdata->nickname) : '<span style="color: red">No recipient</span>' ).'</li>'
-                            .'</ul>'
-                        .'</div>';
-                        break;
+                            echo '<div class="grid-item '
+                                .(isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) ? 'complete' : 'incomplete')
+                                .'" gift="'.$gift->ID.'"'                    
+                            .'>'
+                                .'<strong>Gift #'.$gift->ID.'</strong>'
+                                .'<ul>'
+                                    .'<li>Sent: '.(isset ($gift->post_modified) ? $gift->post_modified : '<span style="color: red">No date</span>' ).'</li>'
+                                    .'<li>By: '.(isset ($senderdata->nickname) ? urldecode($senderdata->nickname) : '<span style="color: red">No sender</span>' ).'</li>'
+                                    .'<li>To: '.(isset ($recipientdata->nickname) ? urldecode($recipientdata->nickname) : '<span style="color: red">No recipient</span>' ).'</li>'
+                                .'</ul>'
+                            .'</div>';
+                            break;
+                        }
                     }
                 }
             }
