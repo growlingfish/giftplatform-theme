@@ -11,7 +11,8 @@
 </div>
 
 <div class="step" id="locations">
-
+    <h1>Locations and objects</h1>
+    <p>This venue contains the following locations and objects:</p>
 <?php
     $locations = get_posts(
         array( 
@@ -35,7 +36,7 @@
     foreach ($locations as $location) {
         echo '<h2>'.$location->post_title.'</h2>';
         echo '<p>'.$location->post_content.'</p>';
-        echo '<div class="grid">';
+        echo '<div class="grid giftobjectsvis">';
         foreach ($objects as $object) {
             $l = get_field( 'field_59a85fff4be5a', $object->ID );
             if (!$l || count($l) == 0) {
@@ -43,7 +44,7 @@
             } else {
                 $l = $l[0];
                 if ($location->ID == $l->ID) {
-                    echo '<div class="grid-item">'.$object->post_title.'</div>';
+                    echo '<div class="grid-item grid-item--width2">'.$object->post_title.'</div>';
                 }
             }
         }
@@ -55,7 +56,7 @@
 
 <div class="step" id="gifts">
     <h2>Gifts made for this venue</h2>
-    <div class="grid">
+    <div class="grid" id="giftsvis">
 <?php
     $all_gifts = get_posts( array(
         'posts_per_page'   => -1,
@@ -129,7 +130,10 @@ jQuery(function($) {
     $('#detail').fadeIn(function () {
         $('#locations').fadeIn(function () {
             $('#gifts').fadeIn(function () {
-        
+                $('.grid').isotope({
+                    itemSelector: '.grid-item',
+                    layoutMode: 'masonry'
+                });
             });
         });
     });
