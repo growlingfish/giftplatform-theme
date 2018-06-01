@@ -13,21 +13,25 @@
 <div class="step" id="locations">
 
 <?php
-    $args = array(
-        'post_type' => 'location',
-        'tax_query' => array(
-            array(
-                'taxonomy' => 'venue',
-                'field'    => 'term_id',
-                'terms'    => array($venue->term_id),
-            ),
-        ),
+    $locations = get_posts(
+        array( 
+            'post_type' => 'location',
+            'posts_per_page' => -1,
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'venue',
+                    'field' => 'id',
+                    'terms' => $venue->term_id
+                )
+            )
+        )
     );
-    $locations = new WP_Query( $args );
-    $args = array(
-        'post_type' => 'object'
+    $objects = get_posts(
+        array( 
+            'post_type' => 'object',
+            'posts_per_page' => -1
+        )
     );
-    $objects = new WP_Query( $args );
     foreach ($locations as $location) {
         echo '<h2>'.$location->post_title.'</h2>';
         echo '<p>'.$location->post_content.'</p>';
@@ -52,23 +56,11 @@
     <h2>Gifts made for this venue</h2>
     <div class="grid">
 <?php
-    $args = array(
-        'post_type' => 'location',
-        'tax_query' => array(
-            array(
-                'taxonomy' => 'venue',
-                'field'    => 'term_id',
-                'terms'    => array($venue->term_id),
-            ),
-        ),
-    );
-    $locations = new WP_Query( $args );
-    $query = array(
-        'numberposts'   => -1,
+    $all_gifts = get_posts( array(
+        'posts_per_page'   => -1,
         'post_type'     => 'gift',
         'post_status'   => 'publish'
-    );
-    $all_gifts = get_posts( $query );
+    ) );
     foreach ($all_gifts as $gift) {
         $wraps = get_field( 'field_58e4f5da816ac', $gift->ID);
         if ($wraps) {
