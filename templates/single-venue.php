@@ -35,7 +35,7 @@
     );
     foreach ($locations as $location) {
         echo '<h2>'.$location->post_title.'</h2>';
-        echo '<p>'.$location->post_content.'</p>';
+        echo '<blockquote>'.$location->post_content.'</blockquote>';
         echo '<div class="grid giftobjectsvis">';
         foreach ($objects as $object) {
             $l = get_field( 'field_59a85fff4be5a', $object->ID );
@@ -44,7 +44,8 @@
             } else {
                 $l = $l[0];
                 if ($location->ID == $l->ID) {
-                    echo '<div class="grid-item grid-item--width2">'.$object->post_title.'</div>';
+                    echo '<div class="grid-item grid-item--width2"><strong>'.$object->post_title.'</strong>'
+                        .'<p><a href="'.get_the_guid($object->ID).'"><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'medium').'" /></a></p>';
                 }
             }
         }
@@ -127,10 +128,18 @@
 jQuery(function($) {
 	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-project.jpg');
 
+    $('.grid-item').click(function () {
+        window.location.href = 'https://gifting.digital/vis/?tool=gift&id=' + $(this).attr('gift');
+    });
+
     $('#detail').fadeIn(function () {
         $('#locations').fadeIn(function () {
+            $('.giftobjectsvis').isotope({
+                itemSelector: '.grid-item',
+                layoutMode: 'masonry'
+            });
             $('#gifts').fadeIn(function () {
-                $('.grid').isotope({
+                $('#giftsvis').isotope({
                     itemSelector: '.grid-item',
                     layoutMode: 'masonry'
                 });
