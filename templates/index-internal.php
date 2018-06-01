@@ -15,10 +15,10 @@
 
 <div class="step" id="step1">
     <h1>Welcome back</h1>
-    <p>What would you like to do?</p>
-    <a href="https://toolkit.gifting.digital/" class="button">View GIFT documentation</a>
-    <a href="https://gifting.digital/cms/" class="button">Use the Content Management System</a>
-    <a href="https://gifting.digital/vis/" class="button">Use the Visualisation tools</a>
+    <p>Where would you like to go?</p>
+    <a href="https://toolkit.gifting.digital/" class="button">GIFT documentation</a>
+    <a href="https://gifting.digital/cms/" class="button">Content Management System</a>
+    <a href="https://gifting.digital/vis/" class="button">Visualisation tools</a>
 </div>
 
 <div class="preloader"></div>

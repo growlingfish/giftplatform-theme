@@ -1,5 +1,9 @@
 <?php
     $venue = get_queried_object();
+
+    if( !current_user_can('administrator') ) {
+        $current_user = wp_get_current_user();
+    }
 ?>
 
 <script src="https://unpkg.com/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>
@@ -44,9 +48,16 @@
             } else {
                 $l = $l[0];
                 if ($location->ID == $l->ID) {
-                    echo '<div class="grid-item grid-item--width2"><strong>'.$object->post_title.'</strong>'
-                        .'<p><a href="'.get_the_guid($object->ID).'"><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'medium').'" /></a></p>'
-                    .'</div>';
+                    $userdata = get_userdata($object->post_author);
+                    if (!isset ($current_user) || $current_user->ID == $userdata->ID) {
+                        echo '<div class="grid-item grid-item--width2"><strong>'.$object->post_title.'</strong>'
+                            .'<p><a href="'.get_the_guid($object->ID).'"><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'medium').'" /></a></p>'
+                        .'</div>';
+                    } else {
+                        echo '<div class="grid-item grid-item--width2"><strong>Private object</strong>'
+                            .'<p><a href="'.get_the_guid($object->ID).'"><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'medium').'" /></a></p>'
+                        .'</div>';
+                    }
                 }
             }
         }
@@ -70,9 +81,6 @@
         'post_type'     => 'gift',
         'post_status'   => 'publish'
     ) );
-    if( !current_user_can('administrator') ) {
-        $current_user = wp_get_current_user();
-    }
     foreach ($all_gifts as $gift) {
         $wraps = get_field( 'field_58e4f5da816ac', $gift->ID);
         if ($wraps) {
