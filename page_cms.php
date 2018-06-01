@@ -57,12 +57,10 @@ remove_action( 'genesis_footer', 'genesis_footer_markup_close', 15 );
 remove_action( 'genesis_loop', 'genesis_do_loop' );
 add_action( 'genesis_loop', 'gift_cms_loop' );
 function gift_cms_loop () { 
-	if ( is_user_logged_in () ) { // Logged in
-		if( current_user_can('administrator') || current_user_can('editor')) {
-			get_template_part( 'templates/cms', 'overview' );
-		} else {
-			get_template_part( 'templates/cms', 'unauthorised' );
-		}
+	if( current_user_can('administrator') || current_user_can('editor')) {
+		get_template_part( 'templates/cms', 'overview' );
+	} else {
+		get_template_part( 'templates/cms', 'unauthorised' );
 	}
 }
 

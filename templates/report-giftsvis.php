@@ -32,7 +32,6 @@
     );
     if( !current_user_can('administrator') ) {
         $current_user = wp_get_current_user();
-        $query['author'] = $current_user->ID;
     }
     $all_gifts = get_posts( $query );
     foreach ($all_gifts as $gift) {
@@ -77,23 +76,41 @@
             }
         }
 
-        echo '<div class="grid-item '
-                .(isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) ? 'complete' : 'incomplete')
-            .'" '
-                .'gift="'.$gift->ID.'"'
-                .'data-date="'.$gift->post_modified.'" '
-                .'data-sender="'.urldecode($senderdata->nickname).'" '
-                .'data-recipient="'.urldecode($recipientdata->nickname).'" '
-                .'data-venue="'.$venue->name.'" '
-            .'>'
-                .'<strong>Gift #'.$gift->ID.'</strong>'
-                .'<ul>'
-                    .'<li>Sent: '.(isset ($gift->post_modified) ? $gift->post_modified : '<span style="color: red">No date</span>' ).'</li>'
-                    .'<li>By: '.(isset ($senderdata->nickname) ? urldecode($senderdata->nickname) : '<span style="color: red">No sender</span>' ).'</li>'
-                    .'<li>To: '.(isset ($recipientdata->nickname) ? urldecode($recipientdata->nickname) : '<span style="color: red">No recipient</span>' ).'</li>'
-                    .'<li>At: '.(isset ($venue->name) ? $venue->name : 'No venue' ).'</li>'
-                .'</ul>'
-            .'</div>';
+        // Full detail
+        if (!isset ($current_user) || $current_user->ID == $senderdata->ID || $current_user->ID == $recipientdata->ID) {
+            echo '<div class="public grid-item '
+                    .(isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) ? 'complete' : 'incomplete')
+                .'" '
+                    .'gift="'.$gift->ID.'"'
+                    .'data-date="'.$gift->post_modified.'" '
+                    .'data-sender="'.urldecode($senderdata->nickname).'" '
+                    .'data-recipient="'.urldecode($recipientdata->nickname).'" '
+                    .'data-venue="'.$venue->name.'" '
+                .'>'
+                    .'<strong>Gift #'.$gift->ID.'</strong>'
+                    .'<ul>'
+                        .'<li>Sent: '.(isset ($gift->post_modified) ? $gift->post_modified : '<span style="color: red">No date</span>' ).'</li>'
+                        .'<li>By: '.(isset ($senderdata->nickname) ? urldecode($senderdata->nickname) : '<span style="color: red">No sender</span>' ).'</li>'
+                        .'<li>To: '.(isset ($recipientdata->nickname) ? urldecode($recipientdata->nickname) : '<span style="color: red">No recipient</span>' ).'</li>'
+                        .'<li>At: '.(isset ($venue->name) ? $venue->name : 'No venue' ).'</li>'
+                    .'</ul>'
+                .'</div>';
+        } else { // Anonymised
+            echo '<div class="grid-item '
+                    .(isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) ? 'complete' : 'incomplete')
+                .'" '
+                    .'data-date="'.$gift->post_modified.'" '
+                    .'data-sender="'.hash('crc32', $senderdata->nickname).'" '
+                    .'data-recipient="'.hash('crc32', $recipientdata->nickname).'" '
+                    .'data-venue="'.$venue->name.'" '
+                .'>'
+                    .'<strong>Private gift</strong>'
+                    .'<ul>'
+                        .'<li>Sent: '.(isset ($gift->post_modified) ? $gift->post_modified : '<span style="color: red">No date</span>' ).'</li>'
+                        .'<li>At: '.(isset ($venue->name) ? $venue->name : 'No venue' ).'</li>'
+                    .'</ul>'
+                .'</div>';
+        }
     }
 
 ?>
@@ -160,7 +177,7 @@ jQuery(function($) {
         });
     });
 
-    $('.grid-item').click(function () {
+    $('.public').click(function () {
         window.location.href = 'https://gifting.digital/vis/?tool=gift&id=' + $(this).attr('gift');
     });
 
