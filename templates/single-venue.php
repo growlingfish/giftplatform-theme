@@ -135,12 +135,8 @@ jQuery(function($) {
 
     $('#detail').fadeIn(function () {
         $('#locations').fadeIn(function () {
-            $('.giftobjectsvis').isotope({
-                itemSelector: '.grid-item',
-                layoutMode: 'masonry'
-            });
             $('#gifts').fadeIn(function () {
-                $('#giftsvis').isotope({
+                $('.grid').isotope({
                     itemSelector: '.grid-item',
                     layoutMode: 'masonry'
                 });
