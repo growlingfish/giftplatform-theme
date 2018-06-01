@@ -9,7 +9,9 @@
     <a href="https://gifting.digital/vis/?tool=gifts" class="button">Gifts</a>
 </div>
 
-<div class="preloader"></div>
+<div style="position: fixed; right: 20px; bottom: 20px;">
+    <button onclick="window.history.back();">Back</button>
+</div>
 
 <script>
 jQuery(function($) {

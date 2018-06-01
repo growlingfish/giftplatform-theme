@@ -16,9 +16,9 @@
 <div class="step" id="step1">
     <h1>Welcome back</h1>
     <p>What would you like to do?</p>
-    <a href="https://toolkit.gifting.digital/" class="button">Take me to the GIFT documentation</a>
-    <a href="https://gifting.digital/cms/" class="button">Take me to the Content Management System</a>
-    <a href="https://gifting.digital/vis/" class="button">Take me to the Visualisation tool</a>
+    <a href="https://toolkit.gifting.digital/" class="button">View GIFT documentation</a>
+    <a href="https://gifting.digital/cms/" class="button">Use the Content Management System</a>
+    <a href="https://gifting.digital/vis/" class="button">Use the Visualisation tools</a>
 </div>
 
 <div class="preloader"></div>

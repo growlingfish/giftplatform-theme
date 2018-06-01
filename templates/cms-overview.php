@@ -3,13 +3,14 @@
 </div>
 
 <div class="step" id="step1">
-    <h1>Overview</h1>
+    <h1>CMS: Overview</h1>
     <p>Welcome back, <?php $current_user = wp_get_current_user(); echo $current_user->display_name; ?>.</p>
     <a href="https://gifting.digital/venues/" class="button">Show me my venues</a>
-    <button onclick="window.history.back();">Back</button>
 </div>
 
-<div class="preloader"></div>
+<div style="position: fixed; right: 20px; bottom: 20px;">
+    <button onclick="window.history.back();">Back</button>
+</div>
 
 <script>
 jQuery(function($) {
