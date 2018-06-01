@@ -77,7 +77,7 @@
                 }
 
                 if ($object) {
-                    $l = get_field( 'field_59a85fff4be5a', $post->ID );
+                    $l = get_field( 'field_59a85fff4be5a', $object->ID );
                     if (!$l || count($l) == 0) {
                         return null;
                     }
