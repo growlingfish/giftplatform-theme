@@ -29,7 +29,11 @@
 		'numberposts'   => -1,
 		'post_type'     => 'gift',
 		'post_status'   => 'publish'
-	);
+    );
+    if( !current_user_can('administrator') ) {
+        $current_user = wp_get_current_user();
+        $query['author'] = $current_user->ID;
+    }
     $all_gifts = get_posts( $query );
     foreach ($all_gifts as $gift) {
         // sender

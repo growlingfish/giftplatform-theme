@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Vis
+ * Template Name: CMS
  *
  * @package Genesis Sample
  * @author  StudioPress
@@ -55,17 +55,13 @@ remove_action( 'genesis_footer', 'genesis_do_footer' );
 remove_action( 'genesis_footer', 'genesis_footer_markup_close', 15 );
 
 remove_action( 'genesis_loop', 'genesis_do_loop' );
-add_action( 'genesis_loop', 'gift_vis_loop' );
-function gift_vis_loop () { 
+add_action( 'genesis_loop', 'gift_cms_loop' );
+function gift_cms_loop () { 
 	if ( is_user_logged_in () ) { // Logged in
-		if ($_GET['tool'] == 'exchange') {
-			get_template_part( 'templates/report', 'exchvis' );
-		} else if ($_GET['tool'] == 'gifts') {
-			get_template_part( 'templates/report', 'giftsvis' );
-		} else if ($_GET['tool'] == 'gift' && isset($_GET['id'])) {
-			get_template_part( 'templates/report', 'gift' );
+		if( current_user_can('administrator') || current_user_can('editor')) {
+			get_template_part( 'templates/cms', 'overview' );
 		} else {
-			get_template_part( 'templates/index', 'vis' );
+			get_template_part( 'templates/cms', 'unauthorised' );
 		}
 	}
 }
