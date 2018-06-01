@@ -74,8 +74,8 @@ textarea {
 .grid-item--width2 { width: 48%; }
 .grid-item--width3 { width: 31%; }
 
-div#giftsvis .grid-item, 
-div#usedvis .grid-item {
+div#giftsvis .public, 
+div#usedvis .public {
     cursor: pointer;
 }
 

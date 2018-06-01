@@ -1,20 +1,35 @@
 <?php
     global $post;
+
+    $userdata = get_userdata($post->post_author);
+    if( !current_user_can('administrator') ) {
+        $current_user = wp_get_current_user();
+    }
 ?>
 
 <script src="https://unpkg.com/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>
 
 <div class="step" id="detail">
-    <h1><?php echo $post->post_title; ?></h1>
+    <h1>
+<?php 
+    if (!isset ($current_user) || $current_user->ID == $userdata->ID) {
+        echo $post->post_title; 
+    } else {
+        echo 'Private object';
+    }
+?>
+    </h1>
 
     <p><img src="<?php echo get_the_post_thumbnail_url(); ?>" /></p>
 
 <?php
-    $userdata = get_userdata($post->post_author);
-?>
-    <p>Created by <?php echo $userdata->nickname; ?> on <?php echo $post->post_modified; ?>.</p>
+    
+    if (!isset ($current_user) || $current_user->ID == $userdata->ID) {
+        echo '<p>Created by '.$userdata->nickname.' on '.$post->post_modified.'.</p>';
+    } else {
+        echo '<p>Created by '.hash('crc32', $userdata->nickname).' on '.$post->post_modified.'.</p>';
+    }
 
-<?php
     $location = get_field( 'field_59a85fff4be5a', $post->ID );
 	if (!$location || count($location) == 0) {
 		
@@ -29,7 +44,9 @@
 ?>
     <p>Located at <?php echo $location->post_title; ?><?php echo (isset($venue) ? ' in '.$venue : ''); ?>.</p>
 
-<?php if (count($post->post_content) > 0) { ?>
+<?php 
+    if ((!isset ($current_user) || $current_user->ID == $userdata->ID) && count($post->post_content) > 0) { 
+?>
     <p>Comes with the following description:</p>
     <blockquote><?php echo wpautop($post->post_content); ?></blockquote>
 <?php } ?>
@@ -74,17 +91,28 @@
                         }
                     }
 
-                    echo '<div class="grid-item '
-                        .(isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) ? 'complete' : 'incomplete')
-                        .'" gift="'.$gift->ID.'"'                    
-                    .'>'
-                        .'<strong>Gift #'.$gift->ID.'</strong>'
-                        .'<ul>'
-                            .'<li>Sent: '.(isset ($gift->post_modified) ? $gift->post_modified : '<span style="color: red">No date</span>' ).'</li>'
-                            .'<li>By: '.(isset ($senderdata->nickname) ? urldecode($senderdata->nickname) : '<span style="color: red">No sender</span>' ).'</li>'
-                            .'<li>To: '.(isset ($recipientdata->nickname) ? urldecode($recipientdata->nickname) : '<span style="color: red">No recipient</span>' ).'</li>'
-                        .'</ul>'
-                    .'</div>';
+                    if (!isset ($current_user) || $current_user->ID == $senderdata->ID || $current_user->ID == $recipientdata->ID) {
+                        echo '<div class="public grid-item '
+                            .(isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) ? 'complete' : 'incomplete')
+                            .'" gift="'.$gift->ID.'"'                    
+                        .'>'
+                            .'<strong>Gift #'.$gift->ID.'</strong>'
+                            .'<ul>'
+                                .'<li>Sent: '.(isset ($gift->post_modified) ? $gift->post_modified : '<span style="color: red">No date</span>' ).'</li>'
+                                .'<li>By: '.(isset ($senderdata->nickname) ? urldecode($senderdata->nickname) : '<span style="color: red">No sender</span>' ).'</li>'
+                                .'<li>To: '.(isset ($recipientdata->nickname) ? urldecode($recipientdata->nickname) : '<span style="color: red">No recipient</span>' ).'</li>'
+                            .'</ul>'
+                        .'</div>';
+                    } else {
+                        echo '<div class="grid-item '
+                                .(isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) ? 'complete' : 'incomplete')
+                            .'">'
+                                .'<strong>Private gift</strong>'
+                                .'<ul>'
+                                    .'<li>Sent: '.(isset ($gift->post_modified) ? $gift->post_modified : '<span style="color: red">No date</span>' ).'</li>'
+                                .'</ul>'
+                            .'</div>';
+                    }
                     break;
                 }
             }
@@ -103,7 +131,7 @@
 jQuery(function($) {
 	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-project.jpg');
 
-    $('.grid-item').click(function () {
+    $('.public').click(function () {
         window.location.href = 'https://gifting.digital/vis/?tool=gift&id=' + $(this).attr('gift');
     });
 

@@ -20,6 +20,11 @@
     <button id="complete">Complete</button>
     <button id="incomplete">Incomplete</button>
     <button id="clear">Clear</button>
+<?php
+    if( !current_user_can('administrator') ) {
+        echo '<p><strong>Please note:</strong> some of the gifts have been anonymised as you are not the sender or recipient.</p>';
+    }
+?>
 </div>
 
 <div id="giftsvis" class="grid">

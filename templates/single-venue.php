@@ -58,6 +58,11 @@
 
 <div class="step" id="gifts">
     <h2>Gifts made for this venue</h2>
+<?php
+    if( !current_user_can('administrator') ) {
+        echo '<p><strong>Please note:</strong> some of the gifts have been anonymised as you are not the sender or recipient.</p>';
+    }
+?>
     <div class="grid" id="giftsvis">
 <?php
     $all_gifts = get_posts( array(
@@ -65,6 +70,9 @@
         'post_type'     => 'gift',
         'post_status'   => 'publish'
     ) );
+    if( !current_user_can('administrator') ) {
+        $current_user = wp_get_current_user();
+    }
     foreach ($all_gifts as $gift) {
         $wraps = get_field( 'field_58e4f5da816ac', $gift->ID);
         if ($wraps) {
@@ -99,17 +107,28 @@
                                 }
                             }
 
-                            echo '<div class="grid-item '
-                                .(isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) ? 'complete' : 'incomplete')
-                                .'" gift="'.$gift->ID.'"'                    
-                            .'>'
-                                .'<strong>Gift #'.$gift->ID.'</strong>'
-                                .'<ul>'
-                                    .'<li>Sent: '.(isset ($gift->post_modified) ? $gift->post_modified : '<span style="color: red">No date</span>' ).'</li>'
-                                    .'<li>By: '.(isset ($senderdata->nickname) ? urldecode($senderdata->nickname) : '<span style="color: red">No sender</span>' ).'</li>'
-                                    .'<li>To: '.(isset ($recipientdata->nickname) ? urldecode($recipientdata->nickname) : '<span style="color: red">No recipient</span>' ).'</li>'
-                                .'</ul>'
-                            .'</div>';
+                            if (!isset ($current_user) || $current_user->ID == $senderdata->ID || $current_user->ID == $recipientdata->ID) {
+                                echo '<div class="public grid-item '
+                                    .(isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) ? 'complete' : 'incomplete')
+                                    .'" gift="'.$gift->ID.'"'                    
+                                .'>'
+                                    .'<strong>Gift #'.$gift->ID.'</strong>'
+                                    .'<ul>'
+                                        .'<li>Sent: '.(isset ($gift->post_modified) ? $gift->post_modified : '<span style="color: red">No date</span>' ).'</li>'
+                                        .'<li>By: '.(isset ($senderdata->nickname) ? urldecode($senderdata->nickname) : '<span style="color: red">No sender</span>' ).'</li>'
+                                        .'<li>To: '.(isset ($recipientdata->nickname) ? urldecode($recipientdata->nickname) : '<span style="color: red">No recipient</span>' ).'</li>'
+                                    .'</ul>'
+                                .'</div>';
+                            } else { // Anonymised
+                                echo '<div class="grid-item '
+                                    .(isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) ? 'complete' : 'incomplete')
+                                .'">'
+                                    .'<strong>Private gift</strong>'
+                                    .'<ul>'
+                                        .'<li>Sent: '.(isset ($gift->post_modified) ? $gift->post_modified : '<span style="color: red">No date</span>' ).'</li>'
+                                    .'</ul>'
+                                .'</div>';
+                            }
                             break;
                         }
                     }
@@ -129,7 +148,7 @@
 jQuery(function($) {
 	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-project.jpg');
 
-    $('.grid-item').click(function () {
+    $('.public').click(function () {
         window.location.href = 'https://gifting.digital/vis/?tool=gift&id=' + $(this).attr('gift');
     });
 

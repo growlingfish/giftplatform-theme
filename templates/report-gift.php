@@ -2,7 +2,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js" integrity="sha256-L3S3EDEk31HcLA5C6T2ovHvOcD80+fgqaCDt2BAi92o=" crossorigin="anonymous"></script>
 
 <div class="step" id="detail">
-    <h1>Gift</h1>
+    <h1>Gift #<?php echo $_GET['id']; ?></h1>
 <?php
     $gift = get_post($_GET['id']);
 
@@ -10,6 +10,12 @@
 
     // sender
     $senderdata = get_userdata($gift->post_author);
+    if( $senderdata && !current_user_can('administrator') ) {
+        $current_user = wp_get_current_user();
+        if ($current_user->ID != $senderdata->ID) {
+            wp_redirect( esc_url( home_url( '/', 'https' ) ) );
+        }
+    }
     echo '<p>It was sent by '.urldecode($senderdata->nickname).' ... ';
 
     $recipients = get_field( 'field_58e4f6e88f3d7', $gift->ID );
@@ -20,9 +26,22 @@
         }
     }
     if ($recipientdata) {
+        if( !current_user_can('administrator') ) {
+            $current_user = wp_get_current_user();
+            if ($current_user->ID != $recipientdata->ID) {
+                wp_redirect( esc_url( home_url( '/', 'https' ) ) );
+            }
+        }
         echo ' to '.urldecode($recipientdata->nickname).'.</p>';
     } else {
         echo ' <span style="color: red;">but no recipient was chosen.</span></p>';
+    }
+
+    if( !current_user_can('administrator') ) {
+        $current_user = wp_get_current_user();
+        if (!isset ($current_user) || $current_user->ID == $senderdata->ID || $current_user->ID == $recipientdata->ID) {
+            
+        }
     }
 ?>
 </div>
