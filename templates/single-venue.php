@@ -49,13 +49,13 @@
                 $l = $l[0];
                 if ($location->ID == $l->ID) {
                     $userdata = get_userdata($object->post_author);
-                    if (!isset ($current_user) || $current_user->ID == $userdata->ID) {
+                    if (!$userdata || !isset ($current_user) || $current_user->ID == $userdata->ID) {
                         echo '<div class="grid-item grid-item--width2"><strong>'.$object->post_title.'</strong>'
-                            .'<p><a href="'.get_the_guid($object->ID).'"><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'medium').'" /></a></p>'
+                            .'<p><a href="'.get_the_guid($object->ID).'"><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID).'" /></a></p>'
                         .'</div>';
                     } else {
                         echo '<div class="grid-item grid-item--width2"><strong>Private object</strong>'
-                            .'<p><a href="'.get_the_guid($object->ID).'"><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'medium').'" /></a></p>'
+                            .'<p><a href="'.get_the_guid($object->ID).'"><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID).'" /></a></p>'
                         .'</div>';
                     }
                 }

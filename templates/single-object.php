@@ -12,7 +12,7 @@
 <div class="step" id="detail">
     <h1>
 <?php 
-    if (!isset ($current_user) || $current_user->ID == $userdata->ID) {
+    if (!$userdata || !isset ($current_user) || $current_user->ID == $userdata->ID) {
         echo $post->post_title; 
     } else {
         echo 'Private object';
@@ -24,7 +24,9 @@
 
 <?php
     
-    if (!isset ($current_user) || $current_user->ID == $userdata->ID) {
+    if (!$userdata) {
+        echo '<p>Created on '.$post->post_modified.'.</p>';
+    } else if (!isset ($current_user) || $current_user->ID == $userdata->ID) {
         echo '<p>Created by '.$userdata->nickname.' on '.$post->post_modified.'.</p>';
     } else {
         echo '<p>Created by '.hash('crc32', $userdata->nickname).' on '.$post->post_modified.'.</p>';
