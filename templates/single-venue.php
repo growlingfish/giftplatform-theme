@@ -39,11 +39,12 @@
         foreach ($objects as $object) {
             $l = get_field( 'field_59a85fff4be5a', $object->ID );
             if (!$l || count($l) == 0) {
-                return null;
-            }
-            $l = $l[0];
-            if ($location->ID == $l->ID) {
-                echo '<div class="grid-item">'.$object->post_title.'</div>';
+                
+            } else {
+                $l = $l[0];
+                if ($location->ID == $l->ID) {
+                    echo '<div class="grid-item">'.$object->post_title.'</div>';
+                }
             }
         }
         echo '</div>';
