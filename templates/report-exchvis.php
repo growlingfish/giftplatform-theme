@@ -6,12 +6,12 @@ var svg = d3.select(document.getElementById('d3vis')).append('svg'),
     width = window.innerWidth,
     height = window.innerHeight;
 
-svg.attr('width', width).attr('height', height);
+var zoom = d3.behavior.zoom()
+    .scaleExtent([1, 10])
+    .on("zoom", zoomed);
 
-svg.call(d3.zoom().on("zoom", function () {
-    svg.attr("transform", d3.event.transform)
-}))
-.append("g");
+svg.attr('width', width).attr('height', height)
+    .append("g").call(zoom);
 
 var color = d3.scaleOrdinal(d3.schemeCategory20);
 
