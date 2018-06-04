@@ -6,12 +6,7 @@ var svg = d3.select(document.getElementById('d3vis')).append('svg'),
     width = window.innerWidth,
     height = window.innerHeight;
 
-var zoom = d3.behavior.zoom()
-    .scaleExtent([1, 10])
-    .on("zoom", zoomed);
-
-svg.attr('width', width).attr('height', height)
-    .append("g").call(zoom);
+svg.attr('width', width).attr('height', height);
 
 var color = d3.scaleOrdinal(d3.schemeCategory20);
 
