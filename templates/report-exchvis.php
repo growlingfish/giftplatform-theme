@@ -19,6 +19,30 @@ var simulation = d3.forceSimulation()
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
 
+<?php
+    $graph = (object)array( 
+        'nodes' => array(),
+        'links' => array()
+    );
+
+    $graph->nodes[] = (object)array( 
+        "id" => "Myriel",
+        "group" => 1
+    );
+
+    $graph->nodes[] = (object)array( 
+        "id" => "Napoleon",
+        "group" => 1
+    );
+
+    $graph->links[] = (object)array(
+        "source" => "Napoleon",
+        "target" => "Myriel",
+        "value" => 1
+    );
+?>
+
+/*
 var graph = {
   "nodes": [
     {"id": "Myriel", "group": 1},
@@ -355,7 +379,9 @@ var graph = {
     {"source": "Mme.Hucheloup", "target": "Gavroche", "value": 1},
     {"source": "Mme.Hucheloup", "target": "Enjolras", "value": 1}
   ]
-};
+};*/
+
+var graph = <?php echo json_encode($graph); ?>;
 
 var nodes = graph.nodes,
     nodeById = d3.map(nodes, function(d) { return d.id; }),
