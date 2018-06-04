@@ -2,6 +2,8 @@
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 
+// try https://bl.ocks.org/mbostock/3680999
+
 var svg = d3.select(document.getElementById('d3vis')).append('svg'),
     width = window.innerWidth,
     height = window.innerHeight;
