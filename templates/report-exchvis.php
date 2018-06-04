@@ -50,7 +50,7 @@ var simulation = d3.forceSimulation()
 
         $found = false;
         foreach ($graph->nodes as $node) {
-            if ($node->user_id && $node->user_id == $senderdata->ID) {
+            if ($node->id == 'user-'.$senderdata->ID) {
                 $found = true;
                 break;
             }
@@ -73,7 +73,7 @@ var simulation = d3.forceSimulation()
 
                 $found = false;
                 foreach ($graph->nodes as $node) {
-                    if ($node->user_id && $node->user_id == $recipientdata->ID) {
+                    if ($node->id == 'user-'.$recipientdata->ID) {
                         $found = true;
                         break;
                     }
@@ -86,17 +86,11 @@ var simulation = d3.forceSimulation()
                         'title' => urldecode($recipientdata->nickname)
                     );
                 }
-
-                $graph->links[] = (object)array(
-                    "source" => 'user-'.$senderdata->ID,
-                    "target" => 'user-'.$recipientdata->ID,
-                    "value" => 1
-                );
                 break; // only one recipient for now
             }
         }
 
-        /*
+        
         $wraps = get_field( 'field_58e4f5da816ac', $gift->ID);
         unset($object, $venue);
         if ($wraps) {
@@ -110,10 +104,40 @@ var simulation = d3.forceSimulation()
                     unset($object);
                 }  
                 if ($object) {
-                    
+                    $found = false;
+                    foreach ($graph->nodes as $node) {
+                        if ($node->id == 'object-'.$object->ID) {
+                            $found = true;
+                            break;
+                        }
+                    }
+                    if (!$found) {
+                        $graph->nodes[] = (object)array( 
+                            "id" => 'object-'.$object->ID,
+                            "group" => 2,
+                            'object_id' => $object->ID,
+                            'title' => $object->post_title
+                        );
+                    }
+
+                    if ($senderdata) {
+                        $graph->links[] = (object)array(
+                            "source" => 'user-'.$senderdata->ID,
+                            "target" => 'object-'.$object->ID,
+                            "value" => 1
+                        );
+                    }
+
+                    if ($recipientdata) {
+                        $graph->links[] = (object)array(
+                            "source" => 'object-'.$object->ID,
+                            "target" => 'user-'.$recipientdata->ID,
+                            "value" => 1
+                        );
+                    }
                 }
             }
-        }*/
+        }
 
     }
 
@@ -162,8 +186,8 @@ simulation.force("link")
     .links(links);
 
 function ticked() {
-link.attr("d", positionLink);
-node.attr("transform", positionNode);
+    link.attr("d", positionLink);
+    node.attr("transform", positionNode);
 }
 
 function positionLink(d) {
