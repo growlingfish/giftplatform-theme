@@ -8,6 +8,11 @@ var svg = d3.select(document.getElementById('d3vis')).append('svg'),
 
 svg.attr('width', width).attr('height', height);
 
+svg.call(d3.zoom().on("zoom", function () {
+    svg.attr("transform", d3.event.transform)
+}))
+.append("g");
+
 var color = d3.scaleOrdinal(d3.schemeCategory20);
 
 var simulation = d3.forceSimulation()
@@ -20,22 +25,6 @@ var simulation = d3.forceSimulation()
         'nodes' => array(),
         'links' => array()
     );
-/*
-    $graph->nodes[] = (object)array( 
-        "id" => "Myriel",
-        "group" => 1
-    );
-
-    $graph->nodes[] = (object)array( 
-        "id" => "Napoleon",
-        "group" => 1
-    );
-
-    $graph->links[] = (object)array(
-        "source" => "Napoleon",
-        "target" => "Myriel",
-        "value" => 1
-    );*/
 
     $query = array(
 		'numberposts'   => -1,
@@ -178,7 +167,7 @@ var node = svg.selectAll(".node")
         .on("end", dragended));
 
 node.append("title")
-    .text(function(d) { return d.id; });
+    .text(function(d) { return d.title; });
 
 simulation
     .nodes(nodes)
