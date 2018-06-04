@@ -93,3 +93,13 @@ div.giftobjectsvis .grid-item {
     margin: 1%;
     font-size: 0.7em;
 }
+
+.node {
+    stroke: #fff;
+    stroke-width: 1.5px;
+  }
+  
+.link {
+    fill: none;
+    stroke: #bbb;
+}
