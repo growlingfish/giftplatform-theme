@@ -1,22 +1,12 @@
-<svg width="960" height="600" id="vis"></svg>
+<div id="d3vis"></div>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 
-var svg = d3.select("svg"),
-    //width = +svg.attr("width"),
+var svg = d3.select(document.getElementById('d3vis')).append('svg'),
     width = window.innerWidth,
-    //height = +svg.attr("height");
     height = window.innerHeight;
 
-d3.select("div#vis")
-   .append("div")
-   .classed("svg-container", true) //container class to make it responsive
-   .append("svg")
-   //responsive SVG needs these 2 attributes and no width and height attr
-   .attr("preserveAspectRatio", "xMinYMin meet")
-   .attr("viewBox", "0 0 600 400")
-   //class to make it responsive
-   .classed("svg-content-responsive", true); 
+svg.attr('width', width).attr('height', height);
 
 var color = d3.scaleOrdinal(d3.schemeCategory20);
 
