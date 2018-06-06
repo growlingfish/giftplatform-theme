@@ -10,12 +10,27 @@ var svg = d3.select(document.getElementById('d3vis')).append('svg'),
 
 svg.attr('width', width).attr('height', height);
 
+var g = svg.append("g");
+
 var color = d3.scaleOrdinal(d3.schemeCategory20);
 
 var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().distance(10).strength(0.5))
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
+
+svg.append("rect")
+    .attr("fill", "none")
+    .attr("pointer-events", "all")
+    .attr("width", width)
+    .attr("height", height)
+    .call(d3.zoom()
+        .scaleExtent([1, 8])
+        .on("zoom", zoom));
+
+function zoom() {
+  g.attr("transform", d3.event.transform);
+}
 
 <?php
     $graph = (object)array( 
