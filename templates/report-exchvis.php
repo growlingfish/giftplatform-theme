@@ -154,20 +154,20 @@ var nodes = graph.nodes,
     bilinks = [];
 
 links.forEach(function(link) {
-var s = link.source = nodeById.get(link.source),
-    t = link.target = nodeById.get(link.target),
-    i = {}; // intermediate node
-nodes.push(i);
-links.push({source: s, target: i}, {source: i, target: t});
-bilinks.push([s, i, t]);
+    var s = link.source = nodeById.get(link.source),
+        t = link.target = nodeById.get(link.target),
+        i = {}; // intermediate node
+    nodes.push(i);
+    links.push({source: s, target: i}, {source: i, target: t});
+    bilinks.push([s, i, t]);
 });
 
-var link = svg.selectAll(".link")
-.data(bilinks)
-.enter().append("path")
-    .attr("class", "link");
+var link = g.selectAll(".link")
+    .data(bilinks)
+    .enter().append("path")
+        .attr("class", "link");
 
-var node = svg.selectAll(".node")
+var node = g.selectAll(".node")
 .data(nodes.filter(function(d) { return d.id; }))
 .enter().append("circle")
     .attr("class", "node")
