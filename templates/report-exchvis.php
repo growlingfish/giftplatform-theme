@@ -10,7 +10,7 @@ var svg = d3.select(document.getElementById('d3vis')).append('svg'),
 
 svg.attr('width', width).attr('height', height);
 
-var g = svg.append("g");
+//var g = svg.append("g");
 
 var color = d3.scaleOrdinal(d3.schemeCategory20);
 
@@ -19,7 +19,7 @@ var simulation = d3.forceSimulation()
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
 
-svg.append("rect")
+/*svg.append("rect")
     .attr("fill", "none")
     .attr("pointer-events", "all")
     .attr("width", width)
@@ -29,8 +29,8 @@ svg.append("rect")
         .on("zoom", zoom));
 
 function zoom() {
-  g.attr("transform", d3.event.transform);
-}
+  svg.attr("transform", d3.event.transform);
+}*/
 
 <?php
     $graph = (object)array( 
@@ -162,12 +162,12 @@ links.forEach(function(link) {
     bilinks.push([s, i, t]);
 });
 
-var link = g.selectAll(".link")
+var link = svg.selectAll(".link")
     .data(bilinks)
     .enter().append("path")
         .attr("class", "link");
 
-var node = g.selectAll(".node")
+var node = svg.selectAll(".node")
 .data(nodes.filter(function(d) { return d.id; }))
 .enter().append("circle")
     .attr("class", "node")
