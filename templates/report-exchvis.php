@@ -1,11 +1,10 @@
 <div id="d3vis"></div>
-<div id="controls" style="position: absolute; top: 30px; left: 30px;">
+<div style="position: fixed; right: 20px; bottom: 20px;">
     <button id="reset">Reset</button>
+    <button onclick="window.history.back();">Back</button>
 </div>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
-
-// try https://bl.ocks.org/mbostock/3680999
 
 var svg = d3.select(document.getElementById('d3vis')).append('svg'),
     width = window.innerWidth,
@@ -47,12 +46,21 @@ var simulation = d3.forceSimulation()
             }
         }
         if (!$found) {
-            $graph->nodes[] = (object)array( 
-                "id" => 'user-'.$senderdata->ID,
-                "group" => 1,
-                'user_id' => $senderdata->ID,
-                'title' => urldecode($senderdata->nickname)
-            );
+            if (!isset ($current_user) || $current_user->ID == $senderdata->ID || $current_user->ID == $recipientdata->ID) {
+                $graph->nodes[] = (object)array( 
+                    "id" => 'user-'.$senderdata->ID,
+                    "group" => 1,
+                    'user_id' => $senderdata->ID,
+                    'title' => urldecode($senderdata->nickname)
+                );
+            } else {
+                $graph->nodes[] = (object)array( 
+                    "id" => 'user-'.$senderdata->ID,
+                    "group" => 1,
+                    'user_id' => $senderdata->ID,
+                    'title' => hash('crc32', $senderdata->nickname)
+                );
+            }
         }
 
         // recipient
@@ -70,12 +78,21 @@ var simulation = d3.forceSimulation()
                     }
                 }
                 if (!$found) {
-                    $graph->nodes[] = (object)array( 
-                        "id" => 'user-'.$recipientdata->ID,
-                        "group" => 1,
-                        'user_id' => $recipientdata->ID,
-                        'title' => urldecode($recipientdata->nickname)
-                    );
+                    if (!isset ($current_user) || $current_user->ID == $senderdata->ID || $current_user->ID == $recipientdata->ID) {
+                        $graph->nodes[] = (object)array( 
+                            "id" => 'user-'.$recipientdata->ID,
+                            "group" => 1,
+                            'user_id' => $recipientdata->ID,
+                            'title' => urldecode($recipientdata->nickname)
+                        );
+                    } else {
+                        $graph->nodes[] = (object)array( 
+                            "id" => 'user-'.$recipientdata->ID,
+                            "group" => 1,
+                            'user_id' => $recipientdata->ID,
+                            'title' => hash('crc32', $recipientdata->nickname)
+                        );
+                    }
                 }
                 break; // only one recipient for now
             }
@@ -185,7 +202,7 @@ zoom_handler(svg);
 
 function zoom_actions () {
     g.attr("transform", d3.event.transform);
-    textElements.attr("font-size", (15 / d3.event.scale));
+    textElements.attr("font-size", (15 / d3.event.transform.k));
 }
 
 nodeElements.on('click', selectNode);
