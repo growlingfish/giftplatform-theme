@@ -167,12 +167,12 @@ links.forEach(function(link) {
     bilinks.push([s, i, t]);
 });
 
-var link = svg.selectAll(".link")
+var linkElements = svg.selectAll(".link")
     .data(bilinks)
     .enter().append("path")
         .attr("class", "link");
 
-var node = svg.selectAll(".node")
+var nodeElements = svg.selectAll(".node")
 .data(nodes.filter(function(d) { return d.id; }))
 .enter().append("circle")
     .attr("class", "node")
@@ -183,10 +183,10 @@ var node = svg.selectAll(".node")
         .on("drag", dragged)
         .on("end", dragended));
 
-node.append("title")
+nodeElements.append("title")
     .text(function(d) { return d.title; });
 
-node.on('click', selectNode);
+nodeElements.on('click', selectNode);
 
 simulation
     .nodes(nodes)
@@ -202,8 +202,8 @@ jQuery(function($) {
 });
 
 function ticked() {
-    link.attr("d", positionLink);
-    node.attr("transform", positionNode);
+    linkElements.attr("d", positionLink);
+    nodeElements.attr("transform", positionNode);
 }
 
 function positionLink(d) {
@@ -231,7 +231,7 @@ function dragended(d) {
 }
 
 function getNeighbors(node) {
-  return links.reduce((neighbors, link) => {
+  return linkElements.reduce((neighbors, link) => {
     if (link.target.id === node.id) {
       neighbors.push(link.source.id)
     } else if (link.source.id === node.id) {
