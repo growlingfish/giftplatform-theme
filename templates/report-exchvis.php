@@ -178,7 +178,13 @@ var nodeElements = g.selectAll(".node")
         .on("drag", dragged)
         .on("end", dragended));
 
-function zoom() {
+//add zoom capabilities 
+var zoom_handler = d3.zoom()
+    .on("zoom", zoom_actions);
+
+zoom_handler(svg);
+
+function zoom_actions () {
     g.attr("transform", d3.event.transform);
 }
 
