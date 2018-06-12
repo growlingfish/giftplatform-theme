@@ -230,44 +230,52 @@ function dragended(d) {
   d.fx = null, d.fy = null;
 }
 
-function getNeighbors(node) {
-  return links.reduce((neighbors, link) => {
-    if (link.target === node.id) {
-      neighbors.push(link.source)
-    } else if (link.source === node.id) {
-      neighbors.push(link.target)
+function getNeighbours(node) {
+    var neighbours = [];
+    for (i in links) {
+        if (isNeighbourLink(node, links[i])) {
+            neighbours.push(links[i]);
+        }
     }
-    return neighbors
-  }, [node.id])
+    return neighbours;
 }
 
-function isNeighborLink(node, link) {
-  return link.target === node.id || link.source === node.id
+function isNeighbourLink(node, link) {
+  return link.source.id && link.value && link.source.id === node.id;
 }
 
 function getNodeColor(node, neighbors) {
-  if (neighbors.indexOf(node.id)) {
-    return node.group === 1 ? 'blue' : 'green'
-  }
-  return node.group === 1 ? 'red' : 'gray'
+    for (i in neighbors) {
+        if (neighors[i].target.id === node.id) {
+            return 'green';
+        } else if (neighbors[i].source.id === node.id) {
+            return 'blue';
+        }
+    }
+    return node.group === 1 ? '#888888' : '#CCCCCC'
 }
-
+/*
 function getTextColor(node, neighbors) {
   return neighbors.indexOf(node.id) ? 'green' : 'black'
 }
 
 function getLinkColor(node, link) {
-  return isNeighborLink(node, link) ? 'green' : '#E5E5E5'
+  return isNeighbourLink(node, link) ? 'green' : '#E5E5E5'
+}
+*/
+
+function getNodeSize (node, selectedNode) {
+    return node === selectNode ? 10 : 5;
 }
 
 function selectNode(selectedNode) {
-  const neighbors = getNeighbors(selectedNode)
-  nodeElements
-    .attr('fill', node => getNodeColor(node, neighbors)) 
-  textElements
+    const neighbors = getNeighbours(selectedNode);
+    nodeElements.attr('fill', node => getNodeColor(node, neighbors));
+    nodeElements.attr('r', node => getNodeSize(node, selectedNode));
+  /*textElements
     .attr('fill', node => getTextColor(node, neighbors))
   linkElements
-    .attr('stroke', link => getLinkColor(selectedNode, link))
+    .attr('stroke', link => getLinkColor(selectedNode, link))*/
 }
 
 </script>
