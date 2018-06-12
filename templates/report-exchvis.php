@@ -244,11 +244,11 @@ function isNeighbourLink(node, link) {
   return link.source.id && link.value && link.source.id === node.id;
 }
 
-function getNodeColor(node, neighbors) {
-    for (i in neighbors) {
-        if (neighors[i].target.id === node.id) {
+function getNodeColor(node, neighbours) {
+    for (i in neighbours) {
+        if (neighbours[i].target.id === node.id) {
             return 'green';
-        } else if (neighbors[i].source.id === node.id) {
+        } else if (neighbours[i].source.id === node.id) {
             return 'blue';
         }
     }
@@ -269,8 +269,8 @@ function getNodeSize (node, selectedNode) {
 }
 
 function selectNode(selectedNode) {
-    const neighbors = getNeighbours(selectedNode);
-    nodeElements.attr('fill', node => getNodeColor(node, neighbors));
+    const neighbours = getNeighbours(selectedNode);
+    nodeElements.attr('fill', node => getNodeColor(node, neighbours));
     nodeElements.attr('r', node => getNodeSize(node, selectedNode));
   /*textElements
     .attr('fill', node => getTextColor(node, neighbors))
