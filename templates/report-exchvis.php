@@ -151,21 +151,15 @@ links.forEach(function(link) {
     bilinks.push([s, i, t]);
 });
 
-svg.append("rect")
-    .attr("fill", "none")
-    .attr("pointer-events", "all")
-    .attr("width", width)
-    .attr("height", height)
-    .call(d3.zoom()
-        .scaleExtent([1, 8])
-        .on("zoom", zoom));
+var g = svg.append("g")
+    .attr("class", "everything");
 
-var linkElements = svg.selectAll(".link")
+var linkElements = g.selectAll(".link")
     .data(bilinks)
     .enter().append("path")
         .attr("class", "link");
 
-var textElements = svg.selectAll(".text")
+var textElements = g.selectAll(".text")
     .data(nodes.filter(function(d) { return d.id; }))
     .enter().append("text")
     .text(function (d) { return d.title; })
@@ -173,7 +167,7 @@ var textElements = svg.selectAll(".text")
     .attr ('dx', 15 )
     .attr ('dy', 4 );
 
-var nodeElements = svg.selectAll(".node")
+var nodeElements = g.selectAll(".node")
 .data(nodes.filter(function(d) { return d.id; }))
 .enter().append("circle")
     .attr("class", "node")
@@ -185,7 +179,7 @@ var nodeElements = svg.selectAll(".node")
         .on("end", dragended));
 
 function zoom() {
-    nodeElements.attr("transform", d3.event.transform);
+    g.attr("transform", d3.event.transform);
 }
 
 nodeElements.on('click', selectNode);
