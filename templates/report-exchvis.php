@@ -183,8 +183,13 @@ var nodeElements = svg.selectAll(".node")
         .on("drag", dragged)
         .on("end", dragended));
 
-nodeElements.append("title")
-    .text(function(d) { return d.title; });
+var textElements = svg.selectAll(".text")
+    .data(nodes.filter(function(d) { return d.id; }))
+    .enter().append("text")
+    .text(function (d) { return d.title; })
+    .attr('font-size', 15)
+    .attr ('dx', 15 )
+    .attr ('dy', 4 );
 
 nodeElements.on('click', selectNode);
 
@@ -204,6 +209,7 @@ jQuery(function($) {
 function ticked() {
     linkElements.attr("d", positionLink);
     nodeElements.attr("transform", positionNode);
+    textElements.attr("transform", positionNode);
 }
 
 function positionLink(d) {
@@ -252,18 +258,27 @@ function getNodeColor(node, neighbours) {
             return 'blue';
         }
     }
-    return node.group === 1 ? '#888888' : '#CCCCCC'
-}
-/*
-function getTextColor(node, neighbors) {
-  return neighbors.indexOf(node.id) ? 'green' : 'black'
-}
-*/
-function getLinkColor(node, link) {
-    return link[2].id === node.id ? 'green' : '#BBBBBB';
-  //return isNeighbourLink(node, link) ? 'green' : '#E5E5E5'
+    return node.group === 1 ? '#888888' : '#CCCCCC';
 }
 
+function getTextColor(node, neighbours) {
+    for (i in neighbours) {
+        if (neighbours[i].target.id === node.id) {
+            return 'green';
+        } else if (neighbours[i].source.id === node.id) {
+            return 'blue';
+        }
+    }
+    return node.group === 1 ? '#888888' : '#CCCCCC';
+}
+
+function getLinkColor(node, link) {
+    return link[0].id === node.id ? 'green' : '#BBBBBB';
+}
+
+function getLinkOpacity(node, link) {
+    return link[0].id === node.id ? 1 : .2;
+}
 
 function getNodeSize (node, selectedNode) {
     return node === selectedNode ? 10 : 5;
@@ -273,9 +288,10 @@ function selectNode(selectedNode) {
     const neighbours = getNeighbours(selectedNode);
     nodeElements.attr('fill', node => getNodeColor(node, neighbours));
     nodeElements.attr('r', node => getNodeSize(node, selectedNode));
-  /*textElements
-    .attr('fill', node => getTextColor(node, neighbors))*/
+    textElements.attr('fill', node => getTextColor(node, neighbors));
+    textElements.attr('opacity', link => getLinkOpacity(selectedNode, link));
     linkElements.attr('stroke', link => getLinkColor(selectedNode, link));
+    linkElements.attr('opacity', link => getLinkOpacity(selectedNode, link));
 }
 
 </script>
