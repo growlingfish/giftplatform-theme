@@ -232,17 +232,17 @@ function dragended(d) {
 
 function getNeighbors(node) {
   return links.reduce((neighbors, link) => {
-    if (link.target.id === node.id) {
-      neighbors.push(link.source.id)
-    } else if (link.source.id === node.id) {
-      neighbors.push(link.target.id)
+    if (link.target === node.id) {
+      neighbors.push(link.source)
+    } else if (link.source === node.id) {
+      neighbors.push(link.target)
     }
     return neighbors
   }, [node.id])
 }
 
 function isNeighborLink(node, link) {
-  return link.target.id === node.id || link.source.id === node.id
+  return link.target === node.id || link.source === node.id
 }
 
 function getNodeColor(node, neighbors) {
@@ -251,9 +251,11 @@ function getNodeColor(node, neighbors) {
   }
   return node.group === 1 ? 'red' : 'gray'
 }
+
 function getTextColor(node, neighbors) {
   return neighbors.indexOf(node.id) ? 'green' : 'black'
 }
+
 function getLinkColor(node, link) {
   return isNeighborLink(node, link) ? 'green' : '#E5E5E5'
 }
