@@ -258,14 +258,14 @@ function getNodeColor(node, neighbours) {
 function getTextColor(node, neighbors) {
   return neighbors.indexOf(node.id) ? 'green' : 'black'
 }
-
+*/
 function getLinkColor(node, link) {
   return isNeighbourLink(node, link) ? 'green' : '#E5E5E5'
 }
-*/
+
 
 function getNodeSize (node, selectedNode) {
-    return node === selectNode ? 10 : 5;
+    return node === selectedNode ? 10 : 5;
 }
 
 function selectNode(selectedNode) {
@@ -273,9 +273,8 @@ function selectNode(selectedNode) {
     nodeElements.attr('fill', node => getNodeColor(node, neighbours));
     nodeElements.attr('r', node => getNodeSize(node, selectedNode));
   /*textElements
-    .attr('fill', node => getTextColor(node, neighbors))
-  linkElements
-    .attr('stroke', link => getLinkColor(selectedNode, link))*/
+    .attr('fill', node => getTextColor(node, neighbors))*/
+    linkElements.attr('stroke', link => getLinkColor(selectedNode, link));
 }
 
 </script>
