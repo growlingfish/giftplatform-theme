@@ -22,7 +22,7 @@
 
 <div class="step" id="step2">
     <h1>What would you like to do?</h1>
-    <p>We offer a <strong>broad kit of tools</strong> for cultural heritage venues and a <strong>platform</strong>for developers who make apps for those venues. We are currently developing a framework that documents these resources.</p>
+    <p>We offer a <strong>broad kit of tools</strong> for cultural heritage venues and a <strong>platform</strong> for developers who make apps for those venues. We are currently developing a framework that documents these resources.</p>
     <a href="https://toolkit.gifting.digital/" class="button">Take me to the GIFT framework</a>
     <a href="https://gift.itu.dk/" class="button">Take me to the GIFT project website</a>
     <p style="padding-top: 20px; font-size: 1.5rem;"><a href="#" id="step3_button">I'm a member of the GIFT Project</a></p>

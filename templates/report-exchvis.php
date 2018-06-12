@@ -14,27 +14,12 @@ var svg = d3.select(document.getElementById('d3vis')).append('svg'),
 
 svg.attr('width', width).attr('height', height);
 
-//var g = svg.append("g");
-
 var color = d3.scaleOrdinal(d3.schemeCategory20);
 
 var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().distance(10).strength(0.5))
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
-
-/*svg.append("rect")
-    .attr("fill", "none")
-    .attr("pointer-events", "all")
-    .attr("width", width)
-    .attr("height", height)
-    .call(d3.zoom()
-        .scaleExtent([1, 8])
-        .on("zoom", zoom));
-
-function zoom() {
-  svg.attr("transform", d3.event.transform);
-}*/
 
 <?php
     $graph = (object)array( 
@@ -150,7 +135,6 @@ function zoom() {
 
 ?>
 
-
 var graph = <?php echo json_encode($graph); ?>;
 
 var nodes = graph.nodes,
@@ -167,10 +151,27 @@ links.forEach(function(link) {
     bilinks.push([s, i, t]);
 });
 
+svg.append("rect")
+    .attr("fill", "none")
+    .attr("pointer-events", "all")
+    .attr("width", width)
+    .attr("height", height)
+    .call(d3.zoom()
+        .scaleExtent([1, 8])
+        .on("zoom", zoom));
+
 var linkElements = svg.selectAll(".link")
     .data(bilinks)
     .enter().append("path")
         .attr("class", "link");
+
+var textElements = svg.selectAll(".text")
+    .data(nodes.filter(function(d) { return d.id; }))
+    .enter().append("text")
+    .text(function (d) { return d.title; })
+    .attr('font-size', 15)
+    .attr ('dx', 15 )
+    .attr ('dy', 4 );
 
 var nodeElements = svg.selectAll(".node")
 .data(nodes.filter(function(d) { return d.id; }))
@@ -183,13 +184,9 @@ var nodeElements = svg.selectAll(".node")
         .on("drag", dragged)
         .on("end", dragended));
 
-var textElements = svg.selectAll(".text")
-    .data(nodes.filter(function(d) { return d.id; }))
-    .enter().append("text")
-    .text(function (d) { return d.title; })
-    .attr('font-size', 15)
-    .attr ('dx', 15 )
-    .attr ('dy', 4 );
+function zoom() {
+    nodeElements.attr("transform", d3.event.transform);
+}
 
 nodeElements.on('click', selectNode);
 
