@@ -1,4 +1,8 @@
 <div id="d3vis"></div>
+<div id="controls">
+    <button id="zoomin">+</button>
+    <button id="zoomout">-</button>
+</div>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 
@@ -146,6 +150,7 @@ function zoom() {
 
 ?>
 
+
 var graph = <?php echo json_encode($graph); ?>;
 
 var nodes = graph.nodes,
@@ -181,12 +186,20 @@ var node = svg.selectAll(".node")
 node.append("title")
     .text(function(d) { return d.title; });
 
+node.on('click', selectNode);
+
 simulation
     .nodes(nodes)
     .on("tick", ticked);
 
 simulation.force("link")
     .links(links);
+
+jQuery(function($) {
+    $('#zoomin').click(function () {
+        svg.selectAll(".node");
+    });
+});
 
 function ticked() {
     link.attr("d", positionLink);
@@ -215,6 +228,44 @@ function dragged(d) {
 function dragended(d) {
   if (!d3.event.active) simulation.alphaTarget(0);
   d.fx = null, d.fy = null;
+}
+
+function getNeighbors(node) {
+  return links.reduce((neighbors, link) => {
+    if (link.target.id === node.id) {
+      neighbors.push(link.source.id)
+    } else if (link.source.id === node.id) {
+      neighbors.push(link.target.id)
+    }
+    return neighbors
+  }, [node.id])
+}
+
+function isNeighborLink(node, link) {
+  return link.target.id === node.id || link.source.id === node.id
+}
+
+function getNodeColor(node, neighbors) {
+  if (neighbors.indexOf(node.id)) {
+    return node.group === 1 ? 'blue' : 'green'
+  }
+  return node.group === 1 ? 'red' : 'gray'
+}
+function getTextColor(node, neighbors) {
+  return neighbors.indexOf(node.id) ? 'green' : 'black'
+}
+function getLinkColor(node, link) {
+  return isNeighborLink(node, link) ? 'green' : '#E5E5E5'
+}
+
+function selectNode(selectedNode) {
+  const neighbors = getNeighbors(selectedNode)
+  nodeElements
+    .attr('fill', node => getNodeColor(node, neighbors)) 
+  textElements
+    .attr('fill', node => getTextColor(node, neighbors))
+  linkElements
+    .attr('stroke', link => getLinkColor(selectedNode, link))
 }
 
 </script>
