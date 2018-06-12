@@ -1,5 +1,5 @@
 <div id="d3vis"></div>
-<div id="controls">
+<div id="controls" style="position: absolute; top: 30px; left: 30px;">
     <button id="reset">Reset</button>
 </div>
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -185,7 +185,7 @@ zoom_handler(svg);
 
 function zoom_actions () {
     g.attr("transform", d3.event.transform);
-    textElements.attr("font-size", (15 / d3.event.scale) + "px");
+    textElements.attr("font-size", (15 / d3.event.scale));
 }
 
 nodeElements.on('click', selectNode);
