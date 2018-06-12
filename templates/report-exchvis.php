@@ -202,7 +202,7 @@ simulation.force("link")
 
 jQuery(function($) {
     $('#zoomin').click(function () {
-        svg.selectAll(".node");
+        console.log(nodeElements);
     });
 });
 
@@ -272,6 +272,15 @@ function getTextColor(node, neighbours) {
     return node.group === 1 ? '#888888' : '#CCCCCC';
 }
 
+function getTextOpacity(node, neighbours) {
+    for (i in neighbours) {
+        if (neighbours[i].target.id === node.id || neighbours[i].source.id === node.id) {
+            return 1;
+        }
+    }
+    return .2;
+}
+
 function getLinkColor(node, link) {
     return link[0].id === node.id ? 'green' : '#BBBBBB';
 }
@@ -289,7 +298,7 @@ function selectNode(selectedNode) {
     nodeElements.attr('fill', node => getNodeColor(node, neighbours));
     nodeElements.attr('r', node => getNodeSize(node, selectedNode));
     textElements.attr('fill', node => getTextColor(node, neighbours));
-    textElements.attr('fill-opacity', link => getLinkOpacity(selectedNode, link));
+    textElements.attr('fill-opacity', link => getTextOpacity(node, neighbours));
     linkElements.attr('stroke', link => getLinkColor(selectedNode, link));
     linkElements.attr('opacity', link => getLinkOpacity(selectedNode, link));
 }
