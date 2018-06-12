@@ -185,7 +185,7 @@ zoom_handler(svg);
 
 function zoom_actions () {
     g.attr("transform", d3.event.transform);
-    textElements.attr('font-size', 15);
+    textElements.attr("font-size", (15 / d3.event.scale) + "px");
 }
 
 nodeElements.on('click', selectNode);
