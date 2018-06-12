@@ -288,8 +288,8 @@ function selectNode(selectedNode) {
     const neighbours = getNeighbours(selectedNode);
     nodeElements.attr('fill', node => getNodeColor(node, neighbours));
     nodeElements.attr('r', node => getNodeSize(node, selectedNode));
-    textElements.attr('fill', node => getTextColor(node, neighbors));
-    textElements.attr('opacity', link => getLinkOpacity(selectedNode, link));
+    textElements.attr('fill', node => getTextColor(node, neighbours));
+    textElements.attr('fill-opacity', link => getLinkOpacity(selectedNode, link));
     linkElements.attr('stroke', link => getLinkColor(selectedNode, link));
     linkElements.attr('opacity', link => getLinkOpacity(selectedNode, link));
 }
