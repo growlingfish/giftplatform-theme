@@ -1,7 +1,6 @@
 <div id="d3vis"></div>
 <div id="controls">
-    <button id="zoomin">+</button>
-    <button id="zoomout">-</button>
+    <button id="reset">Reset</button>
 </div>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
@@ -186,6 +185,7 @@ zoom_handler(svg);
 
 function zoom_actions () {
     g.attr("transform", d3.event.transform);
+    textElements.attr('font-size', 15);
 }
 
 nodeElements.on('click', selectNode);
@@ -198,8 +198,8 @@ simulation.force("link")
     .links(links);
 
 jQuery(function($) {
-    $('#zoomin').click(function () {
-        console.log(nodeElements);
+    $('#reset').click(function () {
+        location.reload();
     });
 });
 
