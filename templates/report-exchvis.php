@@ -252,61 +252,50 @@ function dragended(d) {
 
 function getNeighbours(node) {
     var neighbours = [];
-    for (i in bilinks) {
-        if (isNeighbourLink(node, bilinks[i])) {
-            neighbours.push(bilinks[i]);
+    for (i in links) {
+        if (isNeighbourLink(node, links[i])) {
+            neighbours.push(links[i]);
         }
     }
     return neighbours;
 }
-
-function isNeighbourLink(node, bilink) {
-    return (bilink[0].id === node.id || bilink[2].id === node.id) || bilink[1].id == node.id; // a user || an object
+function isNeighbourLink(node, link) {
+  return link.source.id && link.value && link.source.id === node.id;
 }
-
 function getNodeColor(node, neighbours) {
     for (i in neighbours) {
-        if (neighbours[i][2].id === node.id) {
-            return 'green'; // recipient
-        } else if (neighbours[i][0].id === node.id) {
-            return 'blue'; // sender
-        } else if (neighbours[i][1].id === node.id) {
-            return 'orange'; // object
-        }
-    }
-    return node.group === 1 ? '#888888' : '#CCCCCC'; // a user || an object
-}
-
-function getTextColor(node, neighbours) {
-    for (i in neighbours) {
-        if (neighbours[i][2].id === node.id) {
-            return 'green'; // recipient
-        } else if (neighbours[i][0].id === node.id) {
-            return 'blue'; // sender
-        } else if (neighbours[i][1].id === node.id) {
-            return 'orange'; // object
+        if (neighbours[i].target.id === node.id) {
+            return 'green';
+        } else if (neighbours[i].source.id === node.id) {
+            return 'blue';
         }
     }
     return node.group === 1 ? '#888888' : '#CCCCCC';
 }
-
+function getTextColor(node, neighbours) {
+    for (i in neighbours) {
+        if (neighbours[i].target.id === node.id) {
+            return 'green';
+        } else if (neighbours[i].source.id === node.id) {
+            return 'blue';
+        }
+    }
+    return node.group === 1 ? '#888888' : '#CCCCCC';
+}
 function getTextOpacity(node, neighbours) {
     for (i in neighbours) {
-        if (neighbours[i][2].id === node.id || neighbours[i][0].id === node.id) {
+        if (neighbours[i].target.id === node.id || neighbours[i].source.id === node.id) {
             return 1;
         }
     }
     return .2;
 }
-
 function getLinkColor(node, link) {
     return link[0].id === node.id ? 'green' : '#BBBBBB';
 }
-
 function getLinkOpacity(node, link) {
     return link[0].id === node.id ? 1 : .2;
 }
-
 function getNodeSize (node, selectedNode) {
     return node === selectedNode ? 10 : 5;
 }
