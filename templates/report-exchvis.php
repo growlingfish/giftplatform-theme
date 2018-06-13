@@ -252,35 +252,39 @@ function dragended(d) {
 
 function getNeighbours(node) {
     var neighbours = [];
-    for (i in links) {
-        if (isNeighbourLink(node, links[i])) {
-            neighbours.push(links[i]);
+    for (i in bilinks) {
+        if (isNeighbourLink(node, bilinks[i])) {
+            neighbours.push(bilinks[i]);
         }
     }
     return neighbours;
 }
 
-function isNeighbourLink(node, link) {
-  return link.source.id && link.value && link.source.id === node.id;
+function isNeighbourLink(node, bilink) {
+    return (bilink[0].id === node.id || bilink[2].id === node.id) || bilink[1].id == node.id; // a user || an object
 }
 
 function getNodeColor(node, neighbours) {
     for (i in neighbours) {
-        if (neighbours[i].target.id === node.id) {
-            return 'green';
-        } else if (neighbours[i].source.id === node.id) {
-            return 'blue';
+        if (neighbours[i][2].id === node.id) {
+            return 'green'; // recipient
+        } else if (neighbours[i][0].id === node.id) {
+            return 'blue'; // sender
+        } else if (neighbours[i][0].id === node.id) {
+            return 'orange'; // object
         }
     }
-    return node.group === 1 ? '#888888' : '#CCCCCC';
+    return node.group === 1 ? '#888888' : '#CCCCCC'; // a user || an object
 }
 
 function getTextColor(node, neighbours) {
     for (i in neighbours) {
-        if (neighbours[i].target.id === node.id) {
-            return 'green';
-        } else if (neighbours[i].source.id === node.id) {
-            return 'blue';
+        if (neighbours[i][2].id === node.id) {
+            return 'green'; // recipient
+        } else if (neighbours[i][0].id === node.id) {
+            return 'blue'; // sender
+        } else if (neighbours[i][0].id === node.id) {
+            return 'orange'; // object
         }
     }
     return node.group === 1 ? '#888888' : '#CCCCCC';
@@ -288,7 +292,7 @@ function getTextColor(node, neighbours) {
 
 function getTextOpacity(node, neighbours) {
     for (i in neighbours) {
-        if (neighbours[i].target.id === node.id || neighbours[i].source.id === node.id) {
+        if (neighbours[i][2].id === node.id || neighbours[i][0].id === node.id) {
             return 1;
         }
     }
@@ -309,10 +313,13 @@ function getNodeSize (node, selectedNode) {
 
 function selectNode(selectedNode) {
     const neighbours = getNeighbours(selectedNode);
+
     nodeElements.attr('fill', node => getNodeColor(node, neighbours));
     nodeElements.attr('r', node => getNodeSize(node, selectedNode));
+    
     textElements.attr('fill', node => getTextColor(node, neighbours));
     textElements.attr('fill-opacity', node => getTextOpacity(node, neighbours));
+
     linkElements.attr('stroke', link => getLinkColor(selectedNode, link));
     linkElements.attr('opacity', link => getLinkOpacity(selectedNode, link));
 }
