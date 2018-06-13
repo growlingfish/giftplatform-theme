@@ -270,7 +270,7 @@ function getNodeColor(node, neighbours) {
             return 'green'; // recipient
         } else if (neighbours[i][0].id === node.id) {
             return 'blue'; // sender
-        } else if (neighbours[i][0].id === node.id) {
+        } else if (neighbours[i][1].id === node.id) {
             return 'orange'; // object
         }
     }
@@ -283,7 +283,7 @@ function getTextColor(node, neighbours) {
             return 'green'; // recipient
         } else if (neighbours[i][0].id === node.id) {
             return 'blue'; // sender
-        } else if (neighbours[i][0].id === node.id) {
+        } else if (neighbours[i][1].id === node.id) {
             return 'orange'; // object
         }
     }
