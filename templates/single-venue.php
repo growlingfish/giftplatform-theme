@@ -41,7 +41,7 @@
         );
         $i = 0;
         foreach ($locations as $location) {
-            echo '<h2>Location '.++$i.': '.$location->post_title.'</h2>';
+            echo '<h2 style="padding-top: 30px;">Location '.++$i.': '.$location->post_title.'</h2>';
             echo '<blockquote>'.$location->post_content.'</blockquote>';
             echo '<p><a href="'.get_the_guid($location->ID).'" class="button">Edit this location</a></p>';
             echo '<div class="grid giftobjectsvis">';
@@ -72,7 +72,7 @@
         echo '<p>There are no locations configured in your venue yet.</p>';
     }
 ?>
-    <h2>More locations?</h2>
+    <h2 style="padding-top: 30px;">More locations?</h2>
     <p><a href="/new-location/?venue=<?php echo $venue->term_id; ?>" class="button" target="_blank">Add a new location</a></p>
 </div>
 
