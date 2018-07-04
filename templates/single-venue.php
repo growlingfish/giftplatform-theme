@@ -39,8 +39,9 @@
                 'posts_per_page' => -1
             )
         );
+        $i = 0;
         foreach ($locations as $location) {
-            echo '<h2>'.$location->post_title.'</h2>';
+            echo '<h2>Location '.++$i.': '.$location->post_title.'</h2>';
             echo '<blockquote>'.$location->post_content.'</blockquote>';
             echo '<p><a href="'.get_the_guid($location->ID).'" class="button">Edit this location</a></p>';
             echo '<div class="grid giftobjectsvis">';
