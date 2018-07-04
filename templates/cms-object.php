@@ -4,8 +4,8 @@
 
 <?php 
 
-    if (isset ($_GET['location'])) {
-        $location = get_post( $_GET['location']);
+    if (isset ($_GET['loc'])) {
+        $location = get_post( $_GET['loc']);
     }
 
 ?>

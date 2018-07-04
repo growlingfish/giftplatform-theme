@@ -45,7 +45,7 @@
             echo '<blockquote>'.$location->post_content.'</blockquote>';
             echo '<p><a href="'.get_the_guid($location->ID).'" class="button">Edit this location</a></p>';
             echo '<div class="grid giftobjectsvis">';
-            echo '<div class="grid-item grid-item--width2"><p style="text-align: center;"><a href="/new-object/?location='.$location->ID.'" class="button">Add a new object to this location</a></p></div>';
+            echo '<div class="grid-item grid-item--width2"><p style="text-align: center;"><a href="/new-object/?loc='.$location->ID.'" class="button">Add a new object to this location</a></p></div>';
             foreach ($objects as $object) {
                 $l = get_field( 'field_59a85fff4be5a', $object->ID );
                 if (!$l || count($l) == 0) {
