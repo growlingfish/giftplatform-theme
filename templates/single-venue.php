@@ -16,7 +16,6 @@
 
 <div class="step" id="locations">
     <h1>Locations and objects</h1>
-    <p>This venue contains the following locations and objects:</p>
 <?php
     $locations = get_posts(
         array( 
@@ -32,6 +31,7 @@
         )
     );
     if (count ($locations) > 0) {
+        echo '<p>This venue contains the following locations and objects:</p>';
         $objects = get_posts(
             array( 
                 'post_type' => 'object',
@@ -71,7 +71,7 @@
         echo '<p>There are no locations configured in your venue yet.</p>';
     }
 ?>
-    <p><a href="/new-location/" class="button"></a></p>
+    <p><a href="/new-location/" class="button">Add a new location</a></p>
 
 </div>
 
@@ -155,12 +155,12 @@
             }
         }
     }
+    echo '</div>';
 
     if (!$found) {
         echo '<p>No gifts have been made yet.</p>';
     }
 ?>
-    </div>
 </div>
 
 <div style="position: fixed; right: 20px; bottom: 20px;">
