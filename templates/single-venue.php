@@ -78,7 +78,8 @@
 
 <div class="step" id="freegift">
     <h2>Free gifts</h2>
-    <?php
+    <div class="grid" id="freegiftsvis">
+<?php
     $all_gifts = get_posts( array(
         'posts_per_page'   => -1,
         'post_type'     => 'gift',
