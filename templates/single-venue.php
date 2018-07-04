@@ -12,6 +12,7 @@
     <h1><?php echo $venue->name; ?></h1>
     <p>Introduced with:</p>
     <blockquote><?php echo $venue->description; ?></blockquote>
+    <p><a href="<?php echo get_edit_term_link( $venue->term_id, 'venue', 'location' ); ?>">Edit this title/introduction</a></p>
 </div>
 
 <div class="step" id="locations">
@@ -41,6 +42,7 @@
         foreach ($locations as $location) {
             echo '<h2>'.$location->post_title.'</h2>';
             echo '<blockquote>'.$location->post_content.'</blockquote>';
+            echo '<p><a href="'.get_the_guid($location->ID).'" class="button">Edit this location</a></p>';
             echo '<div class="grid giftobjectsvis">';
             echo '<div class="grid-item grid-item--width2"><strong>Add an object</strong>'
                 .'<p><a href="/new-object/">Click to add an object to this location</a></p>'

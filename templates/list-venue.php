@@ -15,7 +15,7 @@
         foreach ($venues as $venue) {
             $owner = get_field( 'owner', $venue );
             if ($owner['ID'] == get_current_user_id()) {
-                echo '<li><span style="font-weight: bold; padding-right: 30px;">'.$venue->name.'</span> <a href="'.get_term_link($venue->term_id, 'venue').'" class="button">View/edit full detail</a> <a href="'.get_edit_term_link( $venue->term_id, 'venue', 'location' ).'" class="button">Edit title</a></li>';
+                echo '<li><span style="font-weight: bold; padding-right: 30px;">'.$venue->name.'</span> <a href="'.get_term_link($venue->term_id, 'venue').'" class="button">View/edit full detail</a></li>';
                 $i++;
             }
         }
