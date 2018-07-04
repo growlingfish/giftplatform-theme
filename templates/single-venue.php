@@ -31,39 +31,47 @@
             )
         )
     );
-    $objects = get_posts(
-        array( 
-            'post_type' => 'object',
-            'posts_per_page' => -1
-        )
-    );
-    foreach ($locations as $location) {
-        echo '<h2>'.$location->post_title.'</h2>';
-        echo '<blockquote>'.$location->post_content.'</blockquote>';
-        echo '<div class="grid giftobjectsvis">';
-        foreach ($objects as $object) {
-            $l = get_field( 'field_59a85fff4be5a', $object->ID );
-            if (!$l || count($l) == 0) {
-                
-            } else {
-                $l = $l[0];
-                if ($location->ID == $l->ID) {
-                    $userdata = get_userdata($object->post_author);
-                    if (!$userdata || !isset ($current_user) || $current_user->ID == $userdata->ID) {
-                        echo '<div class="grid-item grid-item--width2"><strong>'.$object->post_title.'</strong>'
-                            .'<p><a href="'.get_the_guid($object->ID).'"><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'thumbnail').'" /></a></p>'
-                        .'</div>';
-                    } else {
-                        echo '<div class="grid-item grid-item--width2"><strong>Private object</strong>'
-                            .'<p><a href="'.get_the_guid($object->ID).'"><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'thumbnail').'" /></a></p>'
-                        .'</div>';
+    if (count ($locations) > 0) {
+        $objects = get_posts(
+            array( 
+                'post_type' => 'object',
+                'posts_per_page' => -1
+            )
+        );
+        foreach ($locations as $location) {
+            echo '<h2>'.$location->post_title.'</h2>';
+            echo '<blockquote>'.$location->post_content.'</blockquote>';
+            echo '<div class="grid giftobjectsvis">';
+            echo '<div class="grid-item grid-item--width2"><strong>Add an object</strong>'
+                .'<p><a href="/new-object/">Click to add an object to this location</a></p>'
+            .'</div>';
+            foreach ($objects as $object) {
+                $l = get_field( 'field_59a85fff4be5a', $object->ID );
+                if (!$l || count($l) == 0) {
+                    
+                } else {
+                    $l = $l[0];
+                    if ($location->ID == $l->ID) {
+                        $userdata = get_userdata($object->post_author);
+                        if (!$userdata || !isset ($current_user) || $current_user->ID == $userdata->ID) {
+                            echo '<div class="grid-item grid-item--width2"><strong>'.$object->post_title.'</strong>'
+                                .'<p><a href="'.get_the_guid($object->ID).'"><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'thumbnail').'" /></a></p>'
+                            .'</div>';
+                        } else {
+                            echo '<div class="grid-item grid-item--width2"><strong>Private object</strong>'
+                                .'<p><a href="'.get_the_guid($object->ID).'"><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'thumbnail').'" /></a></p>'
+                            .'</div>';
+                        }
                     }
                 }
             }
+            echo '</div>';
         }
-        echo '</div>';
+    } else {
+        echo '<p>There are no locations configured in your venue yet.</p>';
     }
 ?>
+    <p><a href="/new-location/" class="button"></a></p>
 
 </div>
 
@@ -81,6 +89,7 @@
         'post_type'     => 'gift',
         'post_status'   => 'publish'
     ) );
+    $found = false;
     foreach ($all_gifts as $gift) {
         $wraps = get_field( 'field_58e4f5da816ac', $gift->ID);
         if ($wraps) {
@@ -115,6 +124,8 @@
                                 }
                             }
 
+                            $found = true;
+
                             if (!isset ($current_user) || $current_user->ID == $senderdata->ID || $current_user->ID == $recipientdata->ID) {
                                 echo '<div class="public grid-item '
                                     .(isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) ? 'complete' : 'incomplete')
@@ -143,6 +154,10 @@
                 }
             }
         }
+    }
+
+    if (!$found) {
+        echo '<p>No gifts have been made yet.</p>';
     }
 ?>
     </div>
