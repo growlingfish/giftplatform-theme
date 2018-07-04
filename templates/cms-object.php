@@ -15,13 +15,13 @@
     <p>"Objects" are digital records of physical things in your venue that visitors might want to add to their gifts. These might be exhibits, but they could also be objects in the gift shop, or even architectural features.</p>
     <p>Click on the button below to open the Gift CMS. In the new page ...</p>
     <ol>
-        <li>Give the object a name (in the box labelled "Enter title here")</li>
-        <li>Give the object a brief description in the larger box below</li>
-        <li>Be sure to choose <strong>your username</strong> as the owner</li>
-        <li>Search the list of locations and choose yours <?php echo (isset ($location) ? '('.$location->post_title.')' : '' ); ?></li>
-        <li>Click "Add featured image" and choose an image of the object from your computer (or any image that would help a visitor to find the object)</li>
+        <li style="list-style-type: numeric;">Give the object a name (in the box labelled "Enter title here")</li>
+        <li style="list-style-type: numeric;">Give the object a brief description in the larger box below</li>
+        <li style="list-style-type: numeric;">Be sure to choose <strong>your username</strong> as the owner</li>
+        <li style="list-style-type: numeric;">Search the list of locations and choose yours <?php echo (isset ($location) ? '('.$location->post_title.')' : '' ); ?></li>
+        <li style="list-style-type: numeric;">Click "Add featured image" and choose an image of the object from your computer (or any image that would help a visitor to find the object)</li>
     </ol>
-    <p>When this is complete, press the button labelled "Publish".</p>
+    <p style="padding-top: 30px;">When this is complete, press the button labelled "Publish".</p>
     <p><a href="https://gifting.digital/wp/wp-admin/post-new.php?post_type=object" class="button">Open the CMS</a></p>
 </div>
 

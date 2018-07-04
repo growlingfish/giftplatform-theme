@@ -45,7 +45,7 @@
             echo '<blockquote>'.$location->post_content.'</blockquote>';
             echo '<p><a href="'.get_the_guid($location->ID).'" class="button">Edit this location</a></p>';
             echo '<div class="grid giftobjectsvis">';
-            echo '<div class="grid-item grid-item--width2"><p style="text-align: center;"><a href="/new-object/?loc='.$location->ID.'" class="button">Add a new object to this location</a></p></div>';
+            echo '<div class="grid-item grid-item--width2"><p style="text-align: center; margin-bottom: 0px;"><a href="/new-object/?loc='.$location->ID.'" class="button">Add a new object to this location</a></p></div>';
             foreach ($objects as $object) {
                 $l = get_field( 'field_59a85fff4be5a', $object->ID );
                 if (!$l || count($l) == 0) {
@@ -74,6 +74,91 @@
 ?>
     <h2 style="padding-top: 30px;">More locations?</h2>
     <p><a href="/new-location/?venue=<?php echo $venue->term_id; ?>" class="button" target="_blank">Add a new location</a></p>
+</div>
+
+<div class="step" id="freegift">
+    <h2>Free gifts</h2>
+    <?php
+    $all_gifts = get_posts( array(
+        'posts_per_page'   => -1,
+        'post_type'     => 'gift',
+        'post_status'   => 'publish'
+    ) );
+    $found = false;
+    foreach ($all_gifts as $gift) {
+        $freeGift = get_field( 'field_5a54cf62fc74f', $gift->ID );
+        if ($freeGift) {
+            $wraps = get_field( 'field_58e4f5da816ac', $gift->ID);
+            if ($wraps) {
+                foreach ($wraps as $wrap) {
+                    unset ($object);
+                    $object = get_field( 'field_595b4a2bc9c1c', $wrap->ID);
+                    if (is_array($object) && count($object) > 0) {
+                        $object = $object[0];
+                    } else if (is_a($object, 'WP_Post')) {
+                            
+                    } else {
+                        unset($object);
+                    }
+
+                    if ($object) {
+                        $l = get_field( 'field_59a85fff4be5a', $object->ID );
+                        if (!$l || count($l) == 0) {
+                            return null;
+                        }
+                        $l = $l[0];
+                        foreach ($locations as $location) {
+                            if ($l->ID == $location->ID) {
+                                $senderdata = get_userdata($gift->post_author);
+
+                                // recipient
+                                $recipients = get_field( 'field_58e4f6e88f3d7', $gift->ID );
+                                unset($recipientdata);
+                                if ($recipients) {
+                                    foreach ($recipients as $recipient) {
+                                        $recipientdata = get_userdata($recipient['ID']);
+                                        break; // only one recipient for now
+                                    }
+                                }
+
+                                $found = true;
+
+                                if (!isset ($current_user) || $current_user->ID == $senderdata->ID || $current_user->ID == $recipientdata->ID) {
+                                    echo '<div class="public grid-item '
+                                        .(isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) ? 'complete' : 'incomplete')
+                                        .'" gift="'.$gift->ID.'"'                    
+                                    .'>'
+                                        .'<strong>Gift #'.$gift->ID.'</strong>'
+                                        .'<ul>'
+                                            .'<li>Sent: '.(isset ($gift->post_modified) ? $gift->post_modified : '<span style="color: red">No date</span>' ).'</li>'
+                                            .'<li>By: '.(isset ($senderdata->nickname) ? urldecode($senderdata->nickname) : '<span style="color: red">No sender</span>' ).'</li>'
+                                            .'<li>To: '.(isset ($recipientdata->nickname) ? urldecode($recipientdata->nickname) : '<span style="color: red">No recipient</span>' ).'</li>'
+                                        .'</ul>'
+                                    .'</div>';
+                                } else { // Anonymised
+                                    echo '<div class="grid-item '
+                                        .(isset ($gift->post_modified) && isset ($senderdata->nickname) && isset ($recipientdata->nickname) ? 'complete' : 'incomplete')
+                                    .'">'
+                                        .'<strong>Private gift</strong>'
+                                        .'<ul>'
+                                            .'<li>Sent: '.(isset ($gift->post_modified) ? $gift->post_modified : '<span style="color: red">No date</span>' ).'</li>'
+                                        .'</ul>'
+                                    .'</div>';
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    echo '</div>';
+
+    if (!$found) {
+        echo '<p>No gifts have been made yet.</p>';
+    }
+?>
 </div>
 
 <div class="step" id="gifts">
@@ -178,10 +263,12 @@ jQuery(function($) {
 
     $('#detail').fadeIn(function () {
         $('#locations').fadeIn(function () {
-            $('#gifts').fadeIn(function () {
-                $('.grid').isotope({
-                    itemSelector: '.grid-item',
-                    layoutMode: 'masonry'
+            $('#freegift').fadeIn(function () {
+                $('#gifts').fadeIn(function () {
+                    $('.grid').isotope({
+                        itemSelector: '.grid-item',
+                        layoutMode: 'masonry'
+                    });
                 });
             });
         });
