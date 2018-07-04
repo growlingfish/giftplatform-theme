@@ -157,7 +157,7 @@
     echo '</div>';
 
     if (!$found) {
-        echo '<p>No gifts have been made yet.</p>';
+        echo '<p>You have not made any free gifts for visitors yet.</p>';
     }
 ?>
 </div>
@@ -245,7 +245,7 @@
     echo '</div>';
 
     if (!$found) {
-        echo '<p>No gifts have been made yet.</p>';
+        echo '<p>No gifts have been made by visitors yet.</p>';
     }
 ?>
 </div>
