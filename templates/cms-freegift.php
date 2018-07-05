@@ -107,25 +107,7 @@ jQuery(function($) {
     });
 
     $("#giftcard, #message1, #message2, #message3").on("change input paste keyup", function() {
-        var disabled = false;
-        $("#giftcard, #message1, #message2, #message3").each(function() {
-            if (!$.trim($(this).val())) {
-                disabled = true; 
-            }
-        });
-        for (var i = 0; i < 3; i++) {
-            console.log($('#objects' + i + ' div[chosen="true"]'));
-        }
-        if (!disabled) {
-            $('#step3').fadeIn(function () {
-                $('.grid').isotope({
-                    itemSelector: '.grid-item',
-                    layoutMode: 'masonry'
-                });
-            });
-        } else {
-            $('#step3').fadeOut();
-        }
+        checkComplete();
     });
 });
 
@@ -136,6 +118,31 @@ function selectObject (step, objectID) {
     } else {
         jQuery('#objects' + step + ' div[object="' + objectID + '"]').css('border', '3px solid green');
         jQuery('#objects' + step + ' div[object="' + objectID + '"]').attr('chosen', 'true');
+    }
+    checkComplete();
+}
+
+function checkComplete () {
+    var disabled = false;
+    $("#giftcard, #message1, #message2, #message3").each(function() {
+        if (!$.trim($(this).val())) {
+            disabled = true; 
+        }
+    });
+    for (var i = 0; i < 3; i++) {
+        if($('#objects' + i + ' div[chosen="true"]').length == 0) {
+            disabled = true;
+        }
+    }
+    if (!disabled) {
+        $('#step3').fadeIn(function () {
+            $('.grid').isotope({
+                itemSelector: '.grid-item',
+                layoutMode: 'masonry'
+            });
+        });
+    } else {
+        $('#step3').fadeOut();
     }
 }
 </script>
