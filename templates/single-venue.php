@@ -160,6 +160,7 @@
         echo '<p>You have not made any free gifts for visitors yet.</p>';
     }
 ?>
+    <p><a href="/new-free-gift/" class="button">Add a free gift</a></p>
 </div>
 
 <div class="step" id="gifts">
