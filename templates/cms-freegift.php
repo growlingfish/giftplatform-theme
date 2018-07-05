@@ -15,15 +15,15 @@
         'post_status'   => 'publish'
     ) );
     $our_objects = array();
+    global $current_user;
 	foreach ($all_objects as $object) {
 		$location = get_field( 'field_59a85fff4be5a', $object->ID);
 		if ($location && count($location) == 1) { // does object have a location?
             $venues = wp_get_post_terms( $location[0]->ID, 'venue' );
-            var_dump($venues);
 			foreach ($venues as $venue) {
 				if ($venue->term_id == $_GET['venue']) { // is the location in the appropriate venue?
 					$owner = get_field( 'field_5969c3853f8f2', $object->ID );
-					if ($owner == null || $owner['ID'] == $user->ID) { // object belongs to no-one or this user
+					if ($owner == null || $owner['ID'] == $current_user->ID) { // object belongs to no-one or this user
 						$our_objects[] = $object;
 					}
 					break;
