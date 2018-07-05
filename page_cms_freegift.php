@@ -13,6 +13,11 @@ if ( !is_user_logged_in () ) { // Not logged in
 	exit;
 }
 
+if (!isset($_GET['venue'])) {
+	wp_redirect( esc_url( home_url( '/', 'https' ) ) );
+	exit;
+}
+
 // Add landing page body class to the head.
 add_filter( 'body_class', 'genesis_sample_add_body_class' );
 function genesis_sample_add_body_class( $classes ) {

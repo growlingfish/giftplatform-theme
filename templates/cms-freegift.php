@@ -8,7 +8,37 @@
     <p>If you would like to set up a free gift for your venue, fill out the form below.</p>
 </div>
 
+<?php
+    $all_objects = get_posts( array(
+        'posts_per_page'   => -1,
+        'post_type'     => 'object',
+        'post_status'   => 'publish'
+    ) );
+    $our_objects = array();
+	foreach ($all_objects as $object) {
+		$location = get_field( 'field_59a85fff4be5a', $object->ID);
+		if ($location && count($location) == 1) { // does object have a location?
+			$venues = wp_get_post_terms( $location[0]->ID, 'venue' );
+			foreach ($venues as $venue) {
+				if ($venue->term_id == $_GET['venue']) { // is the location in the appropriate venue?
+					$owner = get_field( 'field_5969c3853f8f2', $object->ID );
+					if ($owner == null || $owner['ID'] == $user->ID) { // object belongs to no-one or this user
+						$our_objects[] = $object;
+					}
+					break;
+				}
+			}
+		}
+	}
+?>
+
 <div class="step" id="step2">
+<?php
+    if (count($our_objects) == 0) {
+        echo '<h2>No objects</h2>';
+        echo '<p>You haven\'t registered any objects in your venue yet. You need to do this first so that you can use the objects to make a free gift.</p>';
+    } else {
+?>
     <h2>Gift card</h2>
     <p>How will you introduce the experience that you are gifting to your visitors? Keep the introduction brief (e.g. 1-3 sentences). The introduction might describe the objects that the experience includes, an overarching theme for the experience, or a perspective that you want the visitor to take while they are exploring.</p>
     <p><textarea id="giftcard"></textarea></p>
@@ -16,6 +46,11 @@
     <p>An experience consists of three objects and three special messages that you have left for them at those objects. It may help to think about one object as the start of the experience, one object as the middle, and one as the end.</p>
     <h2>Object 1: the Start</h2>
     <p>Choose an object from those registered in your venue. You may need to return to the previous screen to add more locations and objects before you complete the free gift.</p>
+    <div class="grid" id="objects1">
+<?php
+    var_dump($our_objects);
+?>
+    </div>
     <p>Now write a message to be "wrapped up" with the object. The visitor will need to find the object in your venue first: by finding the object they will "unwrap" and be able to read the associated message.</p>
     <p><textarea id="message1"></textarea></p>
     <h2>Object 2: the Middle</h2>
@@ -26,11 +61,13 @@
     <p>Object:</p>
     <p>Message:</p>
     <p><textarea id="message3"></textarea></p>
+<?php
+    }
+?>
 </div>
 
 <div class="step" id="step3">
     <h2>Done?</h2>
-    <p style="padding-top: 30px;">When this is complete, press the button labelled "Publish".</p>
     <p><button>Add the free gift</button></p>
 </div>
 
