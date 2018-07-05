@@ -46,11 +46,11 @@
     <h2>Objects</h2>
     <p>An experience consists of three objects and three special messages that you have left for them at those objects. It may help to think about one object as the start of the experience, one object as the middle, and one as the end.</p>
     <h2>Object 1: the Start</h2>
-    <p>Choose an object from those registered in your venue. You may need to return to the previous screen to add more locations and objects before you complete the free gift.</p>
+    <p>Choose an object from those shown below: these are the objects you have registered for your venue. You may need to return to the previous screen to add more locations and objects before you complete the free gift.</p>
     <div class="grid" id="objects1">
 <?php
     foreach ($our_objects as $object) {
-        echo '<div class="grid-item grid-item--width2" style="cursor: pointer;" onclick="selectObject(1, '.$object->ID.')" selected="false" object="'.$object->ID.'"><strong>'.$object->post_title.'</strong>'
+        echo '<div class="grid-item" style="cursor: pointer;" onclick="selectObject(1, '.$object->ID.')" selected="false" object="'.$object->ID.'"><strong>'.$object->post_title.'</strong>'
             .'<p><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'thumbnail').'" /></p>'
         .'</div>';
     }
@@ -63,7 +63,7 @@
     <div class="grid" id="objects2">
 <?php
     foreach ($our_objects as $object) {
-        echo '<div class="grid-item grid-item--width2" style="cursor: pointer;" onclick="selectObject(2, '.$object->ID.')" selected="false" object="'.$object->ID.'"><strong>'.$object->post_title.'</strong>'
+        echo '<div class="grid-item" style="cursor: pointer;" onclick="selectObject(2, '.$object->ID.')" selected="false" object="'.$object->ID.'"><strong>'.$object->post_title.'</strong>'
             .'<p><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'thumbnail').'" /></p>'
         .'</div>';
     }
@@ -76,7 +76,7 @@
     <div class="grid" id="objects3">
 <?php
     foreach ($our_objects as $object) {
-        echo '<div class="grid-item grid-item--width2" style="cursor: pointer;" onclick="selectObject(3, '.$object->ID.')" selected="false" object="'.$object->ID.'"><strong>'.$object->post_title.'</strong>'
+        echo '<div class="grid-item" style="cursor: pointer;" onclick="selectObject(3, '.$object->ID.')" selected="false" object="'.$object->ID.'"><strong>'.$object->post_title.'</strong>'
             .'<p><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'thumbnail').'" /></p>'
         .'</div>';
     }
@@ -124,9 +124,9 @@ jQuery(function($) {
             $('#step3').fadeOut();
         }
     });
-
-    function selectObject (step, objectID) {
-        console.log(step + " " + objectID);
-    }
 });
+
+function selectObject (step, objectID) {
+    console.log(step + " " + objectID);
+}
 </script>
