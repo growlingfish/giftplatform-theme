@@ -49,17 +49,39 @@
     <p>Choose an object from those registered in your venue. You may need to return to the previous screen to add more locations and objects before you complete the free gift.</p>
     <div class="grid" id="objects1">
 <?php
-    var_dump($our_objects);
+    foreach ($our_objects as $object) {
+        echo '<div class="grid-item grid-item--width2" style="cursor: pointer;" onclick="selectObject(1, '.$object->ID.')" selected="false" object="'.$object->ID.'"><strong>'.$object->post_title.'</strong>'
+            .'<p><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'thumbnail').'" /></p>'
+        .'</div>';
+    }
 ?>
     </div>
     <p>Now write a message to be "wrapped up" with the object. The visitor will need to find the object in your venue first: by finding the object they will "unwrap" and be able to read the associated message.</p>
     <p><textarea id="message1"></textarea></p>
     <h2>Object 2: the Middle</h2>
     <p>Object:</p>
+    <div class="grid" id="objects2">
+<?php
+    foreach ($our_objects as $object) {
+        echo '<div class="grid-item grid-item--width2" style="cursor: pointer;" onclick="selectObject(2, '.$object->ID.')" selected="false" object="'.$object->ID.'"><strong>'.$object->post_title.'</strong>'
+            .'<p><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'thumbnail').'" /></p>'
+        .'</div>';
+    }
+?>
+    </div>
     <p>Message:</p>
     <p><textarea id="message2"></textarea></p>
     <h2>Object 3: the End</h2>
     <p>Object:</p>
+    <div class="grid" id="objects3">
+<?php
+    foreach ($our_objects as $object) {
+        echo '<div class="grid-item grid-item--width2" style="cursor: pointer;" onclick="selectObject(3, '.$object->ID.')" selected="false" object="'.$object->ID.'"><strong>'.$object->post_title.'</strong>'
+            .'<p><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'thumbnail').'" /></p>'
+        .'</div>';
+    }
+?>
+    </div>
     <p>Message:</p>
     <p><textarea id="message3"></textarea></p>
 <?php
@@ -92,10 +114,19 @@ jQuery(function($) {
             }
         });
         if (!disabled) {
-            $('#step3').fadeIn();
+            $('#step3').fadeIn(function () {
+                $('.grid').isotope({
+                    itemSelector: '.grid-item',
+                    layoutMode: 'masonry'
+                });
+            });
         } else {
             $('#step3').fadeOut();
         }
     });
+
+    function selectObject (step, objectID) {
+        console.log(step + " " + objectID);
+    }
 });
 </script>
