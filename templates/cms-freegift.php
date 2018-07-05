@@ -118,6 +118,8 @@ function selectObject (step, objectID) {
     } else {
         jQuery('#objects' + step + ' div[object="' + objectID + '"]').css('border', '3px solid green');
         jQuery('#objects' + step + ' div[object="' + objectID + '"]').attr('chosen', 'true');
+        jQuery('#objects' + step + ' div[object!="' + objectID + '"]').css('border', 'none');
+        jQuery('#objects' + step + ' div[object!="' + objectID + '"]').css('chosen', 'false');
     }
     checkComplete();
 }
