@@ -127,7 +127,13 @@ jQuery(function($) {
 });
 
 function selectObject (step, objectID) {
-    console.log(step + " " + objectID);
-    jQuery('#objects' + step + ' div[object="' + objectID + '"]').css('border', '3px solid green');
+    console.log(jQuery('#objects' + step + ' div[object="' + objectID + '"]').attr('selected'));
+    if (jQuery('#objects' + step + ' div[object="' + objectID + '"]').attr('selected') == 'true') {
+        jQuery('#objects' + step + ' div[object="' + objectID + '"]').css('border', 'none');
+        jQuery('#objects' + step + ' div[object="' + objectID + '"]').attr('selected', 'false');
+    } else {
+        jQuery('#objects' + step + ' div[object="' + objectID + '"]').css('border', '3px solid green');
+        jQuery('#objects' + step + ' div[object="' + objectID + '"]').attr('selected', 'true');
+    }
 }
 </script>
