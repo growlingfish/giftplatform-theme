@@ -124,8 +124,8 @@ function selectObject (step, objectID) {
 
 function checkComplete () {
     var disabled = false;
-    $("#giftcard, #message1, #message2, #message3").each(function() {
-        if (!$.trim($(this).val())) {
+    jQuery("#giftcard, #message1, #message2, #message3").each(function() {
+        if (!jQuery.trim(jQuery(this).val())) {
             disabled = true; 
         }
     });
@@ -135,14 +135,14 @@ function checkComplete () {
         }
     }
     if (!disabled) {
-        $('#step3').fadeIn(function () {
-            $('.grid').isotope({
+        jQuery('#step3').fadeIn(function () {
+            jQuery('.grid').isotope({
                 itemSelector: '.grid-item',
                 layoutMode: 'masonry'
             });
         });
     } else {
-        $('#step3').fadeOut();
+        jQuery('#step3').fadeOut();
     }
 }
 </script>
