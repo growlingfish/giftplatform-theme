@@ -2,6 +2,8 @@
     <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cropped-GIFT-white.png" />
 </div>
 
+<script src="https://unpkg.com/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>
+
 <div class="step" id="step1">
     <h1>CMS: Add a free Gift</h1>
     <p>"Free Gifts" are gift experiences from the venue to each visitor (unlike gifts from visitor to visitor). In the <a href="https://toolkit.gifting.digital/framework-pages/gift-exchange-app/" target="_blank">Gift Exchange</a> app, your free gift is offered to each user when they select your particular venue: in this way, the free gift is a useful introduction to the venue and tends to frame the way the users will make their own gifts subsequently.</p>
