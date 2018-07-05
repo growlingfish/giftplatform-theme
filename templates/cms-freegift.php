@@ -105,7 +105,12 @@ jQuery(function($) {
 	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-project.jpg');
 
     $('#step1').fadeIn(function () {
-        $('#step2').fadeIn();
+        $('#step2').fadeIn(function () {
+            jQuery('.grid').isotope({
+                itemSelector: '.grid-item',
+                layoutMode: 'masonry'
+            });
+        });
     });
 
     $("#giftcard, #message1, #message2, #message3").on("change input paste keyup", function() {
@@ -139,12 +144,7 @@ function checkComplete () {
         }
     }
     if (!disabled) {
-        jQuery('#step3').fadeIn(function () {
-            jQuery('.grid').isotope({
-                itemSelector: '.grid-item',
-                layoutMode: 'masonry'
-            });
-        });
+        jQuery('#step3').fadeIn();
     } else {
         jQuery('#step3').fadeOut();
     }
