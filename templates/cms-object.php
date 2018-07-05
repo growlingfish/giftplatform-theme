@@ -22,7 +22,7 @@
         <li style="list-style-type: numeric !important;">Click "Add featured image" and choose an image of the object from your computer (or any image that would help a visitor to find the object)</li>
     </ol>
     <p style="padding-top: 30px;">When this is complete, press the button labelled "Publish".</p>
-    <p><a href="https://gifting.digital/wp/wp-admin/post-new.php?post_type=object" class="button">Open the CMS</a></p>
+    <p><a href="https://gifting.digital/wp/wp-admin/post-new.php?post_type=object" class="button" target="_blank">Open the CMS</a></p>
 </div>
 
 <div style="position: fixed; right: 20px; bottom: 20px;">
