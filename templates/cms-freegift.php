@@ -130,7 +130,7 @@ function checkComplete () {
         }
     });
     for (var i = 0; i < 3; i++) {
-        if($('#objects' + i + ' div[chosen="true"]').length == 0) {
+        if(jQuery('#objects' + i + ' div[chosen="true"]').length == 0) {
             disabled = true;
         }
     }
