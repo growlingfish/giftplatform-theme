@@ -129,7 +129,7 @@ function checkComplete () {
             disabled = true; 
         }
     });
-    for (var i = 0; i < 3; i++) {
+    for (var i = 1; i <= 3; i++) {
         if(jQuery('#objects' + i + ' div[chosen="true"]').length == 0) {
             disabled = true;
         }
