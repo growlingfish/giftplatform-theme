@@ -113,6 +113,9 @@ jQuery(function($) {
                 disabled = true; 
             }
         });
+        for (var i = 0; i < 3; i++) {
+            console.log($('#objects' + i + ' div[chosen="true"]'));
+        }
         if (!disabled) {
             $('#step3').fadeIn(function () {
                 $('.grid').isotope({
@@ -127,7 +130,6 @@ jQuery(function($) {
 });
 
 function selectObject (step, objectID) {
-    console.log(jQuery('#objects' + step + ' div[object="' + objectID + '"]').attr('chosen'));
     if (jQuery('#objects' + step + ' div[object="' + objectID + '"]').attr('chosen') == 'true') {
         jQuery('#objects' + step + ' div[object="' + objectID + '"]').css('border', 'none');
         jQuery('#objects' + step + ' div[object="' + objectID + '"]').attr('chosen', 'false');
