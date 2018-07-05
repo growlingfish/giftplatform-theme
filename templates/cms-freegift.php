@@ -128,5 +128,6 @@ jQuery(function($) {
 
 function selectObject (step, objectID) {
     console.log(step + " " + objectID);
+    jQuery('#objects' + step + ' div[object="' + objectID + '"]').css('border', '3px solid green');
 }
 </script>
