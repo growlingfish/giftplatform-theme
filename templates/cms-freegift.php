@@ -53,7 +53,11 @@ jQuery(function($) {
                 disabled = true; 
             }
         });
-        console.log(disabled);
+        if (!disabled) {
+            $('#step3').fadeIn();
+        } else {
+            $('#step3').fadeOut();
+        }
     });
 });
 </script>
