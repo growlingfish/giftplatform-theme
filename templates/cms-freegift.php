@@ -50,7 +50,7 @@
     <div class="grid" id="objects1">
 <?php
     foreach ($our_objects as $object) {
-        echo '<div class="grid-item" style="cursor: pointer;" onclick="selectObject(1, '.$object->ID.')" selected="false" object="'.$object->ID.'"><strong>'.$object->post_title.'</strong>'
+        echo '<div class="grid-item" style="cursor: pointer;" onclick="selectObject(1, '.$object->ID.')" chosen="false" object="'.$object->ID.'"><strong>'.$object->post_title.'</strong>'
             .'<p><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'thumbnail').'" /></p>'
         .'</div>';
     }
@@ -63,7 +63,7 @@
     <div class="grid" id="objects2">
 <?php
     foreach ($our_objects as $object) {
-        echo '<div class="grid-item" style="cursor: pointer;" onclick="selectObject(2, '.$object->ID.')" selected="false" object="'.$object->ID.'"><strong>'.$object->post_title.'</strong>'
+        echo '<div class="grid-item" style="cursor: pointer;" onclick="selectObject(2, '.$object->ID.')" chosen="false" object="'.$object->ID.'"><strong>'.$object->post_title.'</strong>'
             .'<p><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'thumbnail').'" /></p>'
         .'</div>';
     }
@@ -76,7 +76,7 @@
     <div class="grid" id="objects3">
 <?php
     foreach ($our_objects as $object) {
-        echo '<div class="grid-item" style="cursor: pointer;" onclick="selectObject(3, '.$object->ID.')" selected="false" object="'.$object->ID.'"><strong>'.$object->post_title.'</strong>'
+        echo '<div class="grid-item" style="cursor: pointer;" onclick="selectObject(3, '.$object->ID.')" chosen="false" object="'.$object->ID.'"><strong>'.$object->post_title.'</strong>'
             .'<p><img style="width: 100%;" src="'.get_the_post_thumbnail_url($object->ID, 'thumbnail').'" /></p>'
         .'</div>';
     }
@@ -127,13 +127,13 @@ jQuery(function($) {
 });
 
 function selectObject (step, objectID) {
-    console.log(jQuery('#objects' + step + ' div[object="' + objectID + '"]').attr('selected'));
-    if (jQuery('#objects' + step + ' div[object="' + objectID + '"]').attr('selected') == 'true') {
+    console.log(jQuery('#objects' + step + ' div[object="' + objectID + '"]').attr('chosen'));
+    if (jQuery('#objects' + step + ' div[object="' + objectID + '"]').attr('chosen') == 'true') {
         jQuery('#objects' + step + ' div[object="' + objectID + '"]').css('border', 'none');
-        jQuery('#objects' + step + ' div[object="' + objectID + '"]').attr('selected', 'false');
+        jQuery('#objects' + step + ' div[object="' + objectID + '"]').attr('chosen', 'false');
     } else {
         jQuery('#objects' + step + ' div[object="' + objectID + '"]').css('border', '3px solid green');
-        jQuery('#objects' + step + ' div[object="' + objectID + '"]').attr('selected', 'true');
+        jQuery('#objects' + step + ' div[object="' + objectID + '"]').attr('chosen', 'true');
     }
 }
 </script>
