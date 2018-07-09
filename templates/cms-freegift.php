@@ -93,12 +93,14 @@
 
 <div class="step" id="step3">
     <h2>Done?</h2>
-    <p><button>Add the free gift</button></p>
+    <p><button id="addGift">Add the free gift</button></p>
 </div>
 
 <div style="position: fixed; right: 20px; bottom: 20px;">
     <button onclick="window.history.back();">Back</button>
 </div>
+
+<div class="preloader"></div>
 
 <script>
 jQuery(function($) {
@@ -115,6 +117,55 @@ jQuery(function($) {
 
     $("#giftcard, #message1, #message2, #message3").on("change input paste keyup", function() {
         checkComplete();
+    });
+
+    $('#addGift').click(function () {
+        jQuery('.preloader').show();
+        var request = jQuery.ajax({
+            dataType: "json",
+            cache: false,
+            url: "<?php echo get_stylesheet_directory_uri(); ?>/addgift.php",
+            method: "POST",
+            data: {
+                sender: "<?php echo $user->ID; ?>", 
+                gift: JSON.stringify({ 
+                    title: exhibitName,
+                    receiver: receiver.data.user_email,
+                    receiverName: decodeURIComponent(receiver.data.nickname),
+                    wraps: [
+                        {
+                            id: 0,
+                            title: "<?php echo $user->nickname; ?>'s wrap for " + exhibitName,
+                            challenges: [
+                                {
+                                    type: 'object',
+                                    task: exhibit
+                                }
+                            ]
+                        }
+                    ],
+                    payloads: [
+                        {
+                            id: 0,
+                            title: "<?php echo $user->nickname; ?>'s payload for " + exhibitName,
+                            content: payload
+                        }
+                    ],
+                    giftcard: {
+                        title: "<?php echo $user->nickname; ?>'s giftcard for " + exhibitName,
+                        content: giftcard
+                    }
+                })
+            }
+        });
+        request.done(function( data ) {
+            console.log(data);
+            jQuery('.preloader').fadeOut();
+        });
+        request.fail(function( jqXHR, textStatus ) {
+            console.log( "Request failed: " + textStatus );
+            jQuery('.preloader').fadeOut();
+        });
     });
 });
 
