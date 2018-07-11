@@ -127,32 +127,21 @@ jQuery(function($) {
             url: "<?php echo get_stylesheet_directory_uri(); ?>/addgift.php",
             method: "POST",
             data: {
-                sender: "<?php echo $user->ID; ?>", 
+                sender: "<?php echo $current_user->ID; ?>", 
                 gift: JSON.stringify({ 
-                    title: exhibitName,
-                    receiver: receiver.data.user_email,
-                    receiverName: decodeURIComponent(receiver.data.nickname),
                     wraps: [
                         {
                             id: 0,
-                            title: "<?php echo $user->nickname; ?>'s wrap for " + exhibitName,
-                            challenges: [
-                                {
-                                    type: 'object',
-                                    task: exhibit
-                                }
-                            ]
+                            unwrap_object: object
                         }
                     ],
                     payloads: [
                         {
                             id: 0,
-                            title: "<?php echo $user->nickname; ?>'s payload for " + exhibitName,
                             content: payload
                         }
                     ],
                     giftcard: {
-                        title: "<?php echo $user->nickname; ?>'s giftcard for " + exhibitName,
                         content: giftcard
                     }
                 })
