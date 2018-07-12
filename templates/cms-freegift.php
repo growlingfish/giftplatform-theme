@@ -166,7 +166,7 @@ jQuery(function($) {
             data: data
         });
         request.done(function( data ) {
-            console.log(data);
+            location.reload();
             jQuery('.preloader').fadeOut();
         });
         request.fail(function( jqXHR, textStatus ) {

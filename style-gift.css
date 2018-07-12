@@ -75,7 +75,8 @@ textarea {
 .grid-item--width3 { width: 31%; }
 
 div#giftsvis .public, 
-div#usedvis .public {
+div#usedvis .public,
+div#freegiftsvis .public {
     cursor: pointer;
 }
 
@@ -86,7 +87,8 @@ div#giftsvis .grid-item.incomplete {
 div#giftsvis .grid-item, 
 div#giftobjectsvis .grid-item, 
 div#usedvis .grid-item,
-div.giftobjectsvis .grid-item {
+div.giftobjectsvis .grid-item,
+div#freegiftsvis .grid-item {
     border: 1px solid black;
     background-color: white;
     padding: 10px;

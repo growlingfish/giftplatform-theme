@@ -69,6 +69,8 @@ if (isset ($_POST['sender']) && isset ($_POST['gift'])) {
 		
 		update_field( 'field_58e4f5da816ac', $wraps, $gift_id );
 
+		update_field('field_5a54cf62fc74f', 1, $gift_id );
+
 		echo $gift_id;
 	} else {
 		// delete everything in gift and stop?

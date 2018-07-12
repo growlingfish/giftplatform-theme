@@ -90,6 +90,7 @@
         $freeGift = get_field( 'field_5a54cf62fc74f', $gift->ID );
         if ($freeGift) {
             $wraps = get_field( 'field_58e4f5da816ac', $gift->ID);
+            $located = false;
             if ($wraps) {
                 foreach ($wraps as $wrap) {
                     unset ($object);
@@ -110,6 +111,8 @@
                         $l = $l[0];
                         foreach ($locations as $location) {
                             if ($l->ID == $location->ID) {
+                                $located = true;
+
                                 $senderdata = get_userdata($gift->post_author);
 
                                 // recipient
@@ -150,6 +153,10 @@
                             }
                         }
                     }
+
+                    if ($located) {
+                        break;
+                    }
                 }
             }
         }
@@ -180,6 +187,7 @@
     $found = false;
     foreach ($all_gifts as $gift) {
         $wraps = get_field( 'field_58e4f5da816ac', $gift->ID);
+        $located = false;
         if ($wraps) {
             foreach ($wraps as $wrap) {
                 unset ($object);
@@ -200,6 +208,8 @@
                     $l = $l[0];
                     foreach ($locations as $location) {
                         if ($l->ID == $location->ID) {
+                            $located = true;
+
                             $senderdata = get_userdata($gift->post_author);
 
                             // recipient
@@ -239,6 +249,10 @@
                             break;
                         }
                     }
+                }
+
+                if ($located) {
+                    break;
                 }
             }
         }
