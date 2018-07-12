@@ -121,31 +121,49 @@ jQuery(function($) {
 
     $('#addGift').click(function () {
         jQuery('.preloader').show();
+
+        var data = {
+            sender: "<?php echo $current_user->ID; ?>", 
+            gift: JSON.stringify({ 
+                wraps: [
+                    {
+                        id: 0,
+                        unwrap_object: jQuery('#objects1 div[chosen="true"]')[0]
+                    },
+                    {
+                        id: 1,
+                        unwrap_object: jQuery('#objects2 div[chosen="true"]')[0]
+                    },
+                    {
+                        id: 2,
+                        unwrap_object: jQuery('#objects3 div[chosen="true"]')[0]
+                    }
+                ],
+                payloads: [
+                    {
+                        id: 0,
+                        content: jQuery.trim(jQuery("#message1").val())
+                    },
+                    {
+                        id: 1,
+                        content: jQuery.trim(jQuery("#message2").val())
+                    },
+                    {
+                        id: 2,
+                        content: jQuery.trim(jQuery("#message3").val())
+                    }
+                ],
+                giftcard: {
+                    content: jQuery.trim(jQuery("#giftcard").val())
+                }
+            })
+        };
         var request = jQuery.ajax({
             dataType: "json",
             cache: false,
             url: "<?php echo get_stylesheet_directory_uri(); ?>/addgift.php",
             method: "POST",
-            data: {
-                sender: "<?php echo $current_user->ID; ?>", 
-                gift: JSON.stringify({ 
-                    wraps: [
-                        {
-                            id: 0,
-                            unwrap_object: object
-                        }
-                    ],
-                    payloads: [
-                        {
-                            id: 0,
-                            content: payload
-                        }
-                    ],
-                    giftcard: {
-                        content: giftcard
-                    }
-                })
-            }
+            data: data
         });
         request.done(function( data ) {
             console.log(data);
