@@ -128,15 +128,15 @@ jQuery(function($) {
                 wraps: [
                     {
                         id: 0,
-                        unwrap_object: jQuery('#objects1 div[chosen="true"]')[0]
+                        unwrap_object: jQuery(jQuery('#objects1 div[chosen="true"]')[0]).attr('object')
                     },
                     {
                         id: 1,
-                        unwrap_object: jQuery('#objects2 div[chosen="true"]')[0]
+                        unwrap_object: jQuery(jQuery('#objects2 div[chosen="true"]')[0]).attr('object')
                     },
                     {
                         id: 2,
-                        unwrap_object: jQuery('#objects3 div[chosen="true"]')[0]
+                        unwrap_object: jQuery(jQuery('#objects3 div[chosen="true"]')[0]).attr('object')
                     }
                 ],
                 payloads: [
@@ -161,7 +161,7 @@ jQuery(function($) {
         var request = jQuery.ajax({
             dataType: "json",
             cache: false,
-            url: "<?php echo get_stylesheet_directory_uri(); ?>/addgift.php",
+            url: "<?php echo get_stylesheet_directory_uri(); ?>/addGift.php",
             method: "POST",
             data: data
         });
