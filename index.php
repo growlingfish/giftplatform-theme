@@ -48,10 +48,11 @@ remove_action( 'genesis_footer', 'genesis_footer_markup_close', 15 );
 remove_action( 'genesis_loop', 'genesis_do_loop' );
 add_action( 'genesis_loop', 'gift_index_loop' );
 function gift_index_loop () { 
-	if ( is_user_logged_in () ) { // Not logged in
+	if ( is_user_logged_in () ) {
 		get_template_part( 'templates/index', 'internal' );
 	} else {
-		get_template_part( 'templates/index', 'external' );
+		//get_template_part( 'templates/index', 'external' );
+		get_template_part( 'templates/index', 'signup' );
 	}
 }
 

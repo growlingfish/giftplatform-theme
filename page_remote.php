@@ -57,8 +57,7 @@ remove_action( 'genesis_loop', 'genesis_do_loop' );
 add_action( 'genesis_loop', 'gift_remote_loop' );
 function gift_remote_loop () { 
 	if ( !is_user_logged_in () ) { // Not logged in
-		//get_template_part( 'templates/remote', 'welcome' );
-		get_template_part( 'templates/remote', 'signup' );
+		get_template_part( 'templates/remote', 'welcome' );
 	} else {
 		get_template_part( 'templates/remote', 'dashboard' );
 	}
