@@ -26,10 +26,11 @@
 </div>
 
 <div class="step" id="step2">
-    <h1>What is this website?</h1>
-    <p>This website lets you make a gift for another user. The gifts are personal messages that you create for another user to experience when they have found particular exhibits in the museum.</p>
-    <p>Using this website you choose the exhibit, create the gift, and send it to the lucky recipient.</p>
-    <button id="step3_button">OK</button>
+    <h1>What would you like to do?</h1>
+    <p>We offer a <strong>broad kit of tools</strong> for cultural heritage venues and a <strong>platform</strong> for developers who make apps for those venues. We are currently developing a framework that documents this toolbox.</p>
+    <a href="https://toolkit.gifting.digital/" class="button">Take me to the GIFT toolbox & framework</a>
+    <a href="https://gift.itu.dk/" class="button">Take me to the project website</a>
+    <p style="padding-top: 20px; font-size: 1.5rem;"><a href="#" id="step3_button">I'm a member of the GIFT Project</a></p>
 </div>
 
 <div class="step" id="step3">
@@ -63,10 +64,10 @@
 <div class="preloader"></div>
 
 <script>
-var apiBase = "https://gifting.digital/wp-json/gift/v1/";
+var apiBase = "https://gifting.digital/wp-json/gift/v3/";
 
 jQuery(function($) {
-	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-welcome.jpg');
+	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-project.jpg');
 
     $('#step1').fadeIn();
     jQuery('#loginform').hide();
@@ -77,7 +78,8 @@ jQuery(function($) {
         });
     });
 
-    $('#step3_button').on('click', function () {
+    $('#step3_button').on('click', function (e) {
+        e.preventDefault();
         jQuery('#step2').slideToggle(function () {
             jQuery('#step3').slideToggle();
         });
