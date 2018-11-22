@@ -64,7 +64,7 @@
 <div class="preloader"></div>
 
 <script>
-var apiBase = "https://gifting.digital/wp-json/gift/v3/";
+var apiBase = "https://platform.gifting.digital/wp-json/gift/v3/";
 
 jQuery(function($) {
 	$.backstretch('<?php echo get_stylesheet_directory_uri(); ?>/images/backstretch/index-project.jpg');
@@ -113,7 +113,7 @@ jQuery(function($) {
             } else {
                 console.log(data);
                 setTimeout(function () {
-                    window.location.replace("https://gifting.digital");
+                    window.location.replace("https://platform.gifting.digital");
                 }, 3000);
             }
             jQuery('.preloader').fadeOut();
@@ -121,7 +121,7 @@ jQuery(function($) {
         request.fail(function( jqXHR, textStatus ) {
             console.log( "Request failed: " + textStatus );
             setTimeout(function () {
-                window.location.replace("https://gifting.digital");
+                window.location.replace("https://platform.gifting.digital");
             }, 3000);
             jQuery('.preloader').fadeOut();
         });

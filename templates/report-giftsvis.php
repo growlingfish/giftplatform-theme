@@ -183,7 +183,7 @@ jQuery(function($) {
     });
 
     $('.public').click(function () {
-        window.location.href = 'https://gifting.digital/vis/?tool=gift&id=' + $(this).attr('gift');
+        window.location.href = 'https://platform.gifting.digital/vis/?tool=gift&id=' + $(this).attr('gift');
     });
 
     $('#orders').fadeIn();

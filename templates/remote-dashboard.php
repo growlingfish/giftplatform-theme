@@ -126,7 +126,7 @@ $user = wp_get_current_user();
 
 <script>
 var stranger = false;
-var apiBase = "https://gifting.digital/wp-json/gift/v1/";
+var apiBase = "https://platform.gifting.digital/wp-json/gift/v1/";
 var receiver;
 var exhibit;
 var exhibitName;
@@ -192,20 +192,20 @@ jQuery(function($) {
                         } else {
                             console.log(data);
                             setTimeout(function () {
-                                window.location.replace("https://gifting.digital");
+                                window.location.replace("https://platform.gifting.digital");
                             }, 3000);
                         }
                     });
                     setupRequest.fail(function( jqXHR, textStatus ) {
                         console.log( "Request failed: " + textStatus );
                         setTimeout(function () {
-                            window.location.replace("https://gifting.digital");
+                            window.location.replace("https://platform.gifting.digital");
                         }, 3000);
                     });
                 } else {
                     console.log(data);
                     setTimeout(function () {
-                        window.location.replace("https://gifting.digital");
+                        window.location.replace("https://platform.gifting.digital");
                     }, 3000);
                 }
                 jQuery('.preloader').fadeOut();
@@ -213,7 +213,7 @@ jQuery(function($) {
             request.fail(function( jqXHR, textStatus ) {
                 console.log( "Request failed: " + textStatus );
                 setTimeout(function () {
-                    window.location.replace("https://gifting.digital");
+                    window.location.replace("https://platform.gifting.digital");
                 }, 3000);
                 jQuery('.preloader').fadeOut();
             });
@@ -238,7 +238,7 @@ jQuery(function($) {
             } else {
                 console.log(data);
                 setTimeout(function () {
-                    window.location.replace("https://gifting.digital");
+                    window.location.replace("https://platform.gifting.digital");
                 }, 3000);
             }
             jQuery('.preloader').fadeOut();
@@ -246,7 +246,7 @@ jQuery(function($) {
         request.fail(function( jqXHR, textStatus ) {
             console.log( "Request failed: " + textStatus );
             setTimeout(function () {
-                window.location.replace("https://gifting.digital");
+                window.location.replace("https://platform.gifting.digital");
             }, 3000);
             jQuery('.preloader').fadeOut();
         });
@@ -270,7 +270,7 @@ jQuery(function($) {
             } else {
                 console.log(data);
                 setTimeout(function () {
-                    window.location.replace("https://gifting.digital");
+                    window.location.replace("https://platform.gifting.digital");
                 }, 3000);
             }
             jQuery('.preloader').fadeOut();
@@ -278,7 +278,7 @@ jQuery(function($) {
         request.fail(function( jqXHR, textStatus ) {
             console.log( "Request failed: " + textStatus );
             setTimeout(function () {
-                window.location.replace("https://gifting.digital");
+                window.location.replace("https://platform.gifting.digital");
             }, 3000);
             jQuery('.preloader').fadeOut();
         });

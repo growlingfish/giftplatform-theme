@@ -20,7 +20,7 @@
         <li style="list-style-type: numeric !important;">Start typing the name of your venue <?php echo (isset ($venue) ? '('.$venue->name.')' : '' ); ?> into the box labelled "Venues"; when your venue appears, "add" it</li>
     </ol>
     <p style="padding-top: 30px;">When this is complete, press the button labelled "Publish".</p>
-    <p><a href="https://gifting.digital/wp/wp-admin/post-new.php?post_type=location" class="button">Open the CMS</a></p>
+    <p><a href="https://platform.gifting.digital/wp/wp-admin/post-new.php?post_type=location" class="button">Open the CMS</a></p>
 </div>
 
 <div style="position: fixed; right: 20px; bottom: 20px;">

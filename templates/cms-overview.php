@@ -5,7 +5,7 @@
 <div class="step" id="step1">
     <h1>CMS: Overview</h1>
     <p>Welcome back, <?php $current_user = wp_get_current_user(); echo $current_user->display_name; ?>.</p>
-    <a href="https://gifting.digital/venues/" class="button">Manage my venues</a>
+    <a href="https://platform.gifting.digital/venues/" class="button">Manage my venues</a>
 </div>
 
 <div style="position: fixed; right: 20px; bottom: 20px;">

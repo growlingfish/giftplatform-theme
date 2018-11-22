@@ -17,8 +17,8 @@
     <h1>Welcome back</h1>
     <p>Where would you like to go?</p>
     <a href="https://toolkit.gifting.digital/" class="button">GIFT framework</a>
-    <a href="https://gifting.digital/cms/" class="button">Content Management System</a>
-    <a href="https://gifting.digital/vis/" class="button">Visualisation tools</a>
+    <a href="https://platform.gifting.digital/cms/" class="button">Content Management System</a>
+    <a href="https://platform.gifting.digital/vis/" class="button">Visualisation tools</a>
 </div>
 
 <div class="preloader"></div>
